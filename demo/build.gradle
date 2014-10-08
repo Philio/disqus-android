@@ -1,0 +1,29 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 20
+    buildToolsVersion "20.0.0"
+
+    defaultConfig {
+        applicationId "me.philio.disqus.demo"
+        minSdkVersion 8
+        targetSdkVersion 20
+        versionCode 1
+        versionName "1.0"
+        buildConfigField "String", "API_KEY", '"DOK954O4BO7t87wFeAsj1v0xQd1TytiNPj2wYKEDNtZJuEebBykAZ37iR4dHcDBU"'
+        buildConfigField "String[]", "SCOPES", 'new String[] {"read", "write"}'
+        buildConfigField "String", "REDIRECT_URI", '"http://localhost/callback"'
+    }
+    buildTypes {
+        release {
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:20.0.0'
+    compile project(':disqus')
+}

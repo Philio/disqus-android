@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Disqus Demo</string>
+    <string name="btn_activity_demo">Activity auth demo</string>
+    <string name="btn_fragment_demo">Fragment auth demo</string>
+    <string name="auth_success">Hello %1$s</string>
+    <string name="auth_failure">Authorization was not completed</string>
+</resources>
