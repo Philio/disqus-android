@@ -26,6 +26,8 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import me.philio.disqus.api.model.oauth2.AccessToken;
+
 /**
  * OAuth authorization fragment
  * <p/>
@@ -135,13 +137,15 @@ public class AuthorizeFragment extends Fragment {
 
                     // Extract data from fragment and pass to callback
                     Uri queryUri = new Uri.Builder().encodedQuery(uriFragment).build();
-                    mListener.onSuccess(
-                            queryUri.getQueryParameter(DisqusConstants.PARAM_ACCESS_TOKEN),
-                            Long.parseLong(
-                                    queryUri.getQueryParameter(DisqusConstants.PARAM_EXPIRES_IN)),
-                            queryUri.getQueryParameter(DisqusConstants.PARAM_TOKEN_TYPE),
-                            queryUri.getQueryParameter(DisqusConstants.PARAM_USER_ID),
-                            queryUri.getQueryParameter(DisqusConstants.PARAM_USERNAME));
+                    AccessToken accessToken = new AccessToken();
+                    accessToken.username = queryUri.getQueryParameter(DisqusConstants.PARAM_USERNAME);
+                    accessToken.userId = Long.parseLong(queryUri.getQueryParameter(DisqusConstants.PARAM_USER_ID));
+                    accessToken.accessToken = queryUri.getQueryParameter(DisqusConstants.PARAM_ACCESS_TOKEN);
+                    accessToken.expiresIn = Long.parseLong(queryUri.getQueryParameter(DisqusConstants.PARAM_EXPIRES_IN));
+                    accessToken.tokenType = queryUri.getQueryParameter(DisqusConstants.PARAM_TOKEN_TYPE);
+                    accessToken.state = queryUri.getQueryParameter(DisqusConstants.PARAM_STATE);
+                    accessToken.scope = queryUri.getQueryParameter(DisqusConstants.PARAM_SCOPE);
+                    mListener.onSuccess(accessToken);
                     return true;
                 }
                 return super.shouldOverrideUrlLoading(view, url);
@@ -157,14 +161,13 @@ public class AuthorizeFragment extends Fragment {
 
     /**
      * Listener interface, must be implemented by calling activity
-     * <p/>
+     * 
      * TODO Should handle failures too but at time of writing the cancel button on the Disqus site
      * TODO is broken so only way to cancel is via back button which can be handled in the activity
      */
     public interface AuthorizeListener {
 
-        public void onSuccess(String accessToken, long expiresIn, String type, String userId,
-                              String username);
+        public void onSuccess(AccessToken accessToken);
 
     }
 

@@ -40,11 +40,12 @@ public class DisqusConstants {
     public static final String PARAM_SCOPE = "scope";
     public static final String PARAM_RESPONSE_TYPE = "response_type";
     public static final String PARAM_REDIRECT_URI = "redirect_uri";
+    public static final String PARAM_USERNAME = "username";
+    public static final String PARAM_USER_ID = "user_id";
     public static final String PARAM_ACCESS_TOKEN = "access_token";
     public static final String PARAM_EXPIRES_IN = "expires_in";
     public static final String PARAM_TOKEN_TYPE = "token_type";
-    public static final String PARAM_USER_ID = "user_id";
-    public static final String PARAM_USERNAME = "username";
+    public static final String PARAM_STATE = "state";
 
     /**
      * Authorization response types

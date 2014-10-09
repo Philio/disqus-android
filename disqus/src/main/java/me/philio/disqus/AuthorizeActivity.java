@@ -19,6 +19,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
+import me.philio.disqus.api.model.oauth2.AccessToken;
+
 import static me.philio.disqus.AuthorizeFragment.AuthorizeListener;
 
 /**
@@ -41,10 +43,6 @@ public class AuthorizeActivity extends ActionBarActivity implements
      * Extras that are passed in the result
      */
     public static final String EXTRA_ACCESS_TOKEN = "access_token";
-    public static final String EXTRA_EXPIRES_IN = "expires_in";
-    public static final String EXTRA_TOKEN_TYPE = "token_type";
-    public static final String EXTRA_USER_ID = "user_id";
-    public static final String EXTRA_USERNAME = "username";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,15 +70,10 @@ public class AuthorizeActivity extends ActionBarActivity implements
     }
 
     @Override
-    public void onSuccess(String accessToken, long expiresIn, String tokenType, String userId,
-                          String username) {
+    public void onSuccess(AccessToken accessToken) {
         // Create a result intent
         Intent data = new Intent();
         data.putExtra(EXTRA_ACCESS_TOKEN, accessToken);
-        data.putExtra(EXTRA_EXPIRES_IN, expiresIn);
-        data.putExtra(EXTRA_TOKEN_TYPE, tokenType);
-        data.putExtra(EXTRA_USER_ID, userId);
-        data.putExtra(EXTRA_USERNAME, username);
         setResult(RESULT_OK, data);
         finish();
     }

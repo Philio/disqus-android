@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import me.philio.disqus.AuthorizeActivity;
 import me.philio.disqus.AuthorizeUtils;
+import me.philio.disqus.api.model.oauth2.AccessToken;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
@@ -31,9 +32,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
-            Toast.makeText(this, getString(R.string.auth_success,
-                    data.getStringExtra(AuthorizeActivity.EXTRA_USERNAME)), Toast.LENGTH_LONG)
-                    .show();
+            AccessToken accessToken = data.getParcelableExtra(AuthorizeActivity.EXTRA_ACCESS_TOKEN);
+            Toast.makeText(this, getString(R.string.auth_success, accessToken.username),
+                    Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, R.string.auth_failure, Toast.LENGTH_LONG).show();
         }
