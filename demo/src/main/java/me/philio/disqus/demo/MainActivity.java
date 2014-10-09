@@ -12,6 +12,8 @@ import me.philio.disqus.api.model.oauth2.AccessToken;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
+    private static final String TAG = MainActivity.class.getName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

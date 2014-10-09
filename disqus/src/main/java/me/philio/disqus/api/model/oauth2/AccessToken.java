@@ -32,6 +32,7 @@ public class AccessToken implements Parcelable {
 
     };
 
+    @SerializedName("username")
     public String username;
 
     @SerializedName("user_id")
@@ -44,11 +45,12 @@ public class AccessToken implements Parcelable {
     public long expiresIn;
 
     @SerializedName("token_type")
-
     public String tokenType;
 
+    @SerializedName("state")
     public String state;
 
+    @SerializedName("scope")
     public String scope;
 
     @SerializedName("refresh_token")

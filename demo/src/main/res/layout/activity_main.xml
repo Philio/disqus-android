@@ -17,10 +17,10 @@
         android:text="@string/btn_activity_demo" />
 
     <Button
-        android:id="@+id/btn_fragment_demo"
+        android:id="@+id/btn_user_forum_demo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/btn_fragment_demo" />
+        android:text="@string/btn_user_forum_demo" />
 
 </LinearLayout>
