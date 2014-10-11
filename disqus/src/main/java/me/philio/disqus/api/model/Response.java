@@ -3,20 +3,28 @@ package me.philio.disqus.api.model;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Response from api
- *
- * Response can be an object or an array of objects. Single objects will be converted into an array
- * for consistency
+ * Response
  */
 public class Response<T> {
 
+    /**
+     * Disqus cursor
+     */
     @SerializedName("cursor")
     public Cursor cursor;
 
+    /**
+     * Error code
+     */
     @SerializedName("code")
     public int code;
 
+    /**
+     * Response object
+     * <p/>
+     * Object, array of objects or string for errors
+     */
     @SerializedName("response")
-    public T[] response;
+    public T response;
 
 }
