@@ -1,5 +1,11 @@
 # Disqus Android
 
+## Work in progress
+
+This implementation of the Disqus API for Android is in the very early stages, basic authentication
+with Disqus accounts is completed and some initial work on API methods and models. Feel free to
+contribute if you're interested in this library.
+
 ## Authentication
 
 ### Using AuthorizeActivity
@@ -11,17 +17,17 @@
 3. Implement 'onActivityResult' to get the access token object:
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            // Auth completed, get the access token
-            AccessToken accessToken = data.getParcelableExtra(AuthorizeActivity.EXTRA_ACCESS_TOKEN);
-        } else {
-            // Auth failed
-        }
+        @Override
+        protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+            if (resultCode == RESULT_OK) {
+                // Auth completed, get the access token
+                AccessToken accessToken = data.getParcelableExtra(AuthorizeActivity.EXTRA_ACCESS_TOKEN);
+            } else {
+                // Auth failed
+            }
 
-        super.onActivityResult(requestCode, resultCode, data);
-    }
+            super.onActivityResult(requestCode, resultCode, data);
+        }
 
 ### Using AuthorizeFragment
 
