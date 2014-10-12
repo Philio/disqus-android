@@ -25,9 +25,10 @@ import java.util.List;
 
 import me.philio.disqus.api.http.HttpResponse;
 import me.philio.disqus.api.model.Response;
-import me.philio.disqus.api.model.forums.ForumDetails;
-import me.philio.disqus.api.model.threads.ThreadDetails;
-import me.philio.disqus.api.model.users.UserDetails;
+import me.philio.disqus.api.model.forum.ForumDetails;
+import me.philio.disqus.api.model.post.PostDetails;
+import me.philio.disqus.api.model.thread.ThreadDetails;
+import me.philio.disqus.api.model.user.UserDetails;
 
 /**
  * Users api methods
@@ -393,8 +394,41 @@ public class Users extends AbstractApi {
         return mGson.fromJson(response.getBody(), type);
     }
 
-    public void listPosts() throws Exception {
-        throw new Exception("Stub! Not implemented yet");
+    /**
+     * Returns a list of posts made by the user.
+     *
+     * @see <a href="https://disqus.com/api/docs/users/listPosts/">Documentation</a>
+     * @param since
+     * @param related
+     * @param cursor
+     * @param limit
+     * @param user
+     * @param includes
+     * @param order
+     * @return
+     * @throws IOException
+     */
+    public Response<List<PostDetails>> listPosts(String since, Related[] related, String cursor,
+                                                 Integer limit, Integer user, Include[] includes,
+                                                 Order order) throws IOException {
+        // Build uri
+        Uri.Builder builder = Uri.parse("https://disqus.com/api/3.0/users/listPosts.json")
+                .buildUpon();
+        appendAuth(builder);
+        appendString(builder, "since", since);
+        appendRelated(builder, related);
+        appendString(builder, "cursor", cursor);
+        appendInt(builder, "limit", limit, true);
+        appendInt(builder, "user", user, true);
+        appendIncludes(builder, includes);
+        appendOrder(builder, order);
+
+        // Send request
+        HttpResponse response = mRequest.get(builder.build());
+
+        // Parse JSON response
+        Type type = new TypeToken<Response<List<PostDetails>>>() {}.getType();
+        return mGson.fromJson(response.getBody(), type);
     }
 
     public void removeFollower() throws Exception {

@@ -13,22 +13,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.philio.disqus.api.model.users;
+package me.philio.disqus.api.model.forum;
 
 import com.google.gson.annotations.SerializedName;
 
+import me.philio.disqus.api.model.Image;
+
 /**
- * Connection
+ * Forum details
  */
-public class Connection {
+public class ForumDetails {
+
+    @SerializedName("name")
+    public String name;
+
+    @SerializedName("founder")
+    public String founder;
+
+    @SerializedName("settings")
+    public Settings settings;
 
     @SerializedName("url")
     public String url;
 
+    @SerializedName("guidelines")
+    public String guidelines;
+
+    @SerializedName("favicon")
+    public Image favicon;
+
+    @SerializedName("language")
+    public String language;
+
+    @SerializedName("avatar")
+    public ForumAvatar avatar;
+
     @SerializedName("id")
     public String id;
 
-    @SerializedName("name")
-    public String name;
+    @SerializedName("channel")
+    public String channel;
 
 }

@@ -13,24 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.philio.disqus.api.model.users;
+package me.philio.disqus.api.model.user;
 
 import com.google.gson.annotations.SerializedName;
 
-import me.philio.disqus.api.model.Image;
-
 /**
- * Avatar
+ * Connections
  */
-public class UserAvatar extends Image {
+public class Connections {
 
-    @SerializedName("isCustom")
-    public boolean isCustom;
+    @SerializedName("twitter")
+    public Connection twitter;
 
-    @SerializedName("small")
-    public Image small;
+    @SerializedName("google")
+    public Connection google;
 
-    @SerializedName("large")
-    public Image large;
+    @SerializedName("facebook")
+    public Connection facebook;
 
 }
