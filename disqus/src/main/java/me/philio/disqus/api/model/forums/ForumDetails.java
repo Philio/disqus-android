@@ -28,7 +28,7 @@ public class ForumDetails {
     public String name;
 
     @SerializedName("founder")
-    public int founder;
+    public String founder;
 
     @SerializedName("settings")
     public Settings settings;

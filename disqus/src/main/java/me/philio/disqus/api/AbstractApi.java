@@ -24,6 +24,31 @@ import me.philio.disqus.api.http.HttpRequest;
 public abstract class AbstractApi {
 
     /**
+     * Order
+     */
+    public enum Order {
+        asc, desc
+    }
+
+    /**
+     * Related
+     */
+    public enum Related {
+        forum,
+        author,
+        category
+    }
+
+    /**
+     * Include
+     */
+    public enum Include {
+        open,
+        closed,
+        killed
+    }
+
+    /**
      * Http request instance
      */
     protected HttpRequest mRequest = new HttpRequest();
@@ -97,22 +122,43 @@ public abstract class AbstractApi {
     }
 
     /**
-     * Add order query param based on enum value
+     * Add order query param
      *
      * @param builder
      * @param order
      */
     protected void appendOrder(Uri.Builder builder, Order order) {
         if (order != null) {
-            builder.appendQueryParameter("order", order.name().toLowerCase());
+            builder.appendQueryParameter("order", order.name());
         }
     }
 
     /**
-     * Orders
+     * Add related query param
+     *
+     * @param builder
+     * @param relateds
      */
-    public enum Order {
-        ASC, DESC
+    protected void appendRelated(Uri.Builder builder, Related[] relateds) {
+        if (relateds != null) {
+            for (Related related : relateds) {
+                builder.appendQueryParameter("related", related.name());
+            }
+        }
+    }
+
+    /**
+     * Add include query param
+     *
+     * @param builder
+     * @param includes
+     */
+    protected void appendIncludes(Uri.Builder builder, Include[] includes) {
+        if (includes != null) {
+            for (Include include : includes) {
+                builder.appendQueryParameter("include", include.name());
+            }
+        }
     }
 
 }

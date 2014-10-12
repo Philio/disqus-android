@@ -1,4 +1,4 @@
-# Disqus Android
+# Disqus for Android
 
 ## Work in progress
 
@@ -15,7 +15,6 @@ contribute if you're interested in this library.
 2. Start the activity with `startActivityForResult`.
 
 3. Implement 'onActivityResult' to get the access token object:
-
 
         @Override
         protected void onActivityResult(int requestCode, int resultCode, Intent data) {

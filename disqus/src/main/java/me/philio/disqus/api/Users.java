@@ -26,6 +26,7 @@ import java.util.List;
 import me.philio.disqus.api.http.HttpResponse;
 import me.philio.disqus.api.model.Response;
 import me.philio.disqus.api.model.forums.ForumDetails;
+import me.philio.disqus.api.model.threads.ThreadDetails;
 import me.philio.disqus.api.model.users.UserDetails;
 
 /**
@@ -69,7 +70,7 @@ public class Users extends AbstractApi {
     }
 
     /**
-     * BETA Returns details of a user.
+     * Returns details of a user. [BETA]
      *
      * @see <a href="https://disqus.com/api/docs/users/details/">Documentation</a>
      * @param user
@@ -150,27 +151,185 @@ public class Users extends AbstractApi {
         return mGson.fromJson(response.getBody(), type);
     }
 
-    public void listActiveThreads() throws Exception {
+    /**
+     * Returns a list of threads a user has participated in sorted by last activity. [BETA]
+     *
+     * @see <a href="https://disqus.com/api/docs/users/listActiveThreads/">Documentation</a>
+     * @param forums
+     * @param since
+     * @param related
+     * @param cursor
+     * @param limit
+     * @param user
+     * @param includes
+     * @param order
+     * @return
+     * @throws IOException
+     */
+    public Response<List<ThreadDetails>> listActiveThreads(String[] forums, String since,
+                                                           Related[] related, String cursor,
+                                                           Integer limit, Integer user,
+                                                           Include[] includes, Order order)
+            throws IOException {
+        // Build uri
+        Uri.Builder builder = Uri.parse("https://disqus.com/api/3.0/users/listActiveThreads.json")
+                .buildUpon();
+        appendAuth(builder);
+        if (forums != null) {
+            for (String forum : forums) {
+                appendString(builder, "forum", forum);
+            }
+        }
+        appendString(builder, "since", since);
+        appendRelated(builder, related);
+        appendString(builder, "cursor", cursor);
+        appendInt(builder, "limit", limit, true);
+        appendInt(builder, "user", user, true);
+        appendIncludes(builder, includes);
+        appendOrder(builder, order);
+
+        // Send request
+        HttpResponse response = mRequest.get(builder.build());
+
+        // Parse JSON response
+        Type type = new TypeToken<Response<List<ThreadDetails>>>() {}.getType();
+        return mGson.fromJson(response.getBody(), type);
+    }
+
+    /**
+     * Returns a list of various activity types made by the user. [BETA]
+     *
+     * TODO The response of this method is complex, will be added in a future version
+     *
+     * @see <a href="https://disqus.com/api/docs/users/listActivity/">Documentation</a>
+     * @param since
+     * @param related
+     * @param cursor
+     * @param limit
+     * @param user
+     * @param query
+     * @param includes
+     * @param anonUser
+     * @throws Exception
+     */
+    public void listActivity(String since, Related[] related, String cursor, Integer limit,
+                             Integer user, String query, Include[] includes, String anonUser)
+            throws Exception {
         throw new Exception("Stub! Not implemented yet");
     }
 
-    public void listActivity() throws Exception {
-        throw new Exception("Stub! Not implemented yet");
+    /**
+     * Returns a list of users a user is being followed by. [BETA]
+     *
+     * @see <a href="https://disqus.com/api/docs/users/listFollowers/">Documentation</a>
+     * @param sinceId
+     * @param cursor
+     * @param limit
+     * @param user
+     * @param order
+     * @return
+     * @throws IOException
+     */
+    public Response<List<UserDetails>> listFollowers(Integer sinceId, String cursor, Integer limit,
+                                                     Integer user, Order order) throws IOException {
+        // Build uri
+        Uri.Builder builder = Uri.parse("https://disqus.com/api/3.0/users/listFollowers.json")
+                .buildUpon();
+        appendAuth(builder);
+        appendInt(builder, "since_id", sinceId, true);
+        appendString(builder, "cursor", cursor);
+        appendInt(builder, "limit", limit, true);
+        appendInt(builder, "user", user, true);
+        appendOrder(builder, order);
+
+        // Send request
+        HttpResponse response = mRequest.get(builder.build());
+
+        // Parse JSON response
+        Type type = new TypeToken<Response<List<UserDetails>>>() {}.getType();
+        return mGson.fromJson(response.getBody(), type);
     }
 
-    public void listFollowers() throws Exception {
-        throw new Exception("Stub! Not implemented yet");
+    /**
+     * Returns a list of users a user is following. [BETA]
+     *
+     * @see <a href="https://disqus.com/api/docs/users/listFollowing/">Documentation</a>
+     * @param sinceId
+     * @param cursor
+     * @param limit
+     * @param user
+     * @param order
+     * @return
+     * @throws IOException
+     */
+    public Response<List<UserDetails>> listFollowing(Integer sinceId, String cursor, Integer limit,
+                                                     Integer user, Order order) throws IOException {
+        // Build uri
+        Uri.Builder builder = Uri.parse("https://disqus.com/api/3.0/users/listFollowing.json")
+                .buildUpon();
+        appendAuth(builder);
+        appendInt(builder, "since_id", sinceId, true);
+        appendString(builder, "cursor", cursor);
+        appendInt(builder, "limit", limit, true);
+        appendInt(builder, "user", user, true);
+        appendOrder(builder, order);
+
+        // Send request
+        HttpResponse response = mRequest.get(builder.build());
+
+        // Parse JSON response
+        Type type = new TypeToken<Response<List<UserDetails>>>() {}.getType();
+        return mGson.fromJson(response.getBody(), type);
     }
 
-    public void listFollowing() throws Exception {
-        throw new Exception("Stub! Not implemented yet");
+    /**
+     * Returns a list of forums a user is following. [BETA]
+     *
+     * @see <a href="https://disqus.com/api/docs/users/listFollowingForums/">Documentation</a>
+     * @param sinceId
+     * @param cursor
+     * @param limit
+     * @param user
+     * @param order
+     * @return
+     * @throws IOException
+     */
+    public Response<List<ForumDetails>> listFollowingForums(Integer sinceId, String cursor,
+                                                            Integer limit, Integer user,
+                                                            Order order) throws IOException {
+        // Build uri
+        Uri.Builder builder = Uri.parse("https://disqus.com/api/3.0/users/listFollowingForums.json")
+                .buildUpon();
+        appendAuth(builder);
+        appendInt(builder, "since_id", sinceId, true);
+        appendString(builder, "cursor", cursor);
+        appendInt(builder, "limit", limit, true);
+        appendInt(builder, "user", user, true);
+        appendOrder(builder, order);
+
+        // Send request
+        HttpResponse response = mRequest.get(builder.build());
+
+        // Parse JSON response
+        Type type = new TypeToken<Response<List<ForumDetails>>>() {}.getType();
+        return mGson.fromJson(response.getBody(), type);
     }
 
-    public void listFollowingForums() throws Exception {
-        throw new Exception("Stub! Not implemented yet");
-    }
-
-    public void listFollowingTopics() throws Exception {
+    /**
+     * Returns a list of topics a user is following. [BETA]
+     *
+     * TODO Unable to find any topics to test this with at present as new/beta feature
+     *
+     * @see <a href="https://disqus.com/api/docs/users/listFollowingTopics/">Documentation</a>
+     * @param sinceId
+     * @param cursor
+     * @param limit
+     * @param user
+     * @param order
+     * @throws Exception
+     */
+    public void listFollowingTopics(Integer sinceId, String cursor, Integer limit, Integer user,
+                                    Order order) throws Exception {
         throw new Exception("Stub! Not implemented yet");
     }
 
@@ -217,8 +376,8 @@ public class Users extends AbstractApi {
      * @return
      * @throws IOException
      */
-    public Response<List<ForumDetails>> listMostActiveForums(Integer limit, Integer user) throws
-            IOException {
+    public Response<List<ForumDetails>> listMostActiveForums(Integer limit, Integer user)
+            throws IOException {
         // Build uri
         Uri.Builder builder =
                 Uri.parse("https://disqus.com/api/3.0/users/listMostActiveForums.json").buildUpon();
