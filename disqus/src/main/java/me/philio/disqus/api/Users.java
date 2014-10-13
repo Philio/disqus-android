@@ -431,17 +431,38 @@ public class Users extends AbstractApi {
         return mGson.fromJson(response.getBody(), type);
     }
 
-    public void removeFollower() throws Exception {
-        throw new Exception("Stub! Not implemented yet");
+    /**
+     * Remove a user from set of followers.
+     *
+     * Response is always an empty array and will result in an empty list and can be ignored
+     *
+     * @see <a href="https://disqus.com/api/docs/users/removeFollower/">Documentation</a>
+     * @param follower
+     * @return
+     * @throws Exception
+     */
+    public Response<List<Object>> removeFollower(int follower) throws IOException {
+        // Build uri
+        Uri.Builder builder = new Uri.Builder();
+        appendAuth(builder);
+        appendInt(builder, "follower", follower, true);
+
+        // Send request
+        HttpResponse response = mRequest.post(
+                Uri.parse("https://disqus.com/api/3.0/users/removeFollower.json"),
+                builder.build().getQuery());
+
+        // Parse JSON response
+        Type type = new TypeToken<Response<List<Object>>>() {}.getType();
+        return mGson.fromJson(response.getBody(), type);
     }
 
     /**
      * Unfollow a user.
      *
+     * Response is always an empty array and will result in an empty list and can be ignored
+     *
      * @see <a href="https://disqus.com/api/docs/users/unfollow/">Documentation</a>
-     *
-     * Response is always an empty array and will result in an empty list and can be ingored
-     *
      * @param target
      * @return
      * @throws IOException
@@ -462,8 +483,37 @@ public class Users extends AbstractApi {
         return mGson.fromJson(response.getBody(), type);
     }
 
-    public void updateProfile() throws Exception {
-        throw new Exception("Stub! Not implemented yet");
+    /**
+     * Updates user profile.
+     *
+     * All fields are optional, but any field not present will be updated as blank.
+     *
+     * @see <a href="https://disqus.com/api/docs/users/updateProfile/">Documentation</a>
+     * @param about
+     * @param name
+     * @param url
+     * @param location
+     * @return
+     * @throws IOException
+     */
+    public Response<UserDetails> updateProfile(String about, String name, String url,
+                                               String location) throws IOException {
+        // Build uri
+        Uri.Builder builder = new Uri.Builder();
+        appendAuth(builder);
+        appendString(builder, "about", about);
+        appendString(builder, "name", name);
+        appendString(builder, "url", url);
+        appendString(builder, "location", location);
+
+        // Send request
+        HttpResponse response = mRequest.post(
+                Uri.parse("https://disqus.com/api/3.0/users/updateProfile.json"),
+                builder.build().getQuery());
+
+        // Parse JSON response
+        Type type = new TypeToken<Response<UserDetails>>() {}.getType();
+        return mGson.fromJson(response.getBody(), type);
     }
 
 }

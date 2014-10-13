@@ -131,7 +131,7 @@ public class AuthorizeFragment extends Fragment {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (url.startsWith(mRedirectUri)) {
                     // Get fragment from url
-                    Log.d(TAG, "Processing redirect");
+                    Log.d(TAG, "Processing redirect: " + url);
                     Uri uri = Uri.parse(url);
                     String uriFragment = uri.getFragment();
 
@@ -153,9 +153,9 @@ public class AuthorizeFragment extends Fragment {
         });
 
         // Load authorize url
-        Log.d(TAG, "Loading authorize url");
         String scope = AuthorizeUtils.buildScope(mScopes);
         Uri uri = AuthorizeUtils.buildAuthorizeUri(mApiKey, scope, mRedirectUri);
+        Log.d(TAG, "Loading authorize url: " + uri.toString());
         mWebView.loadUrl(uri.toString());
     }
 
