@@ -6,7 +6,6 @@
 
     <application>
         <activity android:name="me.philio.disqus.AuthorizeActivity" />
-        <activity android:name="me.philio.disqus.AuthorizeActionBarActivity" />
     </application>
 
 </manifest>

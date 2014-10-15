@@ -23,3 +23,9 @@ dependencies {
     compile 'com.android.support:support-v4:20.0.0'
     compile 'com.google.code.gson:gson:2.3'
 }
+
+apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
+
+afterEvaluate {
+    androidJavadocs.classpath += project.android.libraryVariants.toList().first().javaCompile.classpath
+}
