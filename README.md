@@ -1,10 +1,16 @@
 # Disqus for Android
 
-## Work in progress
+## Important
 
-This implementation of the Disqus API for Android is in the very early stages, basic authentication
-with Disqus accounts is completed and some initial work on API methods and models. Feel free to
-contribute if you're interested in this library.
+This library is incomplete/in the early stages of development and is subject to change.
+
+## Download
+
+### Gradle
+
+Add the following to your `build.gradle`:
+
+    compile 'me.philio.disqus:disqus:0.0.1'
 
 ## Authentication
 
