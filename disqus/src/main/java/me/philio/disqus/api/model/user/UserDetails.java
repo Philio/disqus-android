@@ -38,7 +38,7 @@ public class UserDetails {
     public boolean isPrimary;
 
     @SerializedName("id")
-    public String id;
+    public long id;
 
     @SerializedName("numFollowers")
     public int numFollowers;

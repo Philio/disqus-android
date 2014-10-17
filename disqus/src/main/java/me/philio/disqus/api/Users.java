@@ -132,7 +132,7 @@ public class Users extends AbstractApi {
      * @throws IOException
      */
     public Response<List<ForumDetails>> listActiveForums(Integer sinceId, String cursor,
-                                                         Integer limit, Integer user, Order order)
+                                                         Integer limit, Long user, Order order)
             throws IOException {
         // Build uri
         Uri.Builder builder = Uri.parse("https://disqus.com/api/3.0/users/listActiveForums.json")
@@ -141,7 +141,7 @@ public class Users extends AbstractApi {
         appendInt(builder, "since_id", sinceId, true);
         appendString(builder, "cursor", cursor);
         appendInt(builder, "limit", limit, true);
-        appendInt(builder, "user", user, true);
+        appendLong(builder, "user", user, true);
         appendOrder(builder, order);
 
         // Send request
@@ -169,7 +169,7 @@ public class Users extends AbstractApi {
      */
     public Response<List<ThreadDetails>> listActiveThreads(String[] forums, String since,
                                                            Related[] related, String cursor,
-                                                           Integer limit, Integer user,
+                                                           Integer limit, Long user,
                                                            Include[] includes, Order order)
             throws IOException {
         // Build uri
@@ -185,7 +185,7 @@ public class Users extends AbstractApi {
         appendRelated(builder, related);
         appendString(builder, "cursor", cursor);
         appendInt(builder, "limit", limit, true);
-        appendInt(builder, "user", user, true);
+        appendLong(builder, "user", user, true);
         appendIncludes(builder, includes);
         appendOrder(builder, order);
 
@@ -214,7 +214,7 @@ public class Users extends AbstractApi {
      * @throws Exception
      */
     public void listActivity(String since, Related[] related, String cursor, Integer limit,
-                             Integer user, String query, Include[] includes, String anonUser)
+                             Long user, String query, Include[] includes, String anonUser)
             throws Exception {
         throw new Exception("Stub! Not implemented yet");
     }
@@ -232,7 +232,7 @@ public class Users extends AbstractApi {
      * @throws IOException
      */
     public Response<List<UserDetails>> listFollowers(Integer sinceId, String cursor, Integer limit,
-                                                     Integer user, Order order) throws IOException {
+                                                     Long user, Order order) throws IOException {
         // Build uri
         Uri.Builder builder = Uri.parse("https://disqus.com/api/3.0/users/listFollowers.json")
                 .buildUpon();
@@ -240,7 +240,7 @@ public class Users extends AbstractApi {
         appendInt(builder, "since_id", sinceId, true);
         appendString(builder, "cursor", cursor);
         appendInt(builder, "limit", limit, true);
-        appendInt(builder, "user", user, true);
+        appendLong(builder, "user", user, true);
         appendOrder(builder, order);
 
         // Send request
@@ -264,7 +264,7 @@ public class Users extends AbstractApi {
      * @throws IOException
      */
     public Response<List<UserDetails>> listFollowing(Integer sinceId, String cursor, Integer limit,
-                                                     Integer user, Order order) throws IOException {
+                                                     Long user, Order order) throws IOException {
         // Build uri
         Uri.Builder builder = Uri.parse("https://disqus.com/api/3.0/users/listFollowing.json")
                 .buildUpon();
@@ -272,7 +272,7 @@ public class Users extends AbstractApi {
         appendInt(builder, "since_id", sinceId, true);
         appendString(builder, "cursor", cursor);
         appendInt(builder, "limit", limit, true);
-        appendInt(builder, "user", user, true);
+        appendLong(builder, "user", user, true);
         appendOrder(builder, order);
 
         // Send request
@@ -296,8 +296,8 @@ public class Users extends AbstractApi {
      * @throws IOException
      */
     public Response<List<ForumDetails>> listFollowingForums(Integer sinceId, String cursor,
-                                                            Integer limit, Integer user,
-                                                            Order order) throws IOException {
+                                                            Integer limit, Long user, Order order)
+            throws IOException {
         // Build uri
         Uri.Builder builder = Uri.parse("https://disqus.com/api/3.0/users/listFollowingForums.json")
                 .buildUpon();
@@ -305,7 +305,7 @@ public class Users extends AbstractApi {
         appendInt(builder, "since_id", sinceId, true);
         appendString(builder, "cursor", cursor);
         appendInt(builder, "limit", limit, true);
-        appendInt(builder, "user", user, true);
+        appendLong(builder, "user", user, true);
         appendOrder(builder, order);
 
         // Send request
@@ -329,7 +329,7 @@ public class Users extends AbstractApi {
      * @param order
      * @throws Exception
      */
-    public void listFollowingTopics(Integer sinceId, String cursor, Integer limit, Integer user,
+    public void listFollowingTopics(Integer sinceId, String cursor, Integer limit, Long user,
                                     Order order) throws Exception {
         throw new Exception("Stub! Not implemented yet");
     }
@@ -348,7 +348,7 @@ public class Users extends AbstractApi {
      * @throws IOException
      */
     public Response<List<ForumDetails>> listForums(Integer sinceId, String cursor, Integer limit,
-                                            Integer user, Order order) throws IOException {
+                                                   Long user, Order order) throws IOException {
         // Build uri
         Uri.Builder builder = Uri.parse("https://disqus.com/api/3.0/users/listForums.json")
                 .buildUpon();
@@ -356,7 +356,7 @@ public class Users extends AbstractApi {
         appendInt(builder, "since_id", sinceId, true);
         appendString(builder, "cursor", cursor);
         appendInt(builder, "limit", limit, true);
-        appendInt(builder, "user", user, true);
+        appendLong(builder, "user", user, true);
         appendOrder(builder, order);
 
         // Send request
@@ -377,14 +377,14 @@ public class Users extends AbstractApi {
      * @return
      * @throws IOException
      */
-    public Response<List<ForumDetails>> listMostActiveForums(Integer limit, Integer user)
+    public Response<List<ForumDetails>> listMostActiveForums(Integer limit, Long user)
             throws IOException {
         // Build uri
         Uri.Builder builder =
                 Uri.parse("https://disqus.com/api/3.0/users/listMostActiveForums.json").buildUpon();
         appendAuth(builder);
         appendInt(builder, "limit", limit, true);
-        appendInt(builder, "user", user, true);
+        appendLong(builder, "user", user, true);
 
         // Send request
         HttpResponse response = mRequest.get(builder.build());
@@ -409,7 +409,7 @@ public class Users extends AbstractApi {
      * @throws IOException
      */
     public Response<List<PostDetails>> listPosts(String since, Related[] related, String cursor,
-                                                 Integer limit, Integer user, Include[] includes,
+                                                 Integer limit, Long user, Include[] includes,
                                                  Order order) throws IOException {
         // Build uri
         Uri.Builder builder = Uri.parse("https://disqus.com/api/3.0/users/listPosts.json")
@@ -419,7 +419,7 @@ public class Users extends AbstractApi {
         appendRelated(builder, related);
         appendString(builder, "cursor", cursor);
         appendInt(builder, "limit", limit, true);
-        appendInt(builder, "user", user, true);
+        appendLong(builder, "user", user, true);
         appendIncludes(builder, includes);
         appendOrder(builder, order);
 

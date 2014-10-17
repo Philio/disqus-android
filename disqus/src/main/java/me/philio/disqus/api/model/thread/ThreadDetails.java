@@ -55,7 +55,7 @@ public class ThreadDetails {
     public String rawMessage;
 
     @SerializedName("id")
-    public String id;
+    public long id;
 
     @SerializedName("isClosed")
     public boolean isClosed;

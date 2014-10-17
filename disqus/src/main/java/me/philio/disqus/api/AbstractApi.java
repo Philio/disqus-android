@@ -100,9 +100,22 @@ public abstract class AbstractApi {
      * @param key
      * @param value
      * @param positive
-     * @return
      */
     protected void appendInt(Uri.Builder builder, String key, Integer value, boolean positive) {
+        if (value != null && (!positive || value > 0)) {
+            builder.appendQueryParameter(key, value.toString());
+        }
+    }
+
+    /**
+     * Add a long query param
+     *
+     * @param builder
+     * @param key
+     * @param value
+     * @param positive
+     */
+    protected void appendLong(Uri.Builder builder, String key, Long value, boolean positive) {
         if (value != null && (!positive || value > 0)) {
             builder.appendQueryParameter(key, value.toString());
         }

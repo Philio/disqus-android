@@ -78,7 +78,7 @@ public class PostDetails {
     public int numReports;
 
     @SerializedName("id")
-    public String id;
+    public long id;
 
     @SerializedName("isDeleted")
     public boolean isDeleted;
