@@ -78,12 +78,12 @@ public class Users extends AbstractApi {
      * @return
      * @throws IOException
      */
-    public Response<UserDetails> details(Integer user) throws IOException {
+    public Response<UserDetails> details(Long user) throws IOException {
         // Build uri
         Uri.Builder builder = Uri.parse("https://disqus.com/api/3.0/users/details.json")
                 .buildUpon();
         appendAuth(builder);
-        appendInt(builder, "user", user, true);
+        appendLong(builder, "user", user, true);
 
         // Send request
         HttpResponse response = mRequest.get(builder.build());
@@ -103,11 +103,11 @@ public class Users extends AbstractApi {
      * @return
      * @throws IOException
      */
-    public Response<List<Object>> follow(int target) throws IOException {
+    public Response<List<Object>> follow(long target) throws IOException {
         // Build uri
         Uri.Builder builder = new Uri.Builder();
         appendAuth(builder);
-        appendInt(builder, "target", target, true);
+        appendLong(builder, "target", target, true);
 
         // Send request
         HttpResponse response = mRequest.post(
@@ -441,11 +441,11 @@ public class Users extends AbstractApi {
      * @return
      * @throws Exception
      */
-    public Response<List<Object>> removeFollower(int follower) throws IOException {
+    public Response<List<Object>> removeFollower(long follower) throws IOException {
         // Build uri
         Uri.Builder builder = new Uri.Builder();
         appendAuth(builder);
-        appendInt(builder, "follower", follower, true);
+        appendLong(builder, "follower", follower, true);
 
         // Send request
         HttpResponse response = mRequest.post(
@@ -467,11 +467,11 @@ public class Users extends AbstractApi {
      * @return
      * @throws IOException
      */
-    public Response<List<Object>> unfollow(int target) throws IOException {
+    public Response<List<Object>> unfollow(long target) throws IOException {
         // Build uri
         Uri.Builder builder = new Uri.Builder();
         appendAuth(builder);
-        appendInt(builder, "target", target, true);
+        appendLong(builder, "target", target, true);
 
         // Send request
         HttpResponse response = mRequest.post(
