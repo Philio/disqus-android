@@ -18,6 +18,9 @@ package me.philio.disqus.api;
 import android.net.Uri;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.text.DateFormat;
 
 import me.philio.disqus.api.http.HttpRequest;
 
@@ -56,7 +59,7 @@ public abstract class AbstractApi {
     /**
      * Gson instance
      */
-    protected Gson mGson = new Gson();
+    protected Gson mGson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
 
     /**
      * Api key

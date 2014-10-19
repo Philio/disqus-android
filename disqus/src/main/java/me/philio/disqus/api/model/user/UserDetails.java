@@ -17,6 +17,8 @@ package me.philio.disqus.api.model.user;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 /**
  * User details
  */
@@ -59,7 +61,7 @@ public class UserDetails {
     public boolean isPrivate;
 
     @SerializedName("joinedAt")
-    public String joinedAt;
+    public Date joinedAt;
 
     @SerializedName("username")
     public String username;

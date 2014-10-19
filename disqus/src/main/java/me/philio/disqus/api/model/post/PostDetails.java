@@ -17,6 +17,7 @@ package me.philio.disqus.api.model.post;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
 import java.util.List;
 
 import me.philio.disqus.api.model.user.UserDetails;
@@ -66,7 +67,7 @@ public class PostDetails {
     public int points;
 
     @SerializedName("createdAt")
-    public String createdAt;
+    public Date createdAt;
 
     @SerializedName("isEdited")
     public boolean isEdited;

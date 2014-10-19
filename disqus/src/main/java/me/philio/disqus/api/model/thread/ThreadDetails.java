@@ -17,6 +17,7 @@ package me.philio.disqus.api.model.thread;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -70,7 +71,7 @@ public class ThreadDetails {
     public String link;
 
     @SerializedName("createdAt")
-    public String createdAt;
+    public Date createdAt;
 
     @SerializedName("title")
     public String title;
