@@ -10,7 +10,7 @@ This library is incomplete/in the early stages of development and is subject to 
 
 Add the following to your `build.gradle`:
 
-    compile 'me.philio.disqus:disqus:0.0.1'
+    compile 'me.philio.disqus:disqus:0.0.2'
 
 ## Authentication
 
