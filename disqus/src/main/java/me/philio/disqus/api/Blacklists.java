@@ -15,6 +15,18 @@
  */
 package me.philio.disqus.api;
 
+import android.net.Uri;
+
+import com.google.gson.reflect.TypeToken;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.List;
+
+import me.philio.disqus.api.http.HttpResponse;
+import me.philio.disqus.api.model.Response;
+import me.philio.disqus.api.model.blacklist.BlacklistEntry;
+
 /**
  * Blacklists api methods
  */
@@ -30,8 +42,74 @@ public class Blacklists extends AbstractApi {
         super(apiKey, accessToken);
     }
 
-    public void add() throws Exception {
-        throw new Exception("Stub! Not implemented yet");
+    /**
+     * Set api key, secret and access token
+     *
+     * @param apiKey
+     * @param apiSecret
+     * @param accessToken
+     */
+    public Blacklists(String apiKey, String apiSecret, String accessToken) {
+        super(apiKey, apiSecret, accessToken);
+    }
+
+    /**
+     * Adds an entry to the blacklist.
+     *
+     * Requires secret key.
+     *
+     * @see <a href="https://disqus.com/api/docs/blacklists/add/">Documentation</a>
+     * @param forum
+     * @param type
+     * @param value
+     * @param retroactive
+     * @param notes
+     * @return
+     * @throws IOException
+     */
+    public Response<List<BlacklistEntry>> add(String forum, BlacklistEntry.Type type, String value,
+                                              boolean retroactive, String notes)
+            throws IOException {
+        return add(forum, type, new String[]{value}, retroactive, notes);
+    }
+
+    /**
+     * Adds multiple entries to the blacklist.
+     *
+     * Requires secret key.
+     *
+     * @see <a href="https://disqus.com/api/docs/blacklists/add/">Documentation</a>
+     * @param forum
+     * @param type
+     * @param values
+     * @param retroactive
+     * @param notes
+     * @return
+     * @throws IOException
+     */
+    public Response<List<BlacklistEntry>> add(String forum, BlacklistEntry.Type type,
+                                              String[] values, boolean retroactive, String notes)
+            throws IOException {
+        // Build uri
+        Uri.Builder builder = new Uri.Builder();
+        appendAuth(builder);
+        appendString(builder, "forum", forum);
+        for (String value : values) {
+            appendString(builder, type.name(), value);
+        }
+        if (retroactive) {
+            appendInt(builder, "retroactive", 1, true);
+        }
+        appendString(builder, "notes", notes);
+
+        // Send request
+        HttpResponse response = mRequest.post(
+                Uri.parse("https://disqus.com/api/3.0/blacklists/add.json"),
+                builder.build().getQuery());
+
+        // Parse JSON response
+        Type jsonType = new TypeToken<Response<List<BlacklistEntry>>>() {}.getType();
+        return mGson.fromJson(response.getBody(), jsonType);
     }
 
     public void list() throws Exception {

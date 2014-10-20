@@ -46,6 +46,17 @@ public class Users extends AbstractApi {
     }
 
     /**
+     * Set api key, secret and access token
+     *
+     * @param apiKey
+     * @param apiSecret
+     * @param accessToken
+     */
+    public Users(String apiKey, String apiSecret, String accessToken) {
+        super(apiKey, apiSecret, accessToken);
+    }
+
+    /**
      * Updates username for the user, fails if username does not meet requirements, or is taken by
      * another user.
      *

@@ -67,6 +67,11 @@ public abstract class AbstractApi {
     protected String mApiKey;
 
     /**
+     * Api secret
+     */
+    protected String mApiSecret;
+
+    /**
      * Access token
      */
     protected String mAccessToken;
@@ -83,12 +88,27 @@ public abstract class AbstractApi {
     }
 
     /**
+     * Set api key, secret and access token
+     *
+     * @param apiKey
+     * @param apiSecret
+     * @param accessToken
+     */
+    public AbstractApi(String apiKey, String apiSecret, String accessToken) {
+        mApiKey = apiKey;
+        mApiSecret = apiSecret;
+        mAccessToken = accessToken;
+    }
+
+    /**
      * Add authentication params
      *
      * @param builder
      */
     protected void appendAuth(Uri.Builder builder) {
-        if (mApiKey != null) {
+        if (mApiSecret != null) {
+            builder.appendQueryParameter("api_secret", mApiSecret);
+        } else if (mApiKey != null) {
             builder.appendQueryParameter("api_key", mApiKey);
         }
         if (mAccessToken != null) {

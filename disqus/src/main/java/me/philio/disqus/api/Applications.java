@@ -16,7 +16,6 @@
 package me.philio.disqus.api;
 
 import android.net.Uri;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -52,6 +51,17 @@ public class Applications extends AbstractApi {
     }
 
     /**
+     * Set api key, secret and access token
+     *
+     * @param apiKey
+     * @param apiSecret
+     * @param accessToken
+     */
+    public Applications(String apiKey, String apiSecret, String accessToken) {
+        super(apiKey, apiSecret, accessToken);
+    }
+
+    /**
      *
      * @param application
      * @param days
@@ -71,8 +81,8 @@ public class Applications extends AbstractApi {
 
         // Create parser with custom type adapter to handle the nested multi-type arrays
         Type adapterType = new TypeToken<Map<Date, Integer>>() {}.getType();
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-                .registerTypeAdapter(adapterType, new UsageDeserializer()).create();
+        Gson gson = new GsonBuilder().registerTypeAdapter(adapterType, new UsageDeserializer())
+                .create();
 
         // Parse JSON response
         Type type = new TypeToken<Response<Map<Date, Integer>>>() {}.getType();

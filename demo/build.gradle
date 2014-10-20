@@ -10,7 +10,8 @@ android {
         targetSdkVersion 20
         versionCode 1
         versionName "1.0"
-        buildConfigField "String", "API_KEY", '"DOK954O4BO7t87wFeAsj1v0xQd1TytiNPj2wYKEDNtZJuEebBykAZ37iR4dHcDBU"'
+        buildConfigField "String", "API_KEY", '"MmTKjpV8f1P3pG4ZAByubL57gs9KvZHTIqTHBWBmnFI7kGBEAKru14ezH3LuaNEX"'
+        buildConfigField "String", "API_SECRET", '"t2HtBUE83QO17XSQrdT5GdZ2JSdr0w8UdA0UpEIgELjjan3eVCuc6QbLk4fSXO3I"'
         buildConfigField "String[]", "SCOPES", 'new String[] {"read", "write"}'
         buildConfigField "String", "REDIRECT_URI", '"http://localhost/callback"'
     }
