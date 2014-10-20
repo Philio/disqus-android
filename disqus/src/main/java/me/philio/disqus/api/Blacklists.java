@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import me.philio.disqus.api.exception.ApiException;
 import me.philio.disqus.api.http.HttpResponse;
 import me.philio.disqus.api.model.Response;
 import me.philio.disqus.api.model.blacklist.BlacklistEntry;
@@ -31,6 +32,15 @@ import me.philio.disqus.api.model.blacklist.BlacklistEntry;
  * Blacklists api methods
  */
 public class Blacklists extends AbstractApi {
+
+    /**
+     * Set api key
+     *
+     * @param apiKey
+     */
+    public Blacklists(String apiKey) {
+        super(apiKey);
+    }
 
     /**
      * Set api key and access token
@@ -69,7 +79,7 @@ public class Blacklists extends AbstractApi {
      */
     public Response<List<BlacklistEntry>> add(String forum, BlacklistEntry.Type type, String value,
                                               boolean retroactive, String notes)
-            throws IOException {
+            throws ApiException, IOException {
         return add(forum, type, new String[]{value}, retroactive, notes);
     }
 
@@ -89,7 +99,7 @@ public class Blacklists extends AbstractApi {
      */
     public Response<List<BlacklistEntry>> add(String forum, BlacklistEntry.Type type,
                                               String[] values, boolean retroactive, String notes)
-            throws IOException {
+            throws ApiException, IOException {
         // Build uri
         Uri.Builder builder = new Uri.Builder();
         appendAuth(builder);
@@ -106,6 +116,7 @@ public class Blacklists extends AbstractApi {
         HttpResponse response = mRequest.post(
                 Uri.parse("https://disqus.com/api/3.0/blacklists/add.json"),
                 builder.build().getQuery());
+        checkResponse(response);
 
         // Parse JSON response
         Type jsonType = new TypeToken<Response<List<BlacklistEntry>>>() {}.getType();

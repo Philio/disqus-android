@@ -32,6 +32,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import me.philio.disqus.api.exception.ApiException;
 import me.philio.disqus.api.http.HttpResponse;
 import me.philio.disqus.api.model.Response;
 
@@ -39,6 +40,15 @@ import me.philio.disqus.api.model.Response;
  * Applications api methods
  */
 public class Applications extends AbstractApi {
+
+    /**
+     * Set api key
+     *
+     * @param apiKey
+     */
+    public Applications(String apiKey) {
+        super(apiKey);
+    }
 
     /**
      * Set api key and access token
@@ -68,7 +78,8 @@ public class Applications extends AbstractApi {
      * @return
      * @throws IOException
      */
-    public Response<Map<Date, Integer>> listUsage(Integer application, Integer days) throws IOException {
+    public Response<Map<Date, Integer>> listUsage(Integer application, Integer days)
+            throws ApiException, IOException {
         // Build uri
         Uri.Builder builder = Uri.parse("https://disqus.com/api/3.0/applications/listUsage.json")
                 .buildUpon();
@@ -83,6 +94,7 @@ public class Applications extends AbstractApi {
         Type adapterType = new TypeToken<Map<Date, Integer>>() {}.getType();
         Gson gson = new GsonBuilder().registerTypeAdapter(adapterType, new UsageDeserializer())
                 .create();
+        checkResponse(response);
 
         // Parse JSON response
         Type type = new TypeToken<Response<Map<Date, Integer>>>() {}.getType();

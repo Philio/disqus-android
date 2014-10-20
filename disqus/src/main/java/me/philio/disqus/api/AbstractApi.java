@@ -19,10 +19,17 @@ import android.net.Uri;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
-import java.text.DateFormat;
+import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
 
+import me.philio.disqus.api.exception.ApiException;
+import me.philio.disqus.api.exception.BadRequestException;
+import me.philio.disqus.api.exception.ForbiddenException;
 import me.philio.disqus.api.http.HttpRequest;
+import me.philio.disqus.api.http.HttpResponse;
+import me.philio.disqus.api.model.Response;
 
 public abstract class AbstractApi {
 
@@ -77,13 +84,22 @@ public abstract class AbstractApi {
     protected String mAccessToken;
 
     /**
+     * Set api key
+     *
+     * @param apiKey
+     */
+    public AbstractApi(String apiKey) {
+        mApiKey = apiKey;
+    }
+
+    /**
      * Set api key and access token
      *
      * @param apiKey
      * @param accessToken
      */
     public AbstractApi(String apiKey, String accessToken) {
-        mApiKey = apiKey;
+        this(apiKey);
         mAccessToken = accessToken;
     }
 
@@ -95,9 +111,8 @@ public abstract class AbstractApi {
      * @param accessToken
      */
     public AbstractApi(String apiKey, String apiSecret, String accessToken) {
-        mApiKey = apiKey;
+        this(apiKey, accessToken);
         mApiSecret = apiSecret;
-        mAccessToken = accessToken;
     }
 
     /**
@@ -194,6 +209,33 @@ public abstract class AbstractApi {
             for (Include include : includes) {
                 builder.appendQueryParameter("include", include.name());
             }
+        }
+    }
+
+    /**
+     * Check the api response for errors
+     *
+     * @param httpResponse
+     * @throws ApiException
+     */
+    protected void checkResponse(HttpResponse httpResponse) throws ApiException {
+        // If HTTP/200 request was successful
+        if (httpResponse.getCode() == HttpURLConnection.HTTP_OK) {
+            return;
+        }
+
+        // Parse error
+        Type type = new TypeToken<Response<String>>() {}.getType();
+        Response<String> response = mGson.fromJson(httpResponse.getBody(), type);
+
+        // Throw exception based on HTTP response
+        switch (httpResponse.getCode()) {
+            case HttpURLConnection.HTTP_BAD_REQUEST:
+                throw new BadRequestException(response.response);
+            case HttpURLConnection.HTTP_FORBIDDEN:
+                throw new ForbiddenException(response.response);
+            default:
+                throw new ApiException(response.response);
         }
     }
 

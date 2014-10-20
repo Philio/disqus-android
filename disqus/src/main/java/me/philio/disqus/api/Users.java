@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import me.philio.disqus.api.exception.ApiException;
 import me.philio.disqus.api.http.HttpResponse;
 import me.philio.disqus.api.model.Response;
 import me.philio.disqus.api.model.forum.ForumDetails;
@@ -34,6 +35,15 @@ import me.philio.disqus.api.model.user.UserDetails;
  * Users api methods
  */
 public class Users extends AbstractApi {
+
+    /**
+     * Set api key
+     *
+     * @param apiKey
+     */
+    public Users(String apiKey) {
+        super(apiKey);
+    }
 
     /**
      * Set api key and access token
@@ -63,9 +73,10 @@ public class Users extends AbstractApi {
      * @see <a href="https://disqus.com/api/docs/users/checkUsername/">Documentation</a>
      * @param username
      * @return
-     * @throws Exception
+     * @throws ApiException
+     * @throws IOException
      */
-    public Response<String> checkUsername(String username) throws IOException {
+    public Response<String> checkUsername(String username) throws ApiException, IOException {
         // Build uri
         Uri.Builder builder = new Uri.Builder();
         appendAuth(builder);
@@ -75,6 +86,7 @@ public class Users extends AbstractApi {
         HttpResponse response = mRequest.post(
                 Uri.parse("https://disqus.com/api/3.0/users/checkUsername.json"),
                 builder.build().getQuery());
+        checkResponse(response);
 
         // Parse JSON response
         Type type = new TypeToken<Response<String>>() {}.getType();
@@ -87,9 +99,10 @@ public class Users extends AbstractApi {
      * @see <a href="https://disqus.com/api/docs/users/details/">Documentation</a>
      * @param user
      * @return
+     * @throws ApiException
      * @throws IOException
      */
-    public Response<UserDetails> details(Long user) throws IOException {
+    public Response<UserDetails> details(Long user) throws ApiException, IOException {
         // Build uri
         Uri.Builder builder = Uri.parse("https://disqus.com/api/3.0/users/details.json")
                 .buildUpon();
@@ -98,6 +111,7 @@ public class Users extends AbstractApi {
 
         // Send request
         HttpResponse response = mRequest.get(builder.build());
+        checkResponse(response);
 
         // Parse JSON response
         Type type = new TypeToken<Response<UserDetails>>() {}.getType();
@@ -112,9 +126,10 @@ public class Users extends AbstractApi {
      * @see <a href="https://disqus.com/api/docs/users/follow/">Documentation</a>
      * @param target
      * @return
+     * @throws ApiException
      * @throws IOException
      */
-    public Response<List<Object>> follow(long target) throws IOException {
+    public Response<List<Object>> follow(long target) throws ApiException, IOException {
         // Build uri
         Uri.Builder builder = new Uri.Builder();
         appendAuth(builder);
@@ -124,6 +139,7 @@ public class Users extends AbstractApi {
         HttpResponse response = mRequest.post(
                 Uri.parse("https://disqus.com/api/3.0/users/follow.json"),
                 builder.build().getQuery());
+        checkResponse(response);
 
         // Parse JSON response
         Type type = new TypeToken<Response<List<Object>>>() {}.getType();
@@ -140,11 +156,12 @@ public class Users extends AbstractApi {
      * @param user
      * @param order
      * @return
+     * @throws ApiException
      * @throws IOException
      */
     public Response<List<ForumDetails>> listActiveForums(Integer sinceId, String cursor,
                                                          Integer limit, Long user, Order order)
-            throws IOException {
+            throws ApiException, IOException {
         // Build uri
         Uri.Builder builder = Uri.parse("https://disqus.com/api/3.0/users/listActiveForums.json")
                 .buildUpon();
@@ -157,6 +174,7 @@ public class Users extends AbstractApi {
 
         // Send request
         HttpResponse response = mRequest.get(builder.build());
+        checkResponse(response);
 
         // Parse JSON response
         Type type = new TypeToken<Response<List<ForumDetails>>>() {}.getType();
@@ -176,13 +194,14 @@ public class Users extends AbstractApi {
      * @param includes
      * @param order
      * @return
+     * @throws ApiException
      * @throws IOException
      */
     public Response<List<ThreadDetails>> listActiveThreads(String[] forums, String since,
                                                            Related[] related, String cursor,
                                                            Integer limit, Long user,
                                                            Include[] includes, Order order)
-            throws IOException {
+            throws ApiException, IOException {
         // Build uri
         Uri.Builder builder = Uri.parse("https://disqus.com/api/3.0/users/listActiveThreads.json")
                 .buildUpon();
@@ -202,6 +221,7 @@ public class Users extends AbstractApi {
 
         // Send request
         HttpResponse response = mRequest.get(builder.build());
+        checkResponse(response);
 
         // Parse JSON response
         Type type = new TypeToken<Response<List<ThreadDetails>>>() {}.getType();
@@ -222,12 +242,12 @@ public class Users extends AbstractApi {
      * @param query
      * @param includes
      * @param anonUser
-     * @throws Exception
+     * @throws ApiException
      */
     public void listActivity(String since, Related[] related, String cursor, Integer limit,
                              Long user, String query, Include[] includes, String anonUser)
-            throws Exception {
-        throw new Exception("Stub! Not implemented yet");
+            throws ApiException {
+        throw new ApiException("Stub! Not implemented yet");
     }
 
     /**
@@ -240,10 +260,12 @@ public class Users extends AbstractApi {
      * @param user
      * @param order
      * @return
+     * @throws ApiException
      * @throws IOException
      */
     public Response<List<UserDetails>> listFollowers(Integer sinceId, String cursor, Integer limit,
-                                                     Long user, Order order) throws IOException {
+                                                     Long user, Order order)
+            throws ApiException, IOException {
         // Build uri
         Uri.Builder builder = Uri.parse("https://disqus.com/api/3.0/users/listFollowers.json")
                 .buildUpon();
@@ -256,6 +278,7 @@ public class Users extends AbstractApi {
 
         // Send request
         HttpResponse response = mRequest.get(builder.build());
+        checkResponse(response);
 
         // Parse JSON response
         Type type = new TypeToken<Response<List<UserDetails>>>() {}.getType();
@@ -272,10 +295,12 @@ public class Users extends AbstractApi {
      * @param user
      * @param order
      * @return
+     * @throws ApiException
      * @throws IOException
      */
     public Response<List<UserDetails>> listFollowing(Integer sinceId, String cursor, Integer limit,
-                                                     Long user, Order order) throws IOException {
+                                                     Long user, Order order)
+            throws ApiException, IOException {
         // Build uri
         Uri.Builder builder = Uri.parse("https://disqus.com/api/3.0/users/listFollowing.json")
                 .buildUpon();
@@ -288,6 +313,7 @@ public class Users extends AbstractApi {
 
         // Send request
         HttpResponse response = mRequest.get(builder.build());
+        checkResponse(response);
 
         // Parse JSON response
         Type type = new TypeToken<Response<List<UserDetails>>>() {}.getType();
@@ -304,11 +330,12 @@ public class Users extends AbstractApi {
      * @param user
      * @param order
      * @return
+     * @throws ApiException
      * @throws IOException
      */
     public Response<List<ForumDetails>> listFollowingForums(Integer sinceId, String cursor,
                                                             Integer limit, Long user, Order order)
-            throws IOException {
+            throws ApiException, IOException {
         // Build uri
         Uri.Builder builder = Uri.parse("https://disqus.com/api/3.0/users/listFollowingForums.json")
                 .buildUpon();
@@ -321,6 +348,7 @@ public class Users extends AbstractApi {
 
         // Send request
         HttpResponse response = mRequest.get(builder.build());
+        checkResponse(response);
 
         // Parse JSON response
         Type type = new TypeToken<Response<List<ForumDetails>>>() {}.getType();
@@ -338,11 +366,11 @@ public class Users extends AbstractApi {
      * @param limit
      * @param user
      * @param order
-     * @throws Exception
+     * @throws ApiException
      */
     public void listFollowingTopics(Integer sinceId, String cursor, Integer limit, Long user,
-                                    Order order) throws Exception {
-        throw new Exception("Stub! Not implemented yet");
+                                    Order order) throws ApiException {
+        throw new ApiException("Stub! Not implemented yet");
     }
 
     /**
@@ -356,10 +384,12 @@ public class Users extends AbstractApi {
      * @param user
      * @param order
      * @return
+     * @throws ApiException
      * @throws IOException
      */
     public Response<List<ForumDetails>> listForums(Integer sinceId, String cursor, Integer limit,
-                                                   Long user, Order order) throws IOException {
+                                                   Long user, Order order)
+            throws ApiException, IOException {
         // Build uri
         Uri.Builder builder = Uri.parse("https://disqus.com/api/3.0/users/listForums.json")
                 .buildUpon();
@@ -372,6 +402,7 @@ public class Users extends AbstractApi {
 
         // Send request
         HttpResponse response = mRequest.get(builder.build());
+        checkResponse(response);
 
         // Parse JSON response
         Type type = new TypeToken<Response<List<ForumDetails>>>() {}.getType();
@@ -386,10 +417,11 @@ public class Users extends AbstractApi {
      * @param limit
      * @param user
      * @return
+     * @throws ApiException
      * @throws IOException
      */
     public Response<List<ForumDetails>> listMostActiveForums(Integer limit, Long user)
-            throws IOException {
+            throws ApiException, IOException {
         // Build uri
         Uri.Builder builder =
                 Uri.parse("https://disqus.com/api/3.0/users/listMostActiveForums.json").buildUpon();
@@ -399,6 +431,7 @@ public class Users extends AbstractApi {
 
         // Send request
         HttpResponse response = mRequest.get(builder.build());
+        checkResponse(response);
 
         // Parse JSON response
         Type type = new TypeToken<Response<List<ForumDetails>>>() {}.getType();
@@ -417,11 +450,12 @@ public class Users extends AbstractApi {
      * @param includes
      * @param order
      * @return
+     * @throws ApiException
      * @throws IOException
      */
     public Response<List<PostDetails>> listPosts(String since, Related[] related, String cursor,
                                                  Integer limit, Long user, Include[] includes,
-                                                 Order order) throws IOException {
+                                                 Order order) throws ApiException, IOException {
         // Build uri
         Uri.Builder builder = Uri.parse("https://disqus.com/api/3.0/users/listPosts.json")
                 .buildUpon();
@@ -436,6 +470,7 @@ public class Users extends AbstractApi {
 
         // Send request
         HttpResponse response = mRequest.get(builder.build());
+        checkResponse(response);
 
         // Parse JSON response
         Type type = new TypeToken<Response<List<PostDetails>>>() {}.getType();
@@ -450,9 +485,10 @@ public class Users extends AbstractApi {
      * @see <a href="https://disqus.com/api/docs/users/removeFollower/">Documentation</a>
      * @param follower
      * @return
-     * @throws Exception
+     * @throws ApiException
+     * @throws IOException
      */
-    public Response<List<Object>> removeFollower(long follower) throws IOException {
+    public Response<List<Object>> removeFollower(long follower) throws ApiException, IOException {
         // Build uri
         Uri.Builder builder = new Uri.Builder();
         appendAuth(builder);
@@ -462,6 +498,7 @@ public class Users extends AbstractApi {
         HttpResponse response = mRequest.post(
                 Uri.parse("https://disqus.com/api/3.0/users/removeFollower.json"),
                 builder.build().getQuery());
+        checkResponse(response);
 
         // Parse JSON response
         Type type = new TypeToken<Response<List<Object>>>() {}.getType();
@@ -476,9 +513,10 @@ public class Users extends AbstractApi {
      * @see <a href="https://disqus.com/api/docs/users/unfollow/">Documentation</a>
      * @param target
      * @return
+     * @throws ApiException
      * @throws IOException
      */
-    public Response<List<Object>> unfollow(long target) throws IOException {
+    public Response<List<Object>> unfollow(long target) throws ApiException, IOException {
         // Build uri
         Uri.Builder builder = new Uri.Builder();
         appendAuth(builder);
@@ -488,6 +526,7 @@ public class Users extends AbstractApi {
         HttpResponse response = mRequest.post(
                 Uri.parse("https://disqus.com/api/3.0/users/unfollow.json"),
                 builder.build().getQuery());
+        checkResponse(response);
 
         // Parse JSON response
         Type type = new TypeToken<Response<List<Object>>>() {}.getType();
@@ -505,10 +544,11 @@ public class Users extends AbstractApi {
      * @param url
      * @param location
      * @return
+     * @throws ApiException
      * @throws IOException
      */
     public Response<UserDetails> updateProfile(String about, String name, String url,
-                                               String location) throws IOException {
+                                               String location) throws ApiException, IOException {
         // Build uri
         Uri.Builder builder = new Uri.Builder();
         appendAuth(builder);
@@ -521,6 +561,7 @@ public class Users extends AbstractApi {
         HttpResponse response = mRequest.post(
                 Uri.parse("https://disqus.com/api/3.0/users/updateProfile.json"),
                 builder.build().getQuery());
+        checkResponse(response);
 
         // Parse JSON response
         Type type = new TypeToken<Response<UserDetails>>() {}.getType();
