@@ -21,13 +21,12 @@ package me.philio.disqus.api;
 public class Posts extends AbstractApi {
 
     /**
-     * Set api key and access token
+     * Configure api
      *
-     * @param apiKey
-     * @param accessToken
+     * @param config
      */
-    public Posts(String apiKey, String accessToken) {
-        super(apiKey, accessToken);
+    public Posts(ApiConfig config) {
+        super(config);
     }
 
     public void approve() throws Exception {

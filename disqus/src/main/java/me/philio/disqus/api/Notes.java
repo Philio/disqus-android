@@ -21,13 +21,12 @@ package me.philio.disqus.api;
 public class Notes extends AbstractApi {
 
     /**
-     * Set api key and access token
+     * Configure api
      *
-     * @param apiKey
-     * @param accessToken
+     * @param config
      */
-    public Notes(String apiKey, String accessToken) {
-        super(apiKey, accessToken);
+    public Notes(ApiConfig config) {
+        super(config);
     }
 
 }

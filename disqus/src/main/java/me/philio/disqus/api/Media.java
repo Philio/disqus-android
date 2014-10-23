@@ -21,13 +21,12 @@ package me.philio.disqus.api;
 public class Media extends AbstractApi {
 
     /**
-     * Set api key and access token
+     * Configure api
      *
-     * @param apiKey
-     * @param accessToken
+     * @param config
      */
-    public Media(String apiKey, String accessToken) {
-        super(apiKey, accessToken);
+    public Media(ApiConfig config) {
+        super(config);
     }
 
 }

@@ -37,33 +37,12 @@ import me.philio.disqus.api.model.user.UserDetails;
 public class Users extends AbstractApi {
 
     /**
-     * Set api key
+     * Configure api
      *
-     * @param apiKey
+     * @param config
      */
-    public Users(String apiKey) {
-        super(apiKey);
-    }
-
-    /**
-     * Set api key and access token
-     *
-     * @param apiKey
-     * @param accessToken
-     */
-    public Users(String apiKey, String accessToken) {
-        super(apiKey, accessToken);
-    }
-
-    /**
-     * Set api key, secret and access token
-     *
-     * @param apiKey
-     * @param apiSecret
-     * @param accessToken
-     */
-    public Users(String apiKey, String apiSecret, String accessToken) {
-        super(apiKey, apiSecret, accessToken);
+    public Users(ApiConfig config) {
+        super(config);
     }
 
     /**

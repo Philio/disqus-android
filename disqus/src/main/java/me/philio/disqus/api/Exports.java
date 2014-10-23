@@ -21,13 +21,12 @@ package me.philio.disqus.api;
 public class Exports extends AbstractApi {
 
     /**
-     * Set api key and access token
+     * Configure api
      *
-     * @param apiKey
-     * @param accessToken
+     * @param config
      */
-    public Exports(String apiKey, String accessToken) {
-        super(apiKey, accessToken);
+    public Exports(ApiConfig config) {
+        super(config);
     }
 
     public void exportForum() throws Exception {

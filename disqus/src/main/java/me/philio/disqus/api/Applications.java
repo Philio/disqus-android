@@ -42,33 +42,12 @@ import me.philio.disqus.api.model.Response;
 public class Applications extends AbstractApi {
 
     /**
-     * Set api key
+     * Configure api
      *
-     * @param apiKey
+     * @param config
      */
-    public Applications(String apiKey) {
-        super(apiKey);
-    }
-
-    /**
-     * Set api key and access token
-     *
-     * @param apiKey
-     * @param accessToken
-     */
-    public Applications(String apiKey, String accessToken) {
-        super(apiKey, accessToken);
-    }
-
-    /**
-     * Set api key, secret and access token
-     *
-     * @param apiKey
-     * @param apiSecret
-     * @param accessToken
-     */
-    public Applications(String apiKey, String apiSecret, String accessToken) {
-        super(apiKey, apiSecret, accessToken);
+    public Applications(ApiConfig config) {
+        super(config);
     }
 
     /**

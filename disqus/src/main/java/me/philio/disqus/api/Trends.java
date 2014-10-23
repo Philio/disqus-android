@@ -21,13 +21,12 @@ package me.philio.disqus.api;
 public class Trends extends AbstractApi {
 
     /**
-     * Set api key and access token
+     * Configure api
      *
-     * @param apiKey
-     * @param accessToken
+     * @param config
      */
-    public Trends(String apiKey, String accessToken) {
-        super(apiKey, accessToken);
+    public Trends(ApiConfig config) {
+        super(config);
     }
 
     public void listThreads() throws Exception {

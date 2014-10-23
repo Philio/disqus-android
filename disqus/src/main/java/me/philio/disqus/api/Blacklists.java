@@ -34,33 +34,12 @@ import me.philio.disqus.api.model.blacklist.BlacklistEntry;
 public class Blacklists extends AbstractApi {
 
     /**
-     * Set api key
+     * Configure api
      *
-     * @param apiKey
+     * @param config
      */
-    public Blacklists(String apiKey) {
-        super(apiKey);
-    }
-
-    /**
-     * Set api key and access token
-     *
-     * @param apiKey
-     * @param accessToken
-     */
-    public Blacklists(String apiKey, String accessToken) {
-        super(apiKey, accessToken);
-    }
-
-    /**
-     * Set api key, secret and access token
-     *
-     * @param apiKey
-     * @param apiSecret
-     * @param accessToken
-     */
-    public Blacklists(String apiKey, String apiSecret, String accessToken) {
-        super(apiKey, apiSecret, accessToken);
+    public Blacklists(ApiConfig config) {
+        super(config);
     }
 
     /**

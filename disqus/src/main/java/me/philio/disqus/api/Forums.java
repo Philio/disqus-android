@@ -21,13 +21,12 @@ package me.philio.disqus.api;
 public class Forums extends AbstractApi {
 
     /**
-     * Set api key and access token
+     * Configure api
      *
-     * @param apiKey
-     * @param accessToken
+     * @param config
      */
-    public Forums(String apiKey, String accessToken) {
-        super(apiKey, accessToken);
+    public Forums(ApiConfig config) {
+        super(config);
     }
 
     public void addModerator() throws Exception {

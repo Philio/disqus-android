@@ -84,35 +84,25 @@ public abstract class AbstractApi {
     protected String mAccessToken;
 
     /**
-     * Set api key
+     * Configure api
      *
-     * @param apiKey
+     * @param config
      */
-    public AbstractApi(String apiKey) {
-        mApiKey = apiKey;
-    }
-
-    /**
-     * Set api key and access token
-     *
-     * @param apiKey
-     * @param accessToken
-     */
-    public AbstractApi(String apiKey, String accessToken) {
-        this(apiKey);
-        mAccessToken = accessToken;
-    }
-
-    /**
-     * Set api key, secret and access token
-     *
-     * @param apiKey
-     * @param apiSecret
-     * @param accessToken
-     */
-    public AbstractApi(String apiKey, String apiSecret, String accessToken) {
-        this(apiKey, accessToken);
-        mApiSecret = apiSecret;
+    public AbstractApi(ApiConfig config) {
+        if (config != null) {
+            if (config.getApiKey() != null) {
+                mApiKey = config.getApiKey();
+            }
+            if (config.getApiSecret() != null) {
+                mApiSecret = config.getApiSecret();
+            }
+            if (config.getAccessToken() != null) {
+                mAccessToken = config.getAccessToken();
+            }
+            if (config.getReferrer() != null) {
+                mRequest.setReferrer(config.getReferrer());
+            }
+        }
     }
 
     /**

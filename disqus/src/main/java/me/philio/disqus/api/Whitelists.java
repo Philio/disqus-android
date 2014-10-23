@@ -21,13 +21,12 @@ package me.philio.disqus.api;
 public class Whitelists extends AbstractApi {
 
     /**
-     * Set api key and access token
+     * Configure api
      *
-     * @param apiKey
-     * @param accessToken
+     * @param config
      */
-    public Whitelists(String apiKey, String accessToken) {
-        super(apiKey, accessToken);
+    public Whitelists(ApiConfig config) {
+        super(config);
     }
 
     public void add() throws Exception {

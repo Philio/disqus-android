@@ -57,6 +57,20 @@ public class HttpRequest {
     private static final int READ_TIMEOUT = 10000;
 
     /**
+     * Referrer
+     */
+    private String mReferrer;
+
+    /**
+     * Set the referrer
+     *
+     * @param referrer
+     */
+    public void setReferrer(String referrer) {
+        mReferrer = referrer;
+    }
+
+    /**
      * Get request
      *
      * @param uri
@@ -105,6 +119,9 @@ public class HttpRequest {
         connection.setConnectTimeout(CONNECT_TIMEOUT);
         connection.setReadTimeout(READ_TIMEOUT);
         connection.setUseCaches(false);
+        if (mReferrer != null) {
+            connection.setRequestProperty("Referer", mReferrer);
+        }
         return connection;
     }
 
