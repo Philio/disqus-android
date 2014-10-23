@@ -68,6 +68,7 @@ Disqus app settings.
 
 Instantiate any of the API resources with your `ApiConfig`:
 
+    ApiConfig apiConfig = new ApiConfig("apiKey", "accessToken", "http://referrer/");
     Users users = new Users(apiConfig);
 
 ### Execute requests
