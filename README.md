@@ -1,8 +1,9 @@
 # Disqus for Android
 
-## Important
+## About
 
-This library is incomplete/in the early stages of development and is subject to change.
+This library implements the Disqus API for use in Android applications. The library is currently
+incomplete and under development so is subject to change.
 
 ## Download
 
@@ -10,7 +11,7 @@ This library is incomplete/in the early stages of development and is subject to 
 
 Add the following to your `build.gradle`:
 
-    compile 'me.philio.disqus:disqus:0.0.2'
+    compile 'me.philio.disqus:disqus:0.0.3'
 
 ## Authentication
 
@@ -47,3 +48,35 @@ Add the following to your `build.gradle`:
 
 Third party logins are not supported yet, I need to investigate this further and see if it's
 possible to implement SSO or not. Should be added in the near future.
+
+## Basic usage
+
+### Create configuration
+
+Use the `ApiConfig` class to set your app configuration
+
+Options:
+
+* API key - mandatory for all requests.
+* API secret - intended for server to server requests as an alternative to the API key/access token,
+can be used from a mobile app but this presents security risks and is not recommended.
+* Access token - required for requests that require authentication.
+* Referrer - required for some requests that perform domain checks, should match a domain in your
+Disqus app settings.
+
+### Create resource
+
+Instantiate any of the API resources with your `ApiConfig`:
+
+    Users users = new Users(apiConfig);
+
+### Execute requests
+
+Currently implemented methods can be called using all params specified in the Disqus documentation.
+This is probably not the most optimal implementation and usage will be reviewed at a later date.
+
+A combination of primitive and object types have been used and represent optional and required
+parameters for each method:
+
+* Integer represents a nullable optional integer param.
+* int represents a required integer param which generally requires a positive integer value.
