@@ -77,7 +77,7 @@ Currently implemented methods can be called using all params specified in the Di
 This is probably not the most optimal implementation and usage will be reviewed at a later date.
 
 A combination of primitive and object types have been used and represent optional and required
-parameters for each method:
+parameters for each method e.g.:
 
 * Integer represents a nullable optional integer param.
 * int represents a required integer param which generally requires a positive integer value.
