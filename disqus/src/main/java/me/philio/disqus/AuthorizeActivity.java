@@ -25,7 +25,7 @@ import static me.philio.disqus.AuthorizeFragment.AuthorizeListener;
 
 /**
  * OAuth authorization activity
- * <p/>
+ *
  * Loads the {@link AuthorizeFragment} and implements {@link AuthorizeListener} then passes the
  * result back to calling activity.
  */

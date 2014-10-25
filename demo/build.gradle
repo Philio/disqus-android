@@ -1,17 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 20
-    buildToolsVersion "20.0.0"
+    compileSdkVersion 21
+    buildToolsVersion "21.0.2"
 
     defaultConfig {
         applicationId "me.philio.disqus.demo"
         minSdkVersion 8
-        targetSdkVersion 20
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0"
-        buildConfigField "String", "API_KEY", '"MmTKjpV8f1P3pG4ZAByubL57gs9KvZHTIqTHBWBmnFI7kGBEAKru14ezH3LuaNEX"'
-        buildConfigField "String", "API_SECRET", '"t2HtBUE83QO17XSQrdT5GdZ2JSdr0w8UdA0UpEIgELjjan3eVCuc6QbLk4fSXO3I"'
+        buildConfigField "String", "API_KEY", '"5MuhbYXnb0MhUTUOuk5aD0ndQPaz8zUv0nvdI1fWvuexZlSMwLIQeCwAFg76VbhX"'
         buildConfigField "String[]", "SCOPES", 'new String[] {"read", "write"}'
         buildConfigField "String", "REDIRECT_URI", '"http://localhost/callback"'
     }
@@ -25,6 +24,6 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:20.0.0'
+    compile 'com.android.support:appcompat-v7:21.0.0'
     compile project(':disqus')
 }

@@ -30,7 +30,7 @@ import me.philio.disqus.api.model.oauth2.AccessToken;
 
 /**
  * OAuth authorization fragment
- * <p/>
+ *
  * Sets up a {@link WebView} to start the OAuth2 process, captures the result and passes it to an
  * {@link AuthorizeListener}.
  */
