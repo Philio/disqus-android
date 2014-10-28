@@ -56,6 +56,4 @@ public class BlacklistEntry {
     @SerializedName("createdAt")
     public Date createdAt;
 
-
-
 }
