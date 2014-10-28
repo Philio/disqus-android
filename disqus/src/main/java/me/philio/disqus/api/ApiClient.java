@@ -28,6 +28,7 @@ import me.philio.disqus.api.model.application.Usage;
 import me.philio.disqus.api.model.blacklist.BlacklistValue;
 import me.philio.disqus.api.resource.Applications;
 import me.philio.disqus.api.resource.Blacklists;
+import me.philio.disqus.api.resource.Categories;
 import me.philio.disqus.api.resource.Users;
 import retrofit.ErrorHandler;
 import retrofit.RequestInterceptor;
@@ -142,6 +143,15 @@ public class ApiClient {
      */
     public Blacklists createBlacklists() {
         return mAdapter.create(Blacklists.class);
+    }
+
+    /**
+     * Create categories resource
+     *
+     * @return
+     */
+    public Categories createCategories() {
+        return mAdapter.create(Categories.class);
     }
 
     /**
