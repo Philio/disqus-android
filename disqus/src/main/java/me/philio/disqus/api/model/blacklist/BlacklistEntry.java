@@ -42,7 +42,7 @@ public class BlacklistEntry {
     public String notes;
 
     @SerializedName("value")
-    public String value;
+    public BlacklistValue value;
 
     @SerializedName("conflictingWhitelistRemoved")
     public boolean conflictingWhitelistRemoved;
@@ -55,5 +55,7 @@ public class BlacklistEntry {
 
     @SerializedName("createdAt")
     public Date createdAt;
+
+
 
 }

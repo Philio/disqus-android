@@ -11,7 +11,7 @@ incomplete and under development so is subject to change.
 
 Add the following to your `build.gradle`:
 
-    compile 'me.philio.disqus:disqus:0.0.4'
+    compile 'me.philio.disqus:disqus:0.0.5'
 
 ## Authentication
 
@@ -64,20 +64,26 @@ can be used from a mobile app but this presents security risks and is not recomm
 * Referrer - required for some requests that perform domain checks, should match a domain in your
 Disqus app settings.
 
-### Create resource
+### Create client
 
-Instantiate any of the API resources with your `ApiConfig`:
+As of version 0.0.5 the library is using [Retrofit](http://square.github.io/retrofit/) for requests.
 
-    ApiConfig apiConfig = new ApiConfig("apiKey", "accessToken", "http://referrer/");
-    Users users = new Users(apiConfig);
+The `ApiClient` can be used to create Disqus resource objects based on the Retrofit interfaces
+defined in the `me.philio.disqus.api.resource` package. It works as a wrapper to the Retrofit
+`RestAdapter` and configures the adapter and deserialisation options for Gson.
 
-### Execute requests
+    ApiConfig apiConfig = new ApiConfig("MyApiKey", "AccessToken");
+    ApiClient apiClient = new ApiClient(apiConfig);
 
-Currently implemented methods can be called using all params specified in the Disqus documentation.
-This is probably not the most optimal implementation and usage will be reviewed at a later date.
+### Get resource and make requests
 
-A combination of primitive and object types have been used and represent optional and required
-parameters for each method e.g.:
+    Applications applications = apiClient.createApplications();
+    Response<Usage> usage = applications.listUsage("MyApp", 7);
 
-* Integer represents a nullable optional integer param.
-* int represents a required integer param which generally requires a positive integer value.
+Most requests will exactly match the Disqus API documentation, with minor differences:
+
+* Some methods perform multiple functions, so have been split into single functions for simplicity,
+e.g. add to/remove from blacklist/whitelist
+
+* Some methods have a lot of optional parameters so use a map to avoid long method calls full of
+nulls.

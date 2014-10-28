@@ -35,11 +35,11 @@ public class Response<T> {
     public int code;
 
     /**
-     * Response object
+     * Response data
      *
      * Object, array of objects or string for errors
      */
     @SerializedName("response")
-    public T response;
+    public T data;
 
 }

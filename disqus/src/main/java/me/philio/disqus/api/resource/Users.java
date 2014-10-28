@@ -13,32 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.philio.disqus.api;
+package me.philio.disqus.api.resource;
+
+import me.philio.disqus.api.model.Response;
+import me.philio.disqus.api.model.user.UserDetails;
+import retrofit.http.GET;
+import retrofit.http.POST;
+import retrofit.http.Query;
 
 /**
- * Whitelists api methods
+ * Users resource
  */
-public class Whitelists extends AbstractApi {
+public interface Users {
 
-    /**
-     * Configure api
-     *
-     * @param config
-     */
-    public Whitelists(ApiConfig config) {
-        super(config);
-    }
+    @POST("/users/checkUsername.json")
+    public Response<String> checkUsername(@Query("username") String username);
 
-    public void add() throws Exception {
-        throw new Exception("Stub! Not implemented yet");
-    }
-
-    public void list() throws Exception {
-        throw new Exception("Stub! Not implemented yet");
-    }
-
-    public void remove() throws Exception {
-        throw new Exception("Stub! Not implemented yet");
-    }
+    @GET("/users/details.json")
+    public Response<UserDetails> details(@Query("user") Long user);
 
 }
