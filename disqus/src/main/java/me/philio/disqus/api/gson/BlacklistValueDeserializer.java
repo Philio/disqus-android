@@ -10,13 +10,13 @@ import com.google.gson.JsonParseException;
 import java.lang.reflect.Type;
 
 import me.philio.disqus.DisqusConstants;
-import me.philio.disqus.api.model.blacklist.BlacklistValue;
-import me.philio.disqus.api.model.user.User;
+import me.philio.disqus.api.model.blacklists.BlacklistValue;
+import me.philio.disqus.api.model.users.User;
 
 /**
  * Custom deserializer to convert Disqus blacklist entry value nicely
  *
- * Expects either a {@link String} or a {@link me.philio.disqus.api.model.user.User} object
+ * Expects either a {@link String} or a {@link me.philio.disqus.api.model.users.User} object
  */
 public class BlacklistValueDeserializer implements JsonDeserializer<BlacklistValue> {
 

@@ -1,4 +1,4 @@
-package me.philio.disqus.api.resource;
+package me.philio.disqus.api.resources;
 
 import java.util.List;
 import java.util.Map;
@@ -6,11 +6,11 @@ import java.util.Map;
 import me.philio.disqus.api.exception.ApiException;
 import me.philio.disqus.api.model.Response;
 import me.philio.disqus.api.model.category.Category;
-import me.philio.disqus.api.model.forum.Forum;
-import me.philio.disqus.api.model.forum.Moderator;
-import me.philio.disqus.api.model.post.Post;
-import me.philio.disqus.api.model.thread.Thread;
-import me.philio.disqus.api.model.user.User;
+import me.philio.disqus.api.model.forums.Forum;
+import me.philio.disqus.api.model.forums.Moderator;
+import me.philio.disqus.api.model.posts.Post;
+import me.philio.disqus.api.model.threads.Thread;
+import me.philio.disqus.api.model.users.User;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Query;
@@ -18,12 +18,15 @@ import retrofit.http.QueryMap;
 
 /**
  * Forums resource
+ *
+ * @see <a href="https://disqus.com/api/docs/forums/">Documentation</a>
  */
 public interface Forums {
 
     /**
      * Adds a moderator to a forum
      *
+     * @see <a href="https://disqus.com/api/docs/forums/addModerator/">Documentation</a>
      * @param user
      * @param forum
      * @return
@@ -36,6 +39,7 @@ public interface Forums {
     /**
      * Creates a new forum
      *
+     * @see <a href="https://disqus.com/api/docs/forums/create/">Documentation</a>
      * @param website
      * @param name
      * @param shortName
@@ -50,6 +54,7 @@ public interface Forums {
     /**
      * Creates a new forum
      *
+     * @see <a href="https://disqus.com/api/docs/forums/create/">Documentation</a>
      * @param website
      * @param name
      * @param shortName
@@ -59,14 +64,14 @@ public interface Forums {
      */
     @POST("/forums/create.json")
     public Response<Forum> create(@Query("website") String website,
-                                         @Query("name") String name,
-                                         @Query("short_name") String shortName,
-                                         @Query("guidelines") String guidelines)
-            throws ApiException;
+                                  @Query("name") String name,
+                                  @Query("short_name") String shortName,
+                                  @Query("guidelines") String guidelines) throws ApiException;
 
     /**
      * Returns forum details
      *
+     * @see <a href="https://disqus.com/api/docs/forums/details/">Documentation</a>
      * @param forum
      * @return
      * @throws ApiException
@@ -77,6 +82,7 @@ public interface Forums {
     /**
      * Returns forum details
      *
+     * @see <a href="https://disqus.com/api/docs/forums/details/">Documentation</a>
      * @param forum
      * @param related
      * @return
@@ -89,6 +95,7 @@ public interface Forums {
     /**
      * Follow a forum
      *
+     * @see <a href="https://disqus.com/api/docs/forums/follow/">Documentation</a>
      * @param target
      * @return
      * @throws ApiException
@@ -99,6 +106,7 @@ public interface Forums {
     /**
      * Returns a list of categories within a forum
      *
+     * @see <a href="https://disqus.com/api/docs/forums/listCategories/">Documentation</a>
      * @param forum
      * @return
      * @throws ApiException
@@ -110,6 +118,7 @@ public interface Forums {
     /**
      * Returns a list of categories within a forum
      *
+     * @see <a href="https://disqus.com/api/docs/forums/listCategories/">Documentation</a>
      * @param forum
      * @param optionalParams
      * @return
@@ -123,6 +132,7 @@ public interface Forums {
     /**
      * Returns a list of users following a forum
      *
+     * @see <a href="https://disqus.com/api/docs/forums/listFollowers/">Documentation</a>
      * @param forum
      * @return
      * @throws ApiException
@@ -134,6 +144,7 @@ public interface Forums {
     /**
      * Returns a list of users following a forum
      *
+     * @see <a href="https://disqus.com/api/docs/forums/listFollowers/">Documentation</a>
      * @param forum
      * @param optionalParams
      * @return
@@ -147,6 +158,7 @@ public interface Forums {
     /**
      * Returns a list of all moderators on a forum
      *
+     * @see <a href="https://disqus.com/api/docs/forums/listModerators/">Documentation</a>
      * @param forum
      * @return
      * @throws ApiException
@@ -158,6 +170,7 @@ public interface Forums {
     /**
      * Returns a list of users active within a forum ordered by most comments made
      *
+     * @see <a href="https://disqus.com/api/docs/forums/listMostActiveUsers/">Documentation</a>
      * @param forum
      * @return
      * @throws ApiException
@@ -169,6 +182,7 @@ public interface Forums {
     /**
      * Returns a list of users active within a forum ordered by most comments made
      *
+     * @see <a href="https://disqus.com/api/docs/forums/listMostActiveUsers/">Documentation</a>
      * @param forum
      * @param optionalParams
      * @return
@@ -182,6 +196,7 @@ public interface Forums {
     /**
      * Returns a list of users active within a forum ordered by most likes received
      *
+     * @see <a href="https://disqus.com/api/docs/forums/listMostLikedUsers/">Documentation</a>
      * @param forum
      * @return
      * @throws ApiException
@@ -193,6 +208,7 @@ public interface Forums {
     /**
      * Returns a list of users active within a forum ordered by most likes received
      *
+     * @see <a href="https://disqus.com/api/docs/forums/listMostLikedUsers/">Documentation</a>
      * @param forum
      * @param optionalParams
      * @return
@@ -206,6 +222,7 @@ public interface Forums {
     /**
      * Returns a list of posts within a forum
      *
+     * @see <a href="https://disqus.com/api/docs/forums/listPosts/">Documentation</a>
      * @param forum
      * @return
      * @throws ApiException
@@ -216,6 +233,7 @@ public interface Forums {
     /**
      * Returns a list of posts within a forum
      *
+     * @see <a href="https://disqus.com/api/docs/forums/listPosts/">Documentation</a>
      * @param forum
      * @param optionalParams
      * @return
@@ -229,6 +247,7 @@ public interface Forums {
     /**
      * Returns a list of threads within a forum sorted by the date created
      *
+     * @see <a href="https://disqus.com/api/docs/forums/listThreads/">Documentation</a>
      * @param forum
      * @return
      * @throws ApiException
@@ -239,6 +258,7 @@ public interface Forums {
     /**
      * Returns a list of threads within a forum sorted by the date created
      *
+     * @see <a href="https://disqus.com/api/docs/forums/listThreads/">Documentation</a>
      * @param forum
      * @param optionalParams
      * @return
@@ -252,6 +272,7 @@ public interface Forums {
     /**
      * Returns a list of users active within a forum
      *
+     * @see <a href="https://disqus.com/api/docs/forums/listUsers/">Documentation</a>
      * @param forum
      * @return
      * @throws ApiException
@@ -262,6 +283,7 @@ public interface Forums {
     /**
      * Returns a list of users active within a forum
      *
+     * @see <a href="https://disqus.com/api/docs/forums/listUsers/">Documentation</a>
      * @param forum
      * @param optionalParams
      * @return
@@ -275,6 +297,7 @@ public interface Forums {
     /**
      * Removes a moderator from a forum
      *
+     * @see <a href="https://disqus.com/api/docs/forums/removeModerator/">Documentation</a>
      * @param moderator
      * @return
      * @throws ApiException
@@ -286,6 +309,7 @@ public interface Forums {
     /**
      * Unfollow a forum
      *
+     * @see <a href="https://disqus.com/api/docs/forums/unfollow/">Documentation</a>
      * @param target
      * @return
      * @throws ApiException
@@ -296,6 +320,7 @@ public interface Forums {
     /**
      * Updates forum details
      *
+     * @see <a href="https://disqus.com/api/docs/forums/update/">Documentation</a>
      * @param forum
      * @param website
      * @param name

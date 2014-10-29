@@ -13,21 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.philio.disqus.api.resource;
+package me.philio.disqus.api.model.users;
 
-import me.philio.disqus.api.exception.ApiException;
-import me.philio.disqus.api.model.Response;
-import me.philio.disqus.api.model.application.Usage;
-import retrofit.http.GET;
-import retrofit.http.Query;
+import com.google.gson.annotations.SerializedName;
 
 /**
- * Applications resource
+ * Connection
  */
-public interface Applications {
+public class Connection {
 
-    @GET("/applications/listUsage.json")
-    public Response<Usage> listUsage(@Query("application") String application,
-                                     @Query("days") Integer days) throws ApiException;
+    @SerializedName("url")
+    public String url;
+
+    @SerializedName("id")
+    public String id;
+
+    @SerializedName("name")
+    public String name;
 
 }

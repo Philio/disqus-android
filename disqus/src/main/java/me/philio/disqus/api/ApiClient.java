@@ -24,15 +24,16 @@ import me.philio.disqus.api.exception.BadRequestException;
 import me.philio.disqus.api.exception.ForbiddenException;
 import me.philio.disqus.api.gson.BlacklistValueDeserializer;
 import me.philio.disqus.api.gson.UsageDeserializer;
-import me.philio.disqus.api.model.application.Usage;
-import me.philio.disqus.api.model.blacklist.BlacklistValue;
-import me.philio.disqus.api.resource.Applications;
-import me.philio.disqus.api.resource.Blacklists;
-import me.philio.disqus.api.resource.Categories;
-import me.philio.disqus.api.resource.Exports;
-import me.philio.disqus.api.resource.Feeds;
-import me.philio.disqus.api.resource.Forums;
-import me.philio.disqus.api.resource.Users;
+import me.philio.disqus.api.model.applications.Usage;
+import me.philio.disqus.api.model.blacklists.BlacklistValue;
+import me.philio.disqus.api.resources.Applications;
+import me.philio.disqus.api.resources.Blacklists;
+import me.philio.disqus.api.resources.Categories;
+import me.philio.disqus.api.resources.Exports;
+import me.philio.disqus.api.resources.Feeds;
+import me.philio.disqus.api.resources.Forums;
+import me.philio.disqus.api.resources.Imports;
+import me.philio.disqus.api.resources.Users;
 import retrofit.ErrorHandler;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
@@ -182,6 +183,15 @@ public class ApiClient {
      */
     public Forums createForums() {
         return mAdapter.create(Forums.class);
+    }
+
+    /**
+     * Create imports resource
+     *
+     * @return
+     */
+    public Imports createImports() {
+        return mAdapter.create(Imports.class);
     }
 
     /**

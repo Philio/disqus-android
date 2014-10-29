@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.philio.disqus.api.model.post;
+package me.philio.disqus.api.model.posts;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 import java.util.List;
 
-import me.philio.disqus.api.model.user.User;
+import me.philio.disqus.api.model.users.User;
 
 /**
  * Post details

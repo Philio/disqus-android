@@ -10,11 +10,10 @@ import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.SimpleTimeZone;
 import java.util.TimeZone;
 
 import me.philio.disqus.DisqusConstants;
-import me.philio.disqus.api.model.application.Usage;
+import me.philio.disqus.api.model.applications.Usage;
 
 /**
  * Custom deserializer to convert Disqus usage nested arrays into a map

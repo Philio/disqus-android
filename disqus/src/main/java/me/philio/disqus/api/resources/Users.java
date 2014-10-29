@@ -13,19 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.philio.disqus.api.model.post;
+package me.philio.disqus.api.resources;
 
-import com.google.gson.annotations.SerializedName;
+import me.philio.disqus.api.model.Response;
+import me.philio.disqus.api.model.users.User;
+import retrofit.http.GET;
+import retrofit.http.POST;
+import retrofit.http.Query;
 
 /**
- * Post media metadata
+ * Users resource
+ *
+ * @see <a href="">Documentation</a>
  */
-public class Metadata {
+public interface Users {
 
-    @SerializedName("create_method")
-    public String createMethod;
+    @POST("/users/checkUsername.json")
+    public Response<String> checkUsername(@Query("username") String username);
 
-    @SerializedName("thumbnail")
-    public String thumbnail;
+    @GET("/users/details.json")
+    public Response<User> details(@Query("user") Long user);
 
 }

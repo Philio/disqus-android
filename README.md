@@ -11,7 +11,7 @@ incomplete and under development so is subject to change.
 
 Add the following to your `build.gradle`:
 
-    compile 'me.philio.disqus:disqus:0.0.6'
+    compile 'me.philio.disqus:disqus:0.0.7'
 
 ## Authentication
 
@@ -68,7 +68,7 @@ Disqus app settings.
 As of version 0.0.5 the library is using [Retrofit](http://square.github.io/retrofit/) for requests.
 
 The `ApiClient` can be used to create Disqus resource objects based on the Retrofit interfaces
-defined in the `me.philio.disqus.api.resource` package. It works as a wrapper to the Retrofit
+defined in the `me.philio.disqus.api.resources` package. It works as a wrapper to the Retrofit
 `RestAdapter` and configures the adapter and deserialisation options for Gson.
 
     ApiConfig apiConfig = new ApiConfig("MyApiKey", "AccessToken");

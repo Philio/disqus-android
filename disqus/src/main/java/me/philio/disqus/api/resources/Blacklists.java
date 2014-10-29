@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.philio.disqus.api.resource;
+package me.philio.disqus.api.resources;
 
 import java.util.List;
 import java.util.Map;
 
 import me.philio.disqus.api.exception.ApiException;
 import me.philio.disqus.api.model.Response;
-import me.philio.disqus.api.model.blacklist.BlacklistEntry;
+import me.philio.disqus.api.model.blacklists.BlacklistEntry;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Query;
@@ -28,12 +28,15 @@ import retrofit.http.QueryMap;
 
 /**
  * Blacklists resource
+ *
+ * @see <a href="https://disqus.com/api/docs/blacklists/">Documentation</a>
  */
 public interface Blacklists {
 
     /**
      * Adds a domain entry/entries to the blacklist
      *
+     * @see <a href="https://disqus.com/api/docs/blacklists/add/">Documentation</a>
      * @param forum
      * @param domains
      * @param retroactive
@@ -50,6 +53,7 @@ public interface Blacklists {
     /**
      * Adds a word entry/entries to the blacklist
      *
+     * @see <a href="https://disqus.com/api/docs/blacklists/add/">Documentation</a>
      * @param forum
      * @param words
      * @param retroactive
@@ -66,6 +70,7 @@ public interface Blacklists {
     /**
      * Adds an IP entry/entries to the blacklist
      *
+     * @see <a href="https://disqus.com/api/docs/blacklists/add/">Documentation</a>
      * @param forum
      * @param ips
      * @param retroactive
@@ -81,6 +86,7 @@ public interface Blacklists {
     /**
      * Adds a user entry/entries to the blacklist
      *
+     * @see <a href="https://disqus.com/api/docs/blacklists/add/">Documentation</a>
      * @param forum
      * @param users
      * @param retroactive
@@ -97,6 +103,7 @@ public interface Blacklists {
     /**
      * Adds an email entry/entries to the blacklist
      *
+     * @see <a href="https://disqus.com/api/docs/blacklists/add/">Documentation</a>
      * @param forum
      * @param emails
      * @param retroactive
@@ -113,6 +120,7 @@ public interface Blacklists {
     /**
      * Returns a list of all blacklist entries
      *
+     * @see <a href="https://disqus.com/api/docs/blacklists/list/">Documentation</a>
      * @param forum
      * @return
      * @throws ApiException
@@ -123,6 +131,7 @@ public interface Blacklists {
     /**
      * Returns a list of all blacklist entries
      *
+     * @see <a href="https://disqus.com/api/docs/blacklists/list/">Documentation</a>
      * @param forum
      * @param optionalParams
      * @return
@@ -136,6 +145,7 @@ public interface Blacklists {
     /**
      * Removes a domain entry/entries to the blacklist
      *
+     * @see <a href="https://disqus.com/api/docs/blacklists/remove/">Documentation</a>
      * @param forum
      * @param domains
      * @return
@@ -148,6 +158,7 @@ public interface Blacklists {
     /**
      * Removes a word entry/entries to the blacklist
      *
+     * @see <a href="https://disqus.com/api/docs/blacklists/remove/">Documentation</a>
      * @param forum
      * @param words
      * @return
@@ -160,6 +171,7 @@ public interface Blacklists {
     /**
      * Removes an IP entry/entries to the blacklist
      *
+     * @see <a href="https://disqus.com/api/docs/blacklists/remove/">Documentation</a>
      * @param forum
      * @param ips
      * @return
@@ -171,6 +183,7 @@ public interface Blacklists {
     /**
      * Removes a user entry/entries to the blacklist
      *
+     * @see <a href="https://disqus.com/api/docs/blacklists/remove/">Documentation</a>
      * @param forum
      * @param users
      * @return
@@ -183,6 +196,7 @@ public interface Blacklists {
     /**
      * Removes an email entry/entries to the blacklist
      *
+     * @see <a href="https://disqus.com/api/docs/blacklists/remove/">Documentation</a>
      * @param forum
      * @param emails
      * @return

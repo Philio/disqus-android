@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.philio.disqus.api.model.thread;
+package me.philio.disqus.api.model.threads;
 
 import com.google.gson.annotations.SerializedName;
 

@@ -1,10 +1,10 @@
-package me.philio.disqus.api.model.blacklist;
+package me.philio.disqus.api.model.blacklists;
 
-import me.philio.disqus.api.model.user.User;
+import me.philio.disqus.api.model.users.User;
 
 /**
  * A blacklist value, behaves like a {@link String} unless the {@link BlacklistEntry.Type} is
- * user, in which case should contain a valid {@link me.philio.disqus.api.model.user.User} instance as well
+ * user, in which case should contain a valid {@link me.philio.disqus.api.model.users.User} instance as well
  */
 public class BlacklistValue {
 

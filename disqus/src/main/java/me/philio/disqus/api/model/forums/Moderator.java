@@ -1,8 +1,8 @@
-package me.philio.disqus.api.model.forum;
+package me.philio.disqus.api.model.forums;
 
 import com.google.gson.annotations.SerializedName;
 
-import me.philio.disqus.api.model.user.User;
+import me.philio.disqus.api.model.users.User;
 
 /**
  * Forum moderator

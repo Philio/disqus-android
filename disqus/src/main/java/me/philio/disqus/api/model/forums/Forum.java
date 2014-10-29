@@ -13,47 +13,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.philio.disqus.api.model.blacklist;
+package me.philio.disqus.api.model.forums;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Date;
+import me.philio.disqus.api.model.Image;
 
 /**
- * Entry in the blacklist
+ * Forum details
  */
-public class BlacklistEntry {
+public class Forum {
 
-    /**
-     * Entry types
-     */
-    public enum Type {
-        domain,
-        word,
-        ip,
-        user,
-        email
-    }
+    @SerializedName("name")
+    public String name;
 
-    @SerializedName("forum")
-    public String forum;
+    @SerializedName("founder")
+    public String founder;
 
-    @SerializedName("notes")
-    public String notes;
+    @SerializedName("settings")
+    public Settings settings;
 
-    @SerializedName("value")
-    public BlacklistValue value;
+    @SerializedName("url")
+    public String url;
 
-    @SerializedName("conflictingWhitelistRemoved")
-    public boolean conflictingWhitelistRemoved;
+    @SerializedName("guidelines")
+    public String guidelines;
 
-    @SerializedName("type")
-    public Type type;
+    @SerializedName("favicon")
+    public Image favicon;
+
+    @SerializedName("language")
+    public String language;
+
+    @SerializedName("avatar")
+    public ForumAvatar avatar;
 
     @SerializedName("id")
-    public long id;
+    public String id;
 
-    @SerializedName("createdAt")
-    public Date createdAt;
+    @SerializedName("channel")
+    public String channel;
 
 }

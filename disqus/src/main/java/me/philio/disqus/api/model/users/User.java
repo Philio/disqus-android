@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.philio.disqus.api.model.user;
+package me.philio.disqus.api.model.users;
 
 import com.google.gson.annotations.SerializedName;
 

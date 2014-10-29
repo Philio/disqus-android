@@ -13,22 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.philio.disqus.api.model.user;
+package me.philio.disqus.api.model.posts;
 
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Connections
+ * Post media metadata
  */
-public class Connections {
+public class Metadata {
 
-    @SerializedName("twitter")
-    public Connection twitter;
+    @SerializedName("create_method")
+    public String createMethod;
 
-    @SerializedName("google")
-    public Connection google;
-
-    @SerializedName("facebook")
-    public Connection facebook;
+    @SerializedName("thumbnail")
+    public String thumbnail;
 
 }

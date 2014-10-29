@@ -1,4 +1,4 @@
-package me.philio.disqus.api.model.application;
+package me.philio.disqus.api.model.applications;
 
 import java.util.Date;
 import java.util.HashMap;

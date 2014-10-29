@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.philio.disqus.api.resource;
+package me.philio.disqus.api.resources;
 
 import java.util.List;
 import java.util.Map;
@@ -21,8 +21,8 @@ import java.util.Map;
 import me.philio.disqus.api.exception.ApiException;
 import me.philio.disqus.api.model.Response;
 import me.philio.disqus.api.model.category.Category;
-import me.philio.disqus.api.model.post.Post;
-import me.philio.disqus.api.model.thread.Thread;
+import me.philio.disqus.api.model.posts.Post;
+import me.philio.disqus.api.model.threads.Thread;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Query;
@@ -30,12 +30,15 @@ import retrofit.http.QueryMap;
 
 /**
  * Categories resource
+ *
+ * @see <a href="https://disqus.com/api/docs/categories/">Documentation</a>
  */
 public interface Categories {
 
     /**
      * Creates a new category
      *
+     * @see <a href="https://disqus.com/api/docs/categories/create/">Documentation</a>
      * @param forum
      * @param title
      * @return
@@ -48,6 +51,7 @@ public interface Categories {
     /**
      * Creates a new category
      *
+     * @see <a href="https://disqus.com/api/docs/categories/create/">Documentation</a>
      * @param forum
      * @param title
      * @param isDefault
@@ -62,6 +66,7 @@ public interface Categories {
     /**
      * Returns category details
      *
+     * @see <a href="https://disqus.com/api/docs/categories/details/">Documentation</a>
      * @param category
      * @return
      * @throws ApiException
@@ -72,6 +77,7 @@ public interface Categories {
     /**
      * Returns a list of categories within a forum
      *
+     * @see <a href="https://disqus.com/api/docs/categories/list/">Documentation</a>
      * @param forum
      * @return
      * @throws ApiException
@@ -82,6 +88,7 @@ public interface Categories {
     /**
      * Returns a list of categories within a forum
      *
+     * @see <a href="https://disqus.com/api/docs/categories/list/">Documentation</a>
      * @param forums
      * @return
      * @throws ApiException
@@ -93,6 +100,7 @@ public interface Categories {
     /**
      * Returns a list of categories within a forum
      *
+     * @see <a href="https://disqus.com/api/docs/categories/list/">Documentation</a>
      * @param forum
      * @param optionalParams
      * @return
@@ -106,6 +114,7 @@ public interface Categories {
     /**
      * Returns a list of categories within a forum
      *
+     * @see <a href="https://disqus.com/api/docs/categories/list/">Documentation</a>
      * @param forums
      * @param optionalParams
      * @return
@@ -119,6 +128,7 @@ public interface Categories {
     /**
      * Returns a list of posts within a category
      *
+     * @see <a href="https://disqus.com/api/docs/categories/listPosts/">Documentation</a>
      * @param category
      * @return
      * @throws ApiException
@@ -129,6 +139,7 @@ public interface Categories {
     /**
      * Returns a list of posts within a category
      *
+     * @see <a href="https://disqus.com/api/docs/categories/listPosts/">Documentation</a>
      * @param category
      * @param optionalParams
      * @return
@@ -142,6 +153,7 @@ public interface Categories {
     /**
      * Returns a list of threads within a category sorted by the date created
      *
+     * @see <a href="https://disqus.com/api/docs/categories/listThreads/">Documentation</a>
      * @param category
      * @return
      * @throws ApiException
@@ -153,6 +165,7 @@ public interface Categories {
     /**
      * Returns a list of threads within a category sorted by the date created
      *
+     * @see <a href="https://disqus.com/api/docs/categories/listThreads/">Documentation</a>
      * @param category
      * @param optionalParams
      * @return
