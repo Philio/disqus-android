@@ -46,8 +46,7 @@ Add the following to your `build.gradle`:
 
 ### Google, Facebook, Twitter
 
-Third party logins are not supported yet, I need to investigate this further and see if it's
-possible to implement SSO or not. Should be added in the near future.
+Third party logins are not supported at this time.
 
 ## Basic usage
 
@@ -75,15 +74,28 @@ defined in the `me.philio.disqus.api.resource` package. It works as a wrapper to
     ApiConfig apiConfig = new ApiConfig("MyApiKey", "AccessToken");
     ApiClient apiClient = new ApiClient(apiConfig);
 
-### Get resource and make requests
+### Create resource and make requests
 
     Applications applications = apiClient.createApplications();
     Response<Usage> usage = applications.listUsage("MyApp", 7);
 
-Most requests will exactly match the Disqus API documentation, with minor differences:
+All resources and requests match the naming conventions defined in the Disqus API documentation, but
+often method signatures are kept as simple as possible.
 
-* Some methods perform multiple functions, so have been split into single functions for simplicity,
-e.g. add to/remove from blacklist/whitelist
+In general:
 
-* Some methods have a lot of optional parameters so use a map to avoid long method calls full of
-nulls.
+* Named parameters are required and should not be null.
+
+* Optional parameters can be provided as a `Map` where applicable, refer to the Disqus documentation
+for details or optional parameters.
+
+### Response format
+
+All requests will return a `Response` object. Typical responses contain an error code (which will
+always be 0 as errors throw exceptions), an optional cursor (which can be used for pagination) and
+some data which is a generic type.
+
+The data is usually an object or list of objects and for the majority of requests will be one of the
+models defined in the API package. Some requests return empty structures so to avoid parsing issues
+the data type is either `Object` or `List<Object>`, the response data for these requests can be
+disregarded.

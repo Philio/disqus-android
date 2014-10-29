@@ -291,7 +291,7 @@ public interface Forums {
      * @throws ApiException
      */
     @POST("/forums/unfollow.json")
-    public Response<Object[]> unfollow(@Query("target") String target) throws ApiException;
+    public Response<List<Object>> unfollow(@Query("target") String target) throws ApiException;
 
     /**
      * Updates forum details
