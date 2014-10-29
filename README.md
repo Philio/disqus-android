@@ -87,7 +87,7 @@ In general:
 * Named parameters are required and should not be null.
 
 * Optional parameters can be provided as a `Map` where applicable, refer to the Disqus documentation
-for details or optional parameters.
+for details of optional parameters.
 
 ### Response format
 

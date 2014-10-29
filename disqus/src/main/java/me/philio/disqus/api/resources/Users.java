@@ -24,7 +24,7 @@ import retrofit.http.Query;
 /**
  * Users resource
  *
- * @see <a href="">Documentation</a>
+ * @see <a href="https://disqus.com/api/docs/users/">Documentation</a>
  */
 public interface Users {
 
