@@ -153,7 +153,7 @@ public interface Categories {
 
     /**
      * Returns a list of threads within a category sorted by the date created
-     * 
+     *
      * @param category
      * @param optionalParams
      * @return
