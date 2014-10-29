@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package me.philio.disqus.api.resources;
+package me.philio.disqus.api.resources.notes;
 
 /**
- * Feeds resource
+ * Notes/Templates resource
  *
- * @see <a href="https://disqus.com/api/docs/feeds/">Documentation</a>
+ * @see <a href="https://disqus.com/api/docs/notes/templates/">Documentation</a>
  */
-public interface Feeds {
+public interface Templates {
 
     // No methods currently exist
 

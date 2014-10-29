@@ -33,7 +33,11 @@ import me.philio.disqus.api.resources.Exports;
 import me.philio.disqus.api.resources.Feeds;
 import me.philio.disqus.api.resources.Forums;
 import me.philio.disqus.api.resources.Imports;
+import me.philio.disqus.api.resources.Media;
+import me.philio.disqus.api.resources.Notes;
+import me.philio.disqus.api.resources.Posts;
 import me.philio.disqus.api.resources.Users;
+import me.philio.disqus.api.resources.notes.Templates;
 import retrofit.ErrorHandler;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
@@ -192,6 +196,42 @@ public class ApiClient {
      */
     public Imports createImports() {
         return mAdapter.create(Imports.class);
+    }
+
+    /**
+     * Create media resource
+     *
+     * @return
+     */
+    public Media createMedia() {
+        return mAdapter.create(Media.class);
+    }
+
+    /**
+     * Create notes resource
+     *
+     * @return
+     */
+    public Notes createNotes() {
+        return mAdapter.create(Notes.class);
+    }
+
+    /**
+     * Create notes/templates resource
+     *
+     * @return
+     */
+    public Templates createNotesTemplates() {
+        return mAdapter.create(Templates.class);
+    }
+
+    /**
+     * Create posts resource
+     *
+     * @return
+     */
+    public Posts createPosts() {
+        return mAdapter.create(Posts.class);
     }
 
     /**
