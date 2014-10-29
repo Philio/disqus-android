@@ -22,7 +22,7 @@ import java.util.Date;
 /**
  * User details
  */
-public class UserDetails {
+public class User {
 
     @SerializedName("isFollowing")
     public boolean isFollowing;

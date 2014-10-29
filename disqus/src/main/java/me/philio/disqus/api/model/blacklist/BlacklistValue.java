@@ -1,10 +1,10 @@
 package me.philio.disqus.api.model.blacklist;
 
-import me.philio.disqus.api.model.user.UserDetails;
+import me.philio.disqus.api.model.user.User;
 
 /**
  * A blacklist value, behaves like a {@link String} unless the {@link BlacklistEntry.Type} is
- * user, in which case should contain a valid {@link UserDetails} instance as well
+ * user, in which case should contain a valid {@link me.philio.disqus.api.model.user.User} instance as well
  */
 public class BlacklistValue {
 
@@ -16,7 +16,7 @@ public class BlacklistValue {
     /**
      * User details
      */
-    private UserDetails mUserDetails;
+    private User mUser;
 
     /**
      * Set value
@@ -31,11 +31,11 @@ public class BlacklistValue {
      * Set value and user details
      *
      * @param value
-     * @param userDetails
+     * @param user
      */
-    public BlacklistValue(String value, UserDetails userDetails) {
+    public BlacklistValue(String value, User user) {
         this(value);
-        mUserDetails = userDetails;
+        mUser = user;
     }
 
     @Override
@@ -48,8 +48,8 @@ public class BlacklistValue {
      *
      * @return
      */
-    public UserDetails getUserDetails() {
-        return mUserDetails;
+    public User getUserDetails() {
+        return mUser;
     }
 
 }

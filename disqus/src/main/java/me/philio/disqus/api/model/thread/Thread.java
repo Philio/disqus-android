@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * Thread
  */
-public class ThreadDetails {
+public class Thread {
 
     @SerializedName("feed")
     public String feed;

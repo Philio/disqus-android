@@ -20,9 +20,9 @@ import java.util.Map;
 
 import me.philio.disqus.api.exception.ApiException;
 import me.philio.disqus.api.model.Response;
-import me.philio.disqus.api.model.category.CategoryDetails;
-import me.philio.disqus.api.model.post.PostDetails;
-import me.philio.disqus.api.model.thread.ThreadDetails;
+import me.philio.disqus.api.model.category.Category;
+import me.philio.disqus.api.model.post.Post;
+import me.philio.disqus.api.model.thread.Thread;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Query;
@@ -42,7 +42,7 @@ public interface Categories {
      * @throws ApiException
      */
     @POST("/categories/create.json")
-    public Response<CategoryDetails> create(@Query("forum") String forum,
+    public Response<Category> create(@Query("forum") String forum,
                                             @Query("title") String title) throws ApiException;
 
     /**
@@ -55,7 +55,7 @@ public interface Categories {
      * @throws ApiException
      */
     @POST("/categories/create.json")
-    public Response<CategoryDetails> create(@Query("forum") String forum,
+    public Response<Category> create(@Query("forum") String forum,
                                             @Query("title") String title,
                                             @Query("default") int isDefault) throws ApiException;
 
@@ -67,7 +67,7 @@ public interface Categories {
      * @throws ApiException
      */
     @GET("/categories/details.json")
-    public Response<CategoryDetails> details(@Query("category") long category) throws ApiException;
+    public Response<Category> details(@Query("category") long category) throws ApiException;
 
     /**
      * Returns a list of categories within a forum
@@ -77,7 +77,7 @@ public interface Categories {
      * @throws ApiException
      */
     @GET("/categories/list.json")
-    public Response<List<CategoryDetails>> list(@Query("forum") String forum) throws ApiException;
+    public Response<List<Category>> list(@Query("forum") String forum) throws ApiException;
 
     /**
      * Returns a list of categories within a forum
@@ -87,7 +87,7 @@ public interface Categories {
      * @throws ApiException
      */
     @GET("/categories/list.json")
-    public Response<List<CategoryDetails>> list(@Query("forum") String[] forums)
+    public Response<List<Category>> list(@Query("forum") String[] forums)
             throws ApiException;
 
     /**
@@ -99,7 +99,7 @@ public interface Categories {
      * @throws ApiException
      */
     @GET("/categories/list.json")
-    public Response<List<CategoryDetails>> list(@Query("forum") String forum,
+    public Response<List<Category>> list(@Query("forum") String forum,
                                                 @QueryMap Map<String, String> optionalParams)
             throws ApiException;
 
@@ -112,7 +112,7 @@ public interface Categories {
      * @throws ApiException
      */
     @GET("/categories/list.json")
-    public Response<List<CategoryDetails>> list(@Query("forum") String[] forums,
+    public Response<List<Category>> list(@Query("forum") String[] forums,
                                                 @QueryMap Map<String, String> optionalParams)
             throws ApiException;
 
@@ -124,8 +124,7 @@ public interface Categories {
      * @throws ApiException
      */
     @GET("/categories/listPosts.json")
-    public Response<List<PostDetails>> listPosts(@Query("category") long category)
-            throws ApiException;
+    public Response<List<Post>> listPosts(@Query("category") long category) throws ApiException;
 
     /**
      * Returns a list of posts within a category
@@ -136,8 +135,8 @@ public interface Categories {
      * @throws ApiException
      */
     @GET("/categories/listPosts.json")
-    public Response<List<PostDetails>> listPosts(@Query("category") long category,
-                                                 @QueryMap Map<String, String> optionalParams)
+    public Response<List<Post>> listPosts(@Query("category") long category,
+                                          @QueryMap Map<String, String> optionalParams)
             throws ApiException;
 
     /**
@@ -148,7 +147,7 @@ public interface Categories {
      * @throws ApiException
      */
     @GET("/categories/listThreads.json")
-    public Response<List<ThreadDetails>> listThreads(@Query("category") long category)
+    public Response<List<Thread>> listThreads(@Query("category") long category)
             throws ApiException;
 
     /**
@@ -160,7 +159,7 @@ public interface Categories {
      * @throws ApiException
      */
     @GET("/categories/listThreads.json")
-    public Response<List<ThreadDetails>> listThreads(@Query("category") long category,
+    public Response<List<Thread>> listThreads(@Query("category") long category,
                                                      @QueryMap Map<String, String> optionalParams)
             throws ApiException;
 

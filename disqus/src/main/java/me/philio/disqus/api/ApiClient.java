@@ -31,6 +31,7 @@ import me.philio.disqus.api.resource.Blacklists;
 import me.philio.disqus.api.resource.Categories;
 import me.philio.disqus.api.resource.Exports;
 import me.philio.disqus.api.resource.Feeds;
+import me.philio.disqus.api.resource.Forums;
 import me.philio.disqus.api.resource.Users;
 import retrofit.ErrorHandler;
 import retrofit.RequestInterceptor;
@@ -172,6 +173,15 @@ public class ApiClient {
      */
     public Feeds createFeeds() {
         return mAdapter.create(Feeds.class);
+    }
+
+    /**
+     * Create forums resource
+     *
+     * @return
+     */
+    public Forums createForums() {
+        return mAdapter.create(Forums.class);
     }
 
     /**

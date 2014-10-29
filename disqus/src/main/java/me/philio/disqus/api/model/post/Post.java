@@ -20,12 +20,12 @@ import com.google.gson.annotations.SerializedName;
 import java.util.Date;
 import java.util.List;
 
-import me.philio.disqus.api.model.user.UserDetails;
+import me.philio.disqus.api.model.user.User;
 
 /**
  * Post details
  */
-public class PostDetails {
+public class Post {
 
     @SerializedName("isHighlighted")
     public boolean isHighlighted;
@@ -40,7 +40,7 @@ public class PostDetails {
     public long parent;
 
     @SerializedName("author")
-    public UserDetails author;
+    public User author;
 
     @SerializedName("media")
     public List<Media> media;

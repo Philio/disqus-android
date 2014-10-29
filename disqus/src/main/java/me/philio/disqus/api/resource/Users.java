@@ -16,7 +16,7 @@
 package me.philio.disqus.api.resource;
 
 import me.philio.disqus.api.model.Response;
-import me.philio.disqus.api.model.user.UserDetails;
+import me.philio.disqus.api.model.user.User;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Query;
@@ -30,6 +30,6 @@ public interface Users {
     public Response<String> checkUsername(@Query("username") String username);
 
     @GET("/users/details.json")
-    public Response<UserDetails> details(@Query("user") Long user);
+    public Response<User> details(@Query("user") Long user);
 
 }

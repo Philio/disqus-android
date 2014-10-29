@@ -22,7 +22,7 @@ import me.philio.disqus.api.model.Image;
 /**
  * Forum details
  */
-public class ForumDetails {
+public class Forum {
 
     @SerializedName("name")
     public String name;
