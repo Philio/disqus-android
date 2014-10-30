@@ -23,11 +23,11 @@ public class UsageDeserializer implements JsonDeserializer<Usage> {
     @Override
     public Usage deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
             throws JsonParseException {
-        // Create usage
-        Usage usage = new Usage();
-
         // JSON element should be an array
         if (json.isJsonArray()) {
+            // Create usage
+            Usage usage = new Usage();
+
             // Use SimpleDateFormat to format dates
             SimpleDateFormat dateFormat = new SimpleDateFormat(DisqusConstants.DATE_FORMAT);
             dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -45,8 +45,9 @@ public class UsageDeserializer implements JsonDeserializer<Usage> {
                     }
                 }
             }
+            return usage;
         }
-        return usage;
+        return null;
     }
 
 }

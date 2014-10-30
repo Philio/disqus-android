@@ -24,17 +24,16 @@ public class BlacklistValueDeserializer implements JsonDeserializer<BlacklistVal
     public BlacklistValue deserialize(JsonElement json, Type typeOfT,
                                       JsonDeserializationContext context)
             throws JsonParseException {
-        BlacklistValue value = null;
         if (json.isJsonPrimitive()) {
             // For strings, just set the string value
-            value = new BlacklistValue(json.getAsString());
+            return new BlacklistValue(json.getAsString());
         } else if (json.isJsonObject()) {
             // For user details, parse and set user details and id as string value
             Gson gson = new GsonBuilder().setDateFormat(DisqusConstants.DATE_FORMAT).create();
             User user = gson.fromJson(json, User.class);
-            value = new BlacklistValue(Long.toString(user.id), user);
+            return new BlacklistValue(Long.toString(user.id), user);
         }
-        return value;
+        return null;
     }
 
 }
