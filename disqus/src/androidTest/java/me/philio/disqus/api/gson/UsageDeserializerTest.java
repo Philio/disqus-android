@@ -8,9 +8,21 @@ import junit.framework.TestCase;
 import me.philio.disqus.api.model.applications.Usage;
 
 /**
- * Test cases for UsageDeserializer
+ * Test cases for {@link UsageDeserializer}
  */
 public class UsageDeserializerTest extends TestCase {
+
+    /**
+     * Gson instance
+     */
+    private Gson mGson;
+
+    @Override
+    protected void setUp() throws Exception {
+        Gson mGson = new GsonBuilder()
+                .registerTypeAdapter(Usage.class, new UsageDeserializer())
+                .create();
+    }
 
     /**
      * Test deserialisation of JSON array to a usage object
@@ -32,11 +44,7 @@ public class UsageDeserializerTest extends TestCase {
                 "[\"2011-10-29T00:00:00\",0],[\"2011-10-30T00:00:00\",0]," +
                 "[\"2011-10-31T00:00:00\",0],[\"2011-11-01T00:00:00\",823]," +
                 "[\"2011-11-02T00:00:00\",274]]";
-
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Usage.class, new UsageDeserializer())
-                .create();
-        Usage usage = gson.fromJson(json, Usage.class);
+        Usage usage = mGson.fromJson(json, Usage.class);
         assertNotNull(usage);
         assertEquals(usage.size(), 31);
     }
@@ -46,11 +54,7 @@ public class UsageDeserializerTest extends TestCase {
      */
     public void testEmptyArray() {
         String json = "[]";
-
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Usage.class, new UsageDeserializer())
-                .create();
-        Usage usage = gson.fromJson(json, Usage.class);
+        Usage usage = mGson.fromJson(json, Usage.class);
         assertNotNull(usage);
         assertEquals(usage.size(), 0);
     }
@@ -60,11 +64,7 @@ public class UsageDeserializerTest extends TestCase {
      */
     public void testEmptyString() {
         String json = "";
-
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Usage.class, new UsageDeserializer())
-                .create();
-        Usage usage = gson.fromJson(json, Usage.class);
+        Usage usage = mGson.fromJson(json, Usage.class);
         assertNull(usage);
     }
 
