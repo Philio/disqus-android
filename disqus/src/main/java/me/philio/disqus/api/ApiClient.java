@@ -22,10 +22,10 @@ import me.philio.disqus.DisqusConstants;
 import me.philio.disqus.api.exception.ApiException;
 import me.philio.disqus.api.exception.BadRequestException;
 import me.philio.disqus.api.exception.ForbiddenException;
-import me.philio.disqus.api.gson.BlacklistValueDeserializer;
+import me.philio.disqus.api.gson.BlacklistEntryDeserializer;
 import me.philio.disqus.api.gson.UsageDeserializer;
 import me.philio.disqus.api.model.applications.Usage;
-import me.philio.disqus.api.model.blacklists.BlacklistValue;
+import me.philio.disqus.api.model.blacklists.BlacklistEntry;
 import me.philio.disqus.api.resources.Applications;
 import me.philio.disqus.api.resources.Blacklists;
 import me.philio.disqus.api.resources.Categories;
@@ -36,6 +36,7 @@ import me.philio.disqus.api.resources.Imports;
 import me.philio.disqus.api.resources.Media;
 import me.philio.disqus.api.resources.Notes;
 import me.philio.disqus.api.resources.Posts;
+import me.philio.disqus.api.resources.Threads;
 import me.philio.disqus.api.resources.Users;
 import me.philio.disqus.api.resources.notes.Templates;
 import retrofit.ErrorHandler;
@@ -61,11 +62,6 @@ public class ApiClient {
     private static final String USER_AGENT = "Disqus Android/0.1";
 
     /**
-     * Configuration
-     */
-    private ApiConfig mConfig;
-
-    /**
      * Rest adapter
      */
     private RestAdapter mAdapter;
@@ -75,21 +71,18 @@ public class ApiClient {
      *
      * @param config
      */
-    public ApiClient(ApiConfig config) {
-        // Set config
-        mConfig = config;
-
+    public ApiClient(final ApiConfig config) {
         // Build Gson with Disqus date format and type adapters
         Gson gson = new GsonBuilder()
                 .setDateFormat(DisqusConstants.DATE_FORMAT)
                 .registerTypeAdapter(Usage.class, new UsageDeserializer())
-                .registerTypeAdapter(BlacklistValue.class, new BlacklistValueDeserializer())
+                .registerTypeAdapter(BlacklistEntry.class, new BlacklistEntryDeserializer())
                 .create();
 
         // Build RestAdapter
         mAdapter = new RestAdapter.Builder()
                 .setEndpoint(BASE_URL)
-                .setLogLevel(RestAdapter.LogLevel.BASIC)
+                .setLogLevel(config != null ? config.getLogLevel() : RestAdapter.LogLevel.NONE)
                 .setErrorHandler(new ErrorHandler() {
                     @Override
                     public Throwable handleError(RetrofitError cause) {
@@ -110,22 +103,24 @@ public class ApiClient {
                     @Override
                     public void intercept(RequestFacade request) {
                         request.addHeader("User-Agent", USER_AGENT);
-                        if (mConfig != null) {
+                        if (config != null) {
                             // Public/secret key query params
-                            if (mConfig.getApiSecret() != null) {
-                                request.addQueryParam("api_secret", mConfig.getApiSecret());
-                            } else if (mConfig.getApiKey() != null) {
-                                request.addQueryParam("api_key", mConfig.getApiKey());
+                            if (config.getApiSecret() != null) {
+                                request.addQueryParam("api_secret", config.getApiSecret());
+                            } else if (config.getApiKey() != null) {
+                                request.addQueryParam("api_key", config.getApiKey());
+                            } else {
+
                             }
 
                             // Access token query param
-                            if (mConfig.getAccessToken() != null) {
-                                request.addQueryParam("access_token", mConfig.getAccessToken());
+                            if (config.getAccessToken() != null) {
+                                request.addQueryParam("access_token", config.getAccessToken());
                             }
 
                             // Referrer
-                            if (mConfig.getReferrer() != null) {
-                                request.addHeader("Referer", mConfig.getReferrer());
+                            if (config.getReferrer() != null) {
+                                request.addHeader("Referer", config.getReferrer());
                             }
                         }
                     }
@@ -232,6 +227,15 @@ public class ApiClient {
      */
     public Posts createPosts() {
         return mAdapter.create(Posts.class);
+    }
+
+    /**
+     * Create threads resource
+     *
+     * @return
+     */
+    public Threads createThreads() {
+        return mAdapter.create(Threads.class);
     }
 
     /**

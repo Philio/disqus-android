@@ -15,6 +15,8 @@
  */
 package me.philio.disqus.api;
 
+import static retrofit.RestAdapter.LogLevel;
+
 /**
  * Configuration options
  */
@@ -41,12 +43,34 @@ public class ApiConfig {
     private String mReferrer;
 
     /**
+     * Retrofit log level
+     */
+    private LogLevel mLogLevel = LogLevel.NONE;
+
+    /**
+     * Empty constructor
+     */
+    public ApiConfig() {
+
+    }
+
+    /**
      * Set api key
      *
      * @param apiKey
      */
     public ApiConfig(String apiKey) {
         mApiKey = apiKey;
+    }
+
+    /**
+     * Set api key and log level
+     *
+     * @param apiKey
+     */
+    public ApiConfig(String apiKey, LogLevel logLevel) {
+        this(apiKey);
+        mLogLevel = logLevel;
     }
 
     /**
@@ -58,6 +82,17 @@ public class ApiConfig {
     public ApiConfig(String apiKey, String accessToken) {
         this(apiKey);
         mAccessToken = accessToken;
+    }
+
+    /**
+     * Set api key, access token and log level
+     *
+     * @param apiKey
+     * @param accessToken
+     */
+    public ApiConfig(String apiKey, String accessToken, LogLevel logLevel) {
+        this(apiKey, accessToken);
+        mLogLevel = logLevel;
     }
 
     /**
@@ -73,16 +108,15 @@ public class ApiConfig {
     }
 
     /**
-     * This constructor is here for completeness. Avoid using api secret as it's a security risk
+     * Set api key, access token and referrer
      *
      * @param apiKey
-     * @param apiSecret
      * @param accessToken
      * @param referrer
      */
-    public ApiConfig(String apiKey, String apiSecret, String accessToken, String referrer) {
+    public ApiConfig(String apiKey, String accessToken, String referrer, LogLevel logLevel) {
         this(apiKey, accessToken, referrer);
-        mApiSecret = apiSecret;
+        mLogLevel = logLevel;
     }
 
     /**
@@ -98,9 +132,11 @@ public class ApiConfig {
      * Set api key
      *
      * @param apiKey
+     * @return
      */
-    public void setApiKey(String apiKey) {
+    public ApiConfig setApiKey(String apiKey) {
         this.mApiKey = apiKey;
+        return this;
     }
 
     /**
@@ -116,9 +152,11 @@ public class ApiConfig {
      * Set api secret. Avoid using api secret as it's a security risk
      *
      * @param apiSecret
+     * @return
      */
-    public void setApiSecret(String apiSecret) {
+    public ApiConfig setApiSecret(String apiSecret) {
         this.mApiSecret = apiSecret;
+        return this;
     }
 
     /**
@@ -134,9 +172,11 @@ public class ApiConfig {
      * Set access token
      *
      * @param accessToken
+     * @return
      */
-    public void setAccessToken(String accessToken) {
+    public ApiConfig setAccessToken(String accessToken) {
         this.mAccessToken = accessToken;
+        return this;
     }
 
     /**
@@ -152,9 +192,31 @@ public class ApiConfig {
      * Set referrer
      *
      * @param referrer
+     * @return
      */
-    public void setReferrer(String referrer) {
+    public ApiConfig setReferrer(String referrer) {
         this.mReferrer = referrer;
+        return this;
+    }
+
+    /**
+     * Get log level
+     *
+     * @return
+     */
+    public LogLevel getLogLevel() {
+        return mLogLevel;
+    }
+
+    /**
+     * Set log level
+     *
+     * @param logLevel
+     * @return
+     */
+    public ApiConfig setLogLevel(LogLevel logLevel) {
+        mLogLevel = logLevel;
+        return this;
     }
 
 }

@@ -7,12 +7,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 
 import java.lang.reflect.Type;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimeZone;
 
-import me.philio.disqus.DisqusConstants;
 import me.philio.disqus.api.model.applications.Usage;
 
 /**
@@ -28,21 +24,14 @@ public class UsageDeserializer implements JsonDeserializer<Usage> {
             // Create usage
             Usage usage = new Usage();
 
-            // Use SimpleDateFormat to format dates
-            SimpleDateFormat dateFormat = new SimpleDateFormat(DisqusConstants.DATE_FORMAT);
-            dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-
+            // Iterate the array
             for (JsonElement element : json.getAsJsonArray()) {
                 // Each element should be an array containing a date and int
                 if (element.isJsonArray() && element.getAsJsonArray().size() == 2) {
-                    try {
-                        JsonArray jsonArray = element.getAsJsonArray();
-                        Date date = dateFormat.parse(jsonArray.get(0).getAsString());
-                        int count = jsonArray.get(1).getAsInt();
-                        usage.put(date, count);
-                    } catch (ParseException e) {
-                        throw new JsonParseException(e);
-                    }
+                    JsonArray jsonArray = element.getAsJsonArray();
+                    Date date = context.deserialize(jsonArray.get(0), Date.class);
+                    int count = jsonArray.get(1).getAsInt();
+                    usage.put(date, count);
                 }
             }
             return usage;

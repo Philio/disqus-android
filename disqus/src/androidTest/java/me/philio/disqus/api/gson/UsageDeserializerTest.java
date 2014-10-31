@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 
 import junit.framework.TestCase;
 
+import me.philio.disqus.DisqusConstants;
 import me.philio.disqus.api.model.applications.Usage;
 
 /**
@@ -19,7 +20,8 @@ public class UsageDeserializerTest extends TestCase {
 
     @Override
     protected void setUp() throws Exception {
-        Gson mGson = new GsonBuilder()
+        mGson = new GsonBuilder()
+                .setDateFormat(DisqusConstants.DATE_FORMAT)
                 .registerTypeAdapter(Usage.class, new UsageDeserializer())
                 .create();
     }
