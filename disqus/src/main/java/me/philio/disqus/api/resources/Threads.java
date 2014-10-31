@@ -55,6 +55,7 @@ public interface Threads {
     /**
      * Creates a new thread
      *
+     * @see <a href="https://disqus.com/api/docs/threads/create/">Documentation</a>
      * @param forum
      * @param title
      * @return
@@ -67,6 +68,7 @@ public interface Threads {
     /**
      * Creates a new thread
      *
+     * @see <a href="https://disqus.com/api/docs/threads/create/">Documentation</a>
      * @param forum
      * @param title
      * @param optionalParams
@@ -79,7 +81,28 @@ public interface Threads {
                                    @QueryMap Map<String, String> optionalParams)
             throws ApiException;
 
+    /**
+     * Returns thread details
+     *
+     * @see <a href="https://disqus.com/api/docs/threads/details/">Documentation</a>
+     * @param thread
+     * @return
+     * @throws ApiException
+     */
     @POST("/threads/details.json")
     public Response<Thread> details(@Query("thread") long thread) throws ApiException;
+
+    /**
+     * Returns thread details
+     *
+     * @see <a href="https://disqus.com/api/docs/threads/details/">Documentation</a>
+     * @param thread
+     * @param forum
+     * @return
+     * @throws ApiException
+     */
+    @POST("/threads/details.json")
+    public Response<Thread> details(@Query("thread") long thread,
+                                    @Query("forum") String forum) throws ApiException;
 
 }
