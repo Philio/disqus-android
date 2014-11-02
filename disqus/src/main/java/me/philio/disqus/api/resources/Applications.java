@@ -59,7 +59,7 @@ public interface Applications {
      * @throws ApiException
      */
     @GET("/applications/listUsage.json")
-    public Response<Usage> listUsage(@Query("application") int application,
+    public Response<Usage> listUsage(@Query("application") Integer application,
                                      @Query("days") int days) throws ApiException;
 
 }
