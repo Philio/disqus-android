@@ -32,13 +32,34 @@ public interface Applications {
      * Returns the API usage per day for this application
      *
      * @see <a href="https://disqus.com/api/docs/applications/listUsage/">Documentation</a>
+     * @return
+     * @throws ApiException
+     */
+    @GET("/applications/listUsage.json")
+    public Response<Usage> listUsage() throws ApiException;
+
+    /**
+     * Returns the API usage per day for this application
+     *
+     * @see <a href="https://disqus.com/api/docs/applications/listUsage/">Documentation</a>
+     * @param application
+     * @return
+     * @throws ApiException
+     */
+    @GET("/applications/listUsage.json")
+    public Response<Usage> listUsage(@Query("application") int application) throws ApiException;
+
+    /**
+     * Returns the API usage per day for this application
+     *
+     * @see <a href="https://disqus.com/api/docs/applications/listUsage/">Documentation</a>
      * @param application
      * @param days
      * @return
      * @throws ApiException
      */
     @GET("/applications/listUsage.json")
-    public Response<Usage> listUsage(@Query("application") String application,
-                                     @Query("days") Integer days) throws ApiException;
+    public Response<Usage> listUsage(@Query("application") int application,
+                                     @Query("days") int days) throws ApiException;
 
 }
