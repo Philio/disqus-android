@@ -20,7 +20,7 @@ import java.util.Map;
 
 import me.philio.disqus.api.exception.ApiException;
 import me.philio.disqus.api.model.Response;
-import me.philio.disqus.api.model.blacklists.BlacklistEntry;
+import me.philio.disqus.api.model.blacklists.Entry;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Query;
@@ -44,7 +44,7 @@ public interface Blacklists {
      * @return
      */
     @POST("/blacklists/add.json")
-    public Response<List<BlacklistEntry>> addDomains(@Query("forum") String forum,
+    public Response<List<Entry>> addDomains(@Query("forum") String forum,
                                                      @Query("domain") String[] domains,
                                                      @Query("retroactive") int retroactive,
                                                      @Query("notes") String notes)
@@ -61,7 +61,7 @@ public interface Blacklists {
      * @return
      */
     @POST("/blacklists/add.json")
-    public Response<List<BlacklistEntry>> addWords(@Query("forum") String forum,
+    public Response<List<Entry>> addWords(@Query("forum") String forum,
                                                    @Query("word") String[] words,
                                                    @Query("retroactive") int retroactive,
                                                    @Query("notes") String notes)
@@ -78,7 +78,7 @@ public interface Blacklists {
      * @return
      */
     @POST("/blacklists/add.json")
-    public Response<List<BlacklistEntry>> addIps(@Query("forum") String forum,
+    public Response<List<Entry>> addIps(@Query("forum") String forum,
                                                  @Query("ip") String[] ips,
                                                  @Query("retroactive") int retroactive,
                                                  @Query("notes") String notes) throws ApiException;
@@ -94,7 +94,7 @@ public interface Blacklists {
      * @return
      */
     @POST("/blacklists/add.json")
-    public Response<List<BlacklistEntry>> addUsers(@Query("forum") String forum,
+    public Response<List<Entry>> addUsers(@Query("forum") String forum,
                                                    @Query("user") Long[] users,
                                                    @Query("retroactive") int retroactive,
                                                    @Query("notes") String notes)
@@ -111,7 +111,7 @@ public interface Blacklists {
      * @return
      */
     @POST("/blacklists/add.json")
-    public Response<List<BlacklistEntry>> addEmails(@Query("forum") String forum,
+    public Response<List<Entry>> addEmails(@Query("forum") String forum,
                                                     @Query("email") String[] emails,
                                                     @Query("retroactive") int retroactive,
                                                     @Query("notes") String notes)
@@ -126,7 +126,7 @@ public interface Blacklists {
      * @throws ApiException
      */
     @GET("/blacklists/list.json")
-    public Response<List<BlacklistEntry>> list(@Query("forum") String forum) throws ApiException;
+    public Response<List<Entry>> list(@Query("forum") String forum) throws ApiException;
 
     /**
      * Returns a list of all blacklist entries
@@ -138,7 +138,23 @@ public interface Blacklists {
      * @throws ApiException
      */
     @GET("/blacklists/list.json")
-    public Response<List<BlacklistEntry>> list(@Query("forum") String forum,
+    public Response<List<Entry>> list(@Query("forum") String forum,
+                                               @QueryMap Map<String, String> optionalParams)
+            throws ApiException;
+
+    /**
+     * Returns a list of all blacklist entries
+     *
+     * @see <a href="https://disqus.com/api/docs/blacklists/list/">Documentation</a>
+     * @param forum
+     * @param related
+     * @param optionalParams
+     * @return
+     * @throws ApiException
+     */
+    @GET("/blacklists/list.json")
+    public Response<List<Entry>> list(@Query("forum") String forum,
+                                               @Query("related") String[] related,
                                                @QueryMap Map<String, String> optionalParams)
             throws ApiException;
 
@@ -151,7 +167,7 @@ public interface Blacklists {
      * @return
      */
     @POST("/blacklists/remove.json")
-    public Response<List<BlacklistEntry>> removeDomains(@Query("forum") String forum,
+    public Response<List<Entry>> removeDomains(@Query("forum") String forum,
                                                         @Query("domain") String[] domains)
             throws ApiException;
 
@@ -164,7 +180,7 @@ public interface Blacklists {
      * @return
      */
     @POST("/blacklists/remove.json")
-    public Response<List<BlacklistEntry>> removeWords(@Query("forum") String forum,
+    public Response<List<Entry>> removeWords(@Query("forum") String forum,
                                                       @Query("word") String[] words)
             throws ApiException;
 
@@ -177,7 +193,7 @@ public interface Blacklists {
      * @return
      */
     @POST("/blacklists/remove.json")
-    public Response<List<BlacklistEntry>> removeIps(@Query("forum") String forum,
+    public Response<List<Entry>> removeIps(@Query("forum") String forum,
                                                     @Query("ip") String[] ips) throws ApiException;
 
     /**
@@ -189,7 +205,7 @@ public interface Blacklists {
      * @return
      */
     @POST("/blacklists/remove.json")
-    public Response<List<BlacklistEntry>> removeUsers(@Query("forum") String forum,
+    public Response<List<Entry>> removeUsers(@Query("forum") String forum,
                                                       @Query("user") Long[] users)
             throws ApiException;
 
@@ -202,7 +218,7 @@ public interface Blacklists {
      * @return
      */
     @POST("/blacklists/remove.json")
-    public Response<List<BlacklistEntry>> removeEmails(@Query("forum") String forum,
+    public Response<List<Entry>> removeEmails(@Query("forum") String forum,
                                                        @Query("email") String[] emails)
             throws ApiException;
 

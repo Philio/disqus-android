@@ -14,7 +14,7 @@ import me.philio.disqus.api.model.applications.Usage;
 /**
  * Custom deserializer to convert Disqus usage nested arrays into a map
  */
-public class UsageDeserializer implements JsonDeserializer<Usage> {
+public class ApplicationsUsageDeserializer implements JsonDeserializer<Usage> {
 
     @Override
     public Usage deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)

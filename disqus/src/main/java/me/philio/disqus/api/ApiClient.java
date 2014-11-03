@@ -22,10 +22,10 @@ import me.philio.disqus.DisqusConstants;
 import me.philio.disqus.api.exception.ApiException;
 import me.philio.disqus.api.exception.BadRequestException;
 import me.philio.disqus.api.exception.ForbiddenException;
-import me.philio.disqus.api.gson.BlacklistEntryDeserializer;
-import me.philio.disqus.api.gson.UsageDeserializer;
+import me.philio.disqus.api.gson.ApplicationsUsageDeserializer;
+import me.philio.disqus.api.gson.BlacklistsEntryDeserializer;
 import me.philio.disqus.api.model.applications.Usage;
-import me.philio.disqus.api.model.blacklists.BlacklistEntry;
+import me.philio.disqus.api.model.blacklists.Entry;
 import me.philio.disqus.api.resources.Applications;
 import me.philio.disqus.api.resources.Blacklists;
 import me.philio.disqus.api.resources.Categories;
@@ -75,8 +75,8 @@ public class ApiClient {
         // Build Gson with Disqus date format and type adapters
         Gson gson = new GsonBuilder()
                 .setDateFormat(DisqusConstants.DATE_FORMAT)
-                .registerTypeAdapter(Usage.class, new UsageDeserializer())
-                .registerTypeAdapter(BlacklistEntry.class, new BlacklistEntryDeserializer())
+                .registerTypeAdapter(Usage.class, new ApplicationsUsageDeserializer())
+                .registerTypeAdapter(Entry.class, new BlacklistsEntryDeserializer())
                 .create();
 
         // Build RestAdapter

@@ -6,10 +6,10 @@ import java.util.List;
 
 import me.philio.disqus.api.exception.ApiException;
 import me.philio.disqus.api.model.Response;
-import me.philio.disqus.api.model.blacklists.BlacklistEntry;
+import me.philio.disqus.api.model.blacklists.Entry;
 import me.philio.disqus.api.model.users.User;
 
-import static me.philio.disqus.api.model.blacklists.BlacklistEntry.Type;
+import static me.philio.disqus.api.model.blacklists.Entry.Type;
 
 public class BlacklistsTest extends ResourceTestCase {
 
@@ -34,10 +34,10 @@ public class BlacklistsTest extends ResourceTestCase {
     }
 
     private void cleanUp() throws ApiException {
-        Response<List<BlacklistEntry>> entries =
+        Response<List<Entry>> entries =
                 mBlacklists.list("disqusforandroidintegrationtesting");
         if (entries != null && entries.data != null && entries.data.size() > 0) {
-            for (BlacklistEntry entry : entries.data) {
+            for (Entry entry : entries.data) {
                 if (entry.value == null) {
                     continue;
                 }
@@ -77,7 +77,7 @@ public class BlacklistsTest extends ResourceTestCase {
      */
     @LargeTest
     public void testAddDomains() throws ApiException {
-        Response<List<BlacklistEntry>> entries =
+        Response<List<Entry>> entries =
                 mBlacklists.addDomains("disqusforandroidintegrationtesting",
                         new String[]{"test.com", "test2.com", "test3.com"}, 0,
                         "Added by Disqus for Android");
@@ -99,7 +99,7 @@ public class BlacklistsTest extends ResourceTestCase {
      */
     @LargeTest
     public void testAddWords() throws ApiException {
-        Response<List<BlacklistEntry>> entries =
+        Response<List<Entry>> entries =
                 mBlacklists.addWords("disqusforandroidintegrationtesting",
                         new String[]{"naughty", "words"}, 0, "Added by Disqus for Android");
         assertNotNull(entries);
@@ -118,7 +118,7 @@ public class BlacklistsTest extends ResourceTestCase {
      */
     @LargeTest
     public void testAddIps() throws ApiException {
-        Response<List<BlacklistEntry>> entries =
+        Response<List<Entry>> entries =
                 mBlacklists.addIps("disqusforandroidintegrationtesting",
                         new String[]{"10.0.0.1", "10.0.0.2"}, 0, "Added by Disqus for Android");
         assertNotNull(entries);
@@ -137,7 +137,7 @@ public class BlacklistsTest extends ResourceTestCase {
      */
     @LargeTest
     public void testAddUsers() throws ApiException {
-        Response<List<BlacklistEntry>> entries =
+        Response<List<Entry>> entries =
                 mBlacklists.addUsers("disqusforandroidintegrationtesting",
                         new Long[]{1l, 2l, 3l}, 0, "Added by Disqus for Android");
         assertNotNull(entries);
@@ -158,7 +158,7 @@ public class BlacklistsTest extends ResourceTestCase {
      */
     @LargeTest
     public void testAddEmails() throws ApiException {
-        Response<List<BlacklistEntry>> entries =
+        Response<List<Entry>> entries =
                 mBlacklists.addEmails("disqusforandroidintegrationtesting",
                         new String[]{"mail@test.com", "mail@test2.com", "mail@test3.com"}, 0,
                         "Added by Disqus for Android");
@@ -184,7 +184,7 @@ public class BlacklistsTest extends ResourceTestCase {
                 new String[]{"some", "naughty", "words"}, 0, "Added by Disqus for Android");
         mBlacklists.addIps("disqusforandroidintegrationtesting", new String[]{"10.0.0.1"}, 0,
                 "Added by Disqus for Android");
-        Response<List<BlacklistEntry>> entries =
+        Response<List<Entry>> entries =
                 mBlacklists.list("disqusforandroidintegrationtesting");
         assertNotNull(entries);
         assertNotNull(entries.data);
@@ -209,7 +209,7 @@ public class BlacklistsTest extends ResourceTestCase {
         mBlacklists.addDomains("disqusforandroidintegrationtesting",
                 new String[]{"test.com", "test2.com", "test3.com"}, 0,
                 "Added by Disqus for Android");
-        Response<List<BlacklistEntry>> entries =
+        Response<List<Entry>> entries =
                 mBlacklists.removeDomains("disqusforandroidintegrationtesting",
                         new String[]{"test.com", "test2.com", "test3.com"});
         assertNotNull(entries);
@@ -232,7 +232,7 @@ public class BlacklistsTest extends ResourceTestCase {
     public void testRemoveWords() throws ApiException {
         mBlacklists.addWords("disqusforandroidintegrationtesting", new String[]{"naughty", "words"},
                 0, "Added by Disqus for Android");
-        Response<List<BlacklistEntry>> entries =
+        Response<List<Entry>> entries =
                 mBlacklists.removeWords("disqusforandroidintegrationtesting",
                         new String[]{"naughty", "words"});
         assertNotNull(entries);
@@ -253,7 +253,7 @@ public class BlacklistsTest extends ResourceTestCase {
     public void testRemoveIps() throws ApiException {
         mBlacklists.addIps("disqusforandroidintegrationtesting",
                 new String[]{"10.0.0.1", "10.0.0.2"}, 0, "Added by Disqus for Android");
-        Response<List<BlacklistEntry>> entries =
+        Response<List<Entry>> entries =
                 mBlacklists.removeIps("disqusforandroidintegrationtesting",
                         new String[]{"10.0.0.1", "10.0.0.2"});
         assertNotNull(entries);
@@ -274,7 +274,7 @@ public class BlacklistsTest extends ResourceTestCase {
     public void testRemoveUsers() throws ApiException {
         mBlacklists.addUsers("disqusforandroidintegrationtesting", new Long[]{1l, 2l, 3l}, 0,
                 "Added by Disqus for Android");
-        Response<List<BlacklistEntry>> entries =
+        Response<List<Entry>> entries =
                 mBlacklists.removeUsers("disqusforandroidintegrationtesting",
                         new Long[]{1l, 2l, 3l});
         assertNotNull(entries);
@@ -298,7 +298,7 @@ public class BlacklistsTest extends ResourceTestCase {
         mBlacklists.addEmails("disqusforandroidintegrationtesting",
                 new String[]{"mail@test.com", "mail@test2.com", "mail@test3.com"}, 0,
                 "Added by Disqus for Android");
-        Response<List<BlacklistEntry>> entries =
+        Response<List<Entry>> entries =
                 mBlacklists.removeEmails("disqusforandroidintegrationtesting",
                         new String[]{"mail@test.com", "mail@test2.com", "mail@test3.com"});
         assertNotNull(entries);

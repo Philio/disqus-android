@@ -22,7 +22,7 @@ import java.util.Date;
 /**
  * Entry in the blacklist
  */
-public class BlacklistEntry {
+public class Entry {
 
     /**
      * Entry types
@@ -36,7 +36,7 @@ public class BlacklistEntry {
     }
 
     @SerializedName("forum")
-    public String forum;
+    public Object forum;
 
     @SerializedName("notes")
     public String notes;

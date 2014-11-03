@@ -9,9 +9,9 @@ import me.philio.disqus.DisqusConstants;
 import me.philio.disqus.api.model.applications.Usage;
 
 /**
- * Test cases for {@link UsageDeserializer}
+ * Test cases for {@link ApplicationsUsageDeserializer}
  */
-public class UsageDeserializerTest extends TestCase {
+public class ApplicationsUsageDeserializerTest extends TestCase {
 
     /**
      * Gson instance
@@ -22,7 +22,7 @@ public class UsageDeserializerTest extends TestCase {
     protected void setUp() throws Exception {
         mGson = new GsonBuilder()
                 .setDateFormat(DisqusConstants.DATE_FORMAT)
-                .registerTypeAdapter(Usage.class, new UsageDeserializer())
+                .registerTypeAdapter(Usage.class, new ApplicationsUsageDeserializer())
                 .create();
     }
 
@@ -48,7 +48,7 @@ public class UsageDeserializerTest extends TestCase {
                 "[\"2011-11-02T00:00:00\",274]]";
         Usage usage = mGson.fromJson(json, Usage.class);
         assertNotNull(usage);
-        assertEquals(usage.size(), 31);
+        assertEquals(31, usage.size());
     }
 
     /**
@@ -58,7 +58,7 @@ public class UsageDeserializerTest extends TestCase {
         String json = "[]";
         Usage usage = mGson.fromJson(json, Usage.class);
         assertNotNull(usage);
-        assertEquals(usage.size(), 0);
+        assertEquals(0, usage.size());
     }
 
     /**

@@ -1,7 +1,5 @@
 package me.philio.disqus.api.gson;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -12,33 +10,42 @@ import com.google.gson.annotations.SerializedName;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
-import me.philio.disqus.DisqusConstants;
-import me.philio.disqus.api.model.blacklists.BlacklistEntry;
+import me.philio.disqus.api.model.blacklists.Entry;
+import me.philio.disqus.api.model.forums.Forum;
 import me.philio.disqus.api.model.users.User;
 
 /**
  * Custom deserializer to convert Disqus blacklist entry
  */
-public class BlacklistEntryDeserializer implements JsonDeserializer<BlacklistEntry> {
+public class BlacklistsEntryDeserializer implements JsonDeserializer<Entry> {
 
     @Override
-    public BlacklistEntry deserialize(JsonElement json, Type typeOfT,
+    public Entry deserialize(JsonElement json, Type typeOfT,
                                       JsonDeserializationContext context)
             throws JsonParseException {
         // JSON should be an object
         if (json.isJsonObject()) {
-            Gson gson = new GsonBuilder().setDateFormat(DisqusConstants.DATE_FORMAT).create();
-            BlacklistEntry entry = new BlacklistEntry();
+            Entry entry = new Entry();
 
             // Iterate through fields and try and parse them
-            for (Field field : BlacklistEntry.class.getDeclaredFields()) {
+            for (Field field : Entry.class.getDeclaredFields()) {
                 JsonObject jsonObject = json.getAsJsonObject();
                 String name = getJsonName(field);
 
                 // Parse field if it exists and is not null
                 if (jsonObject.has(name) && !jsonObject.get(name).isJsonNull()) {
-                    // Value is special case string or user
-                    if (name.equals("value")) {
+                    if (name.equals("forum")) {
+                        // Forum can be a string or object, depending if related is used
+                        JsonElement value = jsonObject.get(name);
+                        if (value.isJsonObject()) {
+                            // Deserialise forum object
+                            entry.forum = context.deserialize(value, Forum.class);
+                        } else if (value.isJsonPrimitive()) {
+                            // Get as string
+                            entry.forum = value.getAsString();
+                        }
+                    } else if (name.equals("value")) {
+                        // Value is a special case string or user
                         JsonElement value = jsonObject.get(name);
                         if (value.isJsonObject()) {
                             // Deserialise user object
