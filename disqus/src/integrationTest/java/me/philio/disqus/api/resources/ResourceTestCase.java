@@ -18,8 +18,8 @@ public abstract class ResourceTestCase extends TestCase {
     @Override
     protected void setUp() throws Exception {
         ApiConfig apiConfig =
-                new ApiConfig("3ymeKsGF7H03ga4vIzvwCrM5aFU2Dkx7uaRxBV36Z3e3IJQwbfjVcz6XjrNgf4lH",
-                        "46a082db3ad5418d940cd449f542b075", "http://localhost/");
+                new ApiConfig("VOyNG8ABoNFyMj7KbAEyvPuQB6tvTPQb6hy4fK5U6kkluH1RePMEKfQw9EdLnaez",
+                        "91ee5737b5b04465bc244ad036e3e3b2", "http://localhost/");
         mApiClient = new ApiClient(apiConfig);
     }
 

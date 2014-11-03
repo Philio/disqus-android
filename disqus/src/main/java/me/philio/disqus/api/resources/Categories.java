@@ -46,7 +46,7 @@ public interface Categories {
      */
     @POST("/categories/create.json")
     public Response<Category> create(@Query("forum") String forum,
-                                            @Query("title") String title) throws ApiException;
+                                     @Query("title") String title) throws ApiException;
 
     /**
      * Creates a new category
@@ -60,8 +60,8 @@ public interface Categories {
      */
     @POST("/categories/create.json")
     public Response<Category> create(@Query("forum") String forum,
-                                            @Query("title") String title,
-                                            @Query("default") int isDefault) throws ApiException;
+                                     @Query("title") String title,
+                                     @Query("default") int isDefault) throws ApiException;
 
     /**
      * Returns category details
@@ -108,7 +108,7 @@ public interface Categories {
      */
     @GET("/categories/list.json")
     public Response<List<Category>> list(@Query("forum") String forum,
-                                                @QueryMap Map<String, String> optionalParams)
+                                         @QueryMap Map<String, String> optionalParams)
             throws ApiException;
 
     /**
@@ -122,7 +122,7 @@ public interface Categories {
      */
     @GET("/categories/list.json")
     public Response<List<Category>> list(@Query("forum") String[] forums,
-                                                @QueryMap Map<String, String> optionalParams)
+                                         @QueryMap Map<String, String> optionalParams)
             throws ApiException;
 
     /**
@@ -173,7 +173,7 @@ public interface Categories {
      */
     @GET("/categories/listThreads.json")
     public Response<List<Thread>> listThreads(@Query("category") long category,
-                                                     @QueryMap Map<String, String> optionalParams)
+                                              @QueryMap Map<String, String> optionalParams)
             throws ApiException;
 
 }
