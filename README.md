@@ -54,14 +54,21 @@ Third party logins are not supported at this time.
 
 Use the `ApiConfig` class to set your app configuration
 
-Options:
+    ApiConfig apiConfig = new ApiConfig("MyApiKey", "AccessToken", LogLevel.BASIC);
+
+#### Standard options
 
 * API key - mandatory for all requests.
-* API secret - intended for server to server requests as an alternative to the API key/access token,
-can be used from a mobile app but this presents security risks and is not recommended.
 * Access token - required for requests that require authentication.
 * Referrer - required for some requests that perform domain checks, should match a domain in your
 Disqus app settings.
+* Log level - set the Retrofit logging level, see [Square's docs](http://square.github.io/retrofit/javadoc/retrofit/RestAdapter.LogLevel.html) for details.
+
+#### Other options
+
+* API secret - intended for server to server requests as an alternative to the API key/access token
+and provided for completeness. Can be used from a mobile app but this presents security risks and is
+not recommended.
 
 ### Create client
 
@@ -71,7 +78,6 @@ The `ApiClient` can be used to create Disqus resource objects based on the Retro
 defined in the `me.philio.disqus.api.resources` package. It works as a wrapper to the Retrofit
 `RestAdapter` and configures the adapter and deserialisation options for Gson.
 
-    ApiConfig apiConfig = new ApiConfig("MyApiKey", "AccessToken");
     ApiClient apiClient = new ApiClient(apiConfig);
 
 ### Create resource and make requests
@@ -99,3 +105,10 @@ The data is usually an object or list of objects and for the majority of request
 models defined in the API package. Some requests return empty structures so to avoid parsing issues
 the data type is either `Object` or `List<Object>`, the response data for these requests can be
 disregarded.
+
+## Known issues
+
+### Disqus issues
+
+1. The cancel button for the authorisation page doesn't work.
+2. Related param has no effect when used with `Blacklists.list()` method.
