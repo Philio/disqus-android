@@ -33,27 +33,29 @@ public class ApplicationsTest extends ResourceTestCase {
     }
 
     /**
-     * Test that listUsage returns some valid data for a specific application id
-     *
-     * @throws ApiException
-     */
-    @LargeTest
-    public void testListUsageApp() throws ApiException {
-        Response<Usage> usage = mApplications.listUsage(3318003);
-        assertNotNull(usage);
-        assertNotNull(usage.data);
-        assertTrue(usage.data.size() > 0);
-    }
-
-    /**
      * Test that listUsage returns the requested number of days data
      *
-     * API always returns days + 1 results for some reason, hence requesting 6 and testing for 7
+     * API always returns days 1 extra day than requested
      *
      * @throws ApiException
      */
     @LargeTest
     public void testListUsageDays() throws ApiException {
+        Response<Usage> usage = mApplications.listUsage(6);
+        assertNotNull(usage);
+        assertNotNull(usage.data);
+        assertEquals(7, usage.data.size());
+    }
+
+    /**
+     * Test that listUsage returns the requested number of days data for the specified application
+     *
+     * API always returns days 1 extra day than requested
+     *
+     * @throws ApiException
+     */
+    @LargeTest
+    public void testListUsageAppDays() throws ApiException {
         Response<Usage> usage = mApplications.listUsage(3318003, 6);
         assertNotNull(usage);
         assertNotNull(usage.data);

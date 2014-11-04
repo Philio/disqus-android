@@ -42,12 +42,12 @@ public interface Applications {
      * Returns the API usage per day for this application
      *
      * @see <a href="https://disqus.com/api/docs/applications/listUsage/">Documentation</a>
-     * @param application
+     * @param days
      * @return
      * @throws ApiException
      */
     @GET("/applications/listUsage.json")
-    public Response<Usage> listUsage(@Query("application") int application) throws ApiException;
+    public Response<Usage> listUsage(@Query("days") int days) throws ApiException;
 
     /**
      * Returns the API usage per day for this application
@@ -59,7 +59,7 @@ public interface Applications {
      * @throws ApiException
      */
     @GET("/applications/listUsage.json")
-    public Response<Usage> listUsage(@Query("application") Integer application,
-                                     @Query("days") int days) throws ApiException;
+    public Response<Usage> listUsage(@Query("application") int application,
+                                     @Query("days") Integer days) throws ApiException;
 
 }
