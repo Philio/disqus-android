@@ -31,9 +31,9 @@ public interface Applications {
     /**
      * Returns the API usage per day for this application
      *
-     * @see <a href="https://disqus.com/api/docs/applications/listUsage/">Documentation</a>
-     * @return
+     * @return Usage data for the application
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/applications/listUsage/">Documentation</a>
      */
     @GET("/applications/listUsage.json")
     public Response<Usage> listUsage() throws ApiException;
@@ -41,10 +41,10 @@ public interface Applications {
     /**
      * Returns the API usage per day for this application
      *
-     * @see <a href="https://disqus.com/api/docs/applications/listUsage/">Documentation</a>
-     * @param days
-     * @return
+     * @param days Number of days
+     * @return Usage data for the application
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/applications/listUsage/">Documentation</a>
      */
     @GET("/applications/listUsage.json")
     public Response<Usage> listUsage(@Query("days") int days) throws ApiException;
@@ -52,11 +52,11 @@ public interface Applications {
     /**
      * Returns the API usage per day for this application
      *
-     * @see <a href="https://disqus.com/api/docs/applications/listUsage/">Documentation</a>
-     * @param application
-     * @param days
-     * @return
+     * @param application Application id
+     * @param days        Number of days
+     * @return Usage data for the application
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/applications/listUsage/">Documentation</a>
      */
     @GET("/applications/listUsage.json")
     public Response<Usage> listUsage(@Query("application") int application,

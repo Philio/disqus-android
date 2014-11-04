@@ -36,12 +36,13 @@ public interface Blacklists {
     /**
      * Adds a domain entry/entries to the blacklist
      *
+     * @param forum       The forum short name
+     * @param domains     An array of domains to add
+     * @param retroactive Apply to dates in the past
+     * @param notes       Note to add to the entry
+     * @return A list of the entries added
+     * @throws ApiException
      * @see <a href="https://disqus.com/api/docs/blacklists/add/">Documentation</a>
-     * @param forum
-     * @param domains
-     * @param retroactive
-     * @param notes
-     * @return
      */
     @POST("/blacklists/add.json")
     public Response<List<Entry>> addDomains(@Query("forum") String forum,
@@ -53,12 +54,13 @@ public interface Blacklists {
     /**
      * Adds a word entry/entries to the blacklist
      *
+     * @param forum       The forum short name
+     * @param words       An array of words to add
+     * @param retroactive Apply to dates in the past
+     * @param notes       Note to add to the entry
+     * @return A list of the entries added
+     * @throws ApiException
      * @see <a href="https://disqus.com/api/docs/blacklists/add/">Documentation</a>
-     * @param forum
-     * @param words
-     * @param retroactive
-     * @param notes
-     * @return
      */
     @POST("/blacklists/add.json")
     public Response<List<Entry>> addWords(@Query("forum") String forum,
@@ -70,12 +72,13 @@ public interface Blacklists {
     /**
      * Adds an IP entry/entries to the blacklist
      *
+     * @param forum       The forum short name
+     * @param ips         An array of ips to add
+     * @param retroactive Apply to dates in the past
+     * @param notes       Note to add to the entry
+     * @return A list of the entries added
+     * @throws ApiException
      * @see <a href="https://disqus.com/api/docs/blacklists/add/">Documentation</a>
-     * @param forum
-     * @param ips
-     * @param retroactive
-     * @param notes
-     * @return
      */
     @POST("/blacklists/add.json")
     public Response<List<Entry>> addIps(@Query("forum") String forum,
@@ -86,12 +89,13 @@ public interface Blacklists {
     /**
      * Adds a user entry/entries to the blacklist
      *
+     * @param forum       The forum short name
+     * @param users       An array of user ids to add
+     * @param retroactive Apply to dates in the past
+     * @param notes       Note to add to the entry
+     * @return A list of the entries added
+     * @throws ApiException
      * @see <a href="https://disqus.com/api/docs/blacklists/add/">Documentation</a>
-     * @param forum
-     * @param users
-     * @param retroactive
-     * @param notes
-     * @return
      */
     @POST("/blacklists/add.json")
     public Response<List<Entry>> addUsers(@Query("forum") String forum,
@@ -103,12 +107,13 @@ public interface Blacklists {
     /**
      * Adds an email entry/entries to the blacklist
      *
+     * @param forum       The forum short name
+     * @param emails      An array of emails to add
+     * @param retroactive Apply to dates in the past
+     * @param notes       Note to add to the entry
+     * @return A list of the entries added
+     * @throws ApiException
      * @see <a href="https://disqus.com/api/docs/blacklists/add/">Documentation</a>
-     * @param forum
-     * @param emails
-     * @param retroactive
-     * @param notes
-     * @return
      */
     @POST("/blacklists/add.json")
     public Response<List<Entry>> addEmails(@Query("forum") String forum,
@@ -120,10 +125,10 @@ public interface Blacklists {
     /**
      * Returns a list of all blacklist entries
      *
-     * @see <a href="https://disqus.com/api/docs/blacklists/list/">Documentation</a>
-     * @param forum
-     * @return
+     * @param forum The forum short name
+     * @return A list of the entries
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/blacklists/list/">Documentation</a>
      */
     @GET("/blacklists/list.json")
     public Response<List<Entry>> list(@Query("forum") String forum) throws ApiException;
@@ -131,11 +136,11 @@ public interface Blacklists {
     /**
      * Returns a list of all blacklist entries
      *
-     * @see <a href="https://disqus.com/api/docs/blacklists/list/">Documentation</a>
-     * @param forum
-     * @param optionalParams
-     * @return
+     * @param forum          The forum short name
+     * @param optionalParams A map of optional parameters
+     * @return A list of the entries
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/blacklists/list/">Documentation</a>
      */
     @GET("/blacklists/list.json")
     public Response<List<Entry>> list(@Query("forum") String forum,
@@ -145,12 +150,12 @@ public interface Blacklists {
     /**
      * Returns a list of all blacklist entries
      *
-     * @see <a href="https://disqus.com/api/docs/blacklists/list/">Documentation</a>
-     * @param forum
-     * @param related
-     * @param optionalParams
-     * @return
+     * @param forum          The forum short name
+     * @param related        Get relations in response
+     * @param optionalParams A map of optional parameters
+     * @return A list of the entries
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/blacklists/list/">Documentation</a>
      */
     @GET("/blacklists/list.json")
     public Response<List<Entry>> list(@Query("forum") String forum,
@@ -161,10 +166,11 @@ public interface Blacklists {
     /**
      * Removes a domain entry/entries to the blacklist
      *
+     * @param forum   The forum short name
+     * @param domains An array of domains to remove
+     * @return A list of the entries removed
+     * @throws ApiException
      * @see <a href="https://disqus.com/api/docs/blacklists/remove/">Documentation</a>
-     * @param forum
-     * @param domains
-     * @return
      */
     @POST("/blacklists/remove.json")
     public Response<List<Entry>> removeDomains(@Query("forum") String forum,
@@ -174,10 +180,11 @@ public interface Blacklists {
     /**
      * Removes a word entry/entries to the blacklist
      *
+     * @param forum The forum short name
+     * @param words An array of words to remove
+     * @return A list of the entries removed
+     * @throws ApiException
      * @see <a href="https://disqus.com/api/docs/blacklists/remove/">Documentation</a>
-     * @param forum
-     * @param words
-     * @return
      */
     @POST("/blacklists/remove.json")
     public Response<List<Entry>> removeWords(@Query("forum") String forum,
@@ -187,10 +194,11 @@ public interface Blacklists {
     /**
      * Removes an IP entry/entries to the blacklist
      *
+     * @param forum The forum short name
+     * @param ips   An array of ips to remove
+     * @return A list of the entries removed
+     * @throws ApiException
      * @see <a href="https://disqus.com/api/docs/blacklists/remove/">Documentation</a>
-     * @param forum
-     * @param ips
-     * @return
      */
     @POST("/blacklists/remove.json")
     public Response<List<Entry>> removeIps(@Query("forum") String forum,
@@ -199,10 +207,11 @@ public interface Blacklists {
     /**
      * Removes a user entry/entries to the blacklist
      *
+     * @param forum The forum short name
+     * @param users An array of user ids to remove
+     * @return A list of the entries removed
+     * @throws ApiException
      * @see <a href="https://disqus.com/api/docs/blacklists/remove/">Documentation</a>
-     * @param forum
-     * @param users
-     * @return
      */
     @POST("/blacklists/remove.json")
     public Response<List<Entry>> removeUsers(@Query("forum") String forum,
@@ -212,10 +221,11 @@ public interface Blacklists {
     /**
      * Removes an email entry/entries to the blacklist
      *
+     * @param forum  The forum short name
+     * @param emails An array of emails to remove
+     * @return A list of the entries removed
+     * @throws ApiException
      * @see <a href="https://disqus.com/api/docs/blacklists/remove/">Documentation</a>
-     * @param forum
-     * @param emails
-     * @return
      */
     @POST("/blacklists/remove.json")
     public Response<List<Entry>> removeEmails(@Query("forum") String forum,
