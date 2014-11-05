@@ -21,6 +21,8 @@ import java.util.Map;
 import me.philio.disqus.api.exception.ApiException;
 import me.philio.disqus.api.model.Response;
 import me.philio.disqus.api.model.blacklists.Entry;
+import retrofit.http.Field;
+import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Query;
@@ -44,11 +46,12 @@ public interface Blacklists {
      * @throws ApiException
      * @see <a href="https://disqus.com/api/docs/blacklists/add/">Documentation</a>
      */
+    @FormUrlEncoded
     @POST("/blacklists/add.json")
-    public Response<List<Entry>> addDomains(@Query("forum") String forum,
-                                            @Query("domain") String[] domains,
-                                            @Query("retroactive") int retroactive,
-                                            @Query("notes") String notes)
+    public Response<List<Entry>> addDomains(@Field("forum") String forum,
+                                            @Field("domain") String[] domains,
+                                            @Field("retroactive") int retroactive,
+                                            @Field("notes") String notes)
             throws ApiException;
 
     /**
@@ -62,11 +65,12 @@ public interface Blacklists {
      * @throws ApiException
      * @see <a href="https://disqus.com/api/docs/blacklists/add/">Documentation</a>
      */
+    @FormUrlEncoded
     @POST("/blacklists/add.json")
-    public Response<List<Entry>> addWords(@Query("forum") String forum,
-                                          @Query("word") String[] words,
-                                          @Query("retroactive") int retroactive,
-                                          @Query("notes") String notes)
+    public Response<List<Entry>> addWords(@Field("forum") String forum,
+                                          @Field("word") String[] words,
+                                          @Field("retroactive") int retroactive,
+                                          @Field("notes") String notes)
             throws ApiException;
 
     /**
@@ -80,11 +84,12 @@ public interface Blacklists {
      * @throws ApiException
      * @see <a href="https://disqus.com/api/docs/blacklists/add/">Documentation</a>
      */
+    @FormUrlEncoded
     @POST("/blacklists/add.json")
-    public Response<List<Entry>> addIps(@Query("forum") String forum,
-                                        @Query("ip") String[] ips,
-                                        @Query("retroactive") int retroactive,
-                                        @Query("notes") String notes) throws ApiException;
+    public Response<List<Entry>> addIps(@Field("forum") String forum,
+                                        @Field("ip") String[] ips,
+                                        @Field("retroactive") int retroactive,
+                                        @Field("notes") String notes) throws ApiException;
 
     /**
      * Adds a user entry/entries to the blacklist
@@ -97,11 +102,12 @@ public interface Blacklists {
      * @throws ApiException
      * @see <a href="https://disqus.com/api/docs/blacklists/add/">Documentation</a>
      */
+    @FormUrlEncoded
     @POST("/blacklists/add.json")
-    public Response<List<Entry>> addUsers(@Query("forum") String forum,
-                                          @Query("user") Long[] users,
-                                          @Query("retroactive") int retroactive,
-                                          @Query("notes") String notes)
+    public Response<List<Entry>> addUsers(@Field("forum") String forum,
+                                          @Field("user") Long[] users,
+                                          @Field("retroactive") int retroactive,
+                                          @Field("notes") String notes)
             throws ApiException;
 
     /**
@@ -115,11 +121,12 @@ public interface Blacklists {
      * @throws ApiException
      * @see <a href="https://disqus.com/api/docs/blacklists/add/">Documentation</a>
      */
+    @FormUrlEncoded
     @POST("/blacklists/add.json")
-    public Response<List<Entry>> addEmails(@Query("forum") String forum,
-                                           @Query("email") String[] emails,
-                                           @Query("retroactive") int retroactive,
-                                           @Query("notes") String notes)
+    public Response<List<Entry>> addEmails(@Field("forum") String forum,
+                                           @Field("email") String[] emails,
+                                           @Field("retroactive") int retroactive,
+                                           @Field("notes") String notes)
             throws ApiException;
 
     /**
@@ -172,9 +179,10 @@ public interface Blacklists {
      * @throws ApiException
      * @see <a href="https://disqus.com/api/docs/blacklists/remove/">Documentation</a>
      */
+    @FormUrlEncoded
     @POST("/blacklists/remove.json")
-    public Response<List<Entry>> removeDomains(@Query("forum") String forum,
-                                               @Query("domain") String[] domains)
+    public Response<List<Entry>> removeDomains(@Field("forum") String forum,
+                                               @Field("domain") String[] domains)
             throws ApiException;
 
     /**
@@ -186,9 +194,10 @@ public interface Blacklists {
      * @throws ApiException
      * @see <a href="https://disqus.com/api/docs/blacklists/remove/">Documentation</a>
      */
+    @FormUrlEncoded
     @POST("/blacklists/remove.json")
-    public Response<List<Entry>> removeWords(@Query("forum") String forum,
-                                             @Query("word") String[] words)
+    public Response<List<Entry>> removeWords(@Field("forum") String forum,
+                                             @Field("word") String[] words)
             throws ApiException;
 
     /**
@@ -200,9 +209,10 @@ public interface Blacklists {
      * @throws ApiException
      * @see <a href="https://disqus.com/api/docs/blacklists/remove/">Documentation</a>
      */
+    @FormUrlEncoded
     @POST("/blacklists/remove.json")
-    public Response<List<Entry>> removeIps(@Query("forum") String forum,
-                                           @Query("ip") String[] ips) throws ApiException;
+    public Response<List<Entry>> removeIps(@Field("forum") String forum,
+                                           @Field("ip") String[] ips) throws ApiException;
 
     /**
      * Removes a user entry/entries to the blacklist
@@ -213,9 +223,10 @@ public interface Blacklists {
      * @throws ApiException
      * @see <a href="https://disqus.com/api/docs/blacklists/remove/">Documentation</a>
      */
+    @FormUrlEncoded
     @POST("/blacklists/remove.json")
-    public Response<List<Entry>> removeUsers(@Query("forum") String forum,
-                                             @Query("user") Long[] users)
+    public Response<List<Entry>> removeUsers(@Field("forum") String forum,
+                                             @Field("user") Long[] users)
             throws ApiException;
 
     /**
@@ -227,9 +238,10 @@ public interface Blacklists {
      * @throws ApiException
      * @see <a href="https://disqus.com/api/docs/blacklists/remove/">Documentation</a>
      */
+    @FormUrlEncoded
     @POST("/blacklists/remove.json")
-    public Response<List<Entry>> removeEmails(@Query("forum") String forum,
-                                              @Query("email") String[] emails)
+    public Response<List<Entry>> removeEmails(@Field("forum") String forum,
+                                              @Field("email") String[] emails)
             throws ApiException;
 
 }
