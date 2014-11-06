@@ -155,6 +155,25 @@ public interface Categories {
             throws ApiException;
 
     /**
+     * Returns a list of posts within a category
+     *
+     * @param category       The category id
+     * @param related        Specify relations to include with the response. Allows: forum, thread
+     * @param include        Filter posts by status. Allows: unapproved, approved, spam, deleted,
+     *                       flagged, highlighted
+     * @param optionalParams A map of optional parameters
+     * @return A list of posts
+     * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/categories/listPosts/">Documentation</a>
+     */
+    @GET("/categories/listPosts.json")
+    public Response<List<Post>> listPosts(@Query("category") long category,
+                                          @Query("related") String[] related,
+                                          @Query("include") String[] include,
+                                          @QueryMap Map<String, String> optionalParams)
+            throws ApiException;
+
+    /**
      * Returns a list of threads within a category sorted by the date created
      *
      * @param category The category id
@@ -177,6 +196,22 @@ public interface Categories {
      */
     @GET("/categories/listThreads.json")
     public Response<List<Thread>> listThreads(@Query("category") long category,
+                                              @QueryMap Map<String, String> optionalParams)
+            throws ApiException;
+
+    /**
+     * Returns a list of threads within a category sorted by the date created
+     *
+     * @param category       The category id
+     * @param related        Specify relations to include with the response. Allows: forum, author
+     * @param optionalParams A map of optional parameters
+     * @return A list of threads
+     * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/categories/listThreads/">Documentation</a>
+     */
+    @GET("/categories/listThreads.json")
+    public Response<List<Thread>> listThreads(@Query("category") long category,
+                                              @Query("related") String[] related,
                                               @QueryMap Map<String, String> optionalParams)
             throws ApiException;
 
