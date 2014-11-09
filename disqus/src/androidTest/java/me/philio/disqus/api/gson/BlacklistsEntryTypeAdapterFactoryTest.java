@@ -36,7 +36,7 @@ public class BlacklistsEntryTypeAdapterFactoryTest extends TestCase {
         Entry entry = mGson.fromJson(json, Entry.class);
         assertNotNull(entry);
         assertEquals("disqusforandroidintegrationtesting", entry.forum);
-        assertNotNull(entry.value);
+        assertTrue(entry.value instanceof String);
         assertEquals("test.com", entry.value);
         assertFalse(entry.conflictingWhitelistRemoved);
         assertEquals(Type.domain, entry.type);
@@ -54,7 +54,7 @@ public class BlacklistsEntryTypeAdapterFactoryTest extends TestCase {
         Entry entry = mGson.fromJson(json, Entry.class);
         assertNotNull(entry);
         assertEquals("disqusforandroidintegrationtesting", entry.forum);
-        assertNotNull(entry.value);
+        assertTrue(entry.value instanceof String);
         assertEquals("rudeword", entry.value);
         assertFalse(entry.conflictingWhitelistRemoved);
         assertEquals(Type.word, entry.type);
@@ -72,7 +72,7 @@ public class BlacklistsEntryTypeAdapterFactoryTest extends TestCase {
         Entry entry = mGson.fromJson(json, Entry.class);
         assertNotNull(entry);
         assertEquals("disqusforandroidintegrationtesting", entry.forum);
-        assertNotNull(entry.value);
+        assertTrue(entry.value instanceof String);
         assertEquals("test@test.com", entry.value);
         assertFalse(entry.conflictingWhitelistRemoved);
         assertEquals(Type.email, entry.type);
@@ -91,7 +91,7 @@ public class BlacklistsEntryTypeAdapterFactoryTest extends TestCase {
         Entry entry = mGson.fromJson(json, Entry.class);
         assertNotNull(entry);
         assertEquals("disqusforandroidintegrationtesting", entry.forum);
-        assertNotNull(entry.value);
+        assertTrue(entry.value instanceof String);
         assertEquals("254.254.254.254", entry.value);
         assertFalse(entry.conflictingWhitelistRemoved);
         assertEquals(Type.ip, entry.type);
@@ -124,7 +124,7 @@ public class BlacklistsEntryTypeAdapterFactoryTest extends TestCase {
         Entry entry = mGson.fromJson(json, Entry.class);
         assertNotNull(entry);
         assertEquals("disqusforandroidintegrationtesting", entry.forum);
-        assertNotNull(entry.value);
+        assertTrue(entry.value instanceof User);
         assertEquals("Jason", ((User) entry.value).username);
         assertFalse(entry.conflictingWhitelistRemoved);
         assertEquals(Type.user, entry.type);
