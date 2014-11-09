@@ -1,7 +1,6 @@
 package me.philio.disqus.api.resources;
 
 import android.test.suitebuilder.annotation.LargeTest;
-import android.util.Log;
 
 import java.util.List;
 
@@ -68,7 +67,7 @@ public class BlacklistsTest extends ResourceTestCase {
     /**
      * Test adding domains to the blacklist
      *
-     * @throws Exception
+     * @throws ApiException
      */
     @LargeTest
     public void testAddDomains() throws ApiException {
@@ -90,7 +89,7 @@ public class BlacklistsTest extends ResourceTestCase {
     /**
      * Test adding words to the blacklist
      *
-     * @throws Exception
+     * @throws ApiException
      */
     @LargeTest
     public void testAddWords() throws ApiException {
@@ -109,7 +108,7 @@ public class BlacklistsTest extends ResourceTestCase {
     /**
      * Test adding IPs to the blacklist
      *
-     * @throws Exception
+     * @throws ApiException
      */
     @LargeTest
     public void testAddIps() throws ApiException {
@@ -128,7 +127,7 @@ public class BlacklistsTest extends ResourceTestCase {
     /**
      * Test adding users to the blacklist
      *
-     * @throws Exception
+     * @throws ApiException
      */
     @LargeTest
     public void testAddUsers() throws ApiException {
@@ -139,17 +138,17 @@ public class BlacklistsTest extends ResourceTestCase {
         assertNotNull(entries.data);
         assertEquals(3, entries.data.size());
         assertEquals(Type.user, entries.data.get(0).type);
-        assertEquals(1, ((User ) entries.data.get(0).value).id);
+        assertEquals(1, ((User) entries.data.get(0).value).id);
         assertEquals(Type.user, entries.data.get(1).type);
-        assertEquals(2, ((User ) entries.data.get(1).value).id);
+        assertEquals(2, ((User) entries.data.get(1).value).id);
         assertEquals(Type.user, entries.data.get(2).type);
-        assertEquals(3, ((User ) entries.data.get(2).value).id);
+        assertEquals(3, ((User) entries.data.get(2).value).id);
     }
 
     /**
      * Test adding emails to the blacklist
      *
-     * @throws Exception
+     * @throws ApiException
      */
     @LargeTest
     public void testAddEmails() throws ApiException {
@@ -276,11 +275,11 @@ public class BlacklistsTest extends ResourceTestCase {
         assertNotNull(entries.data);
         assertEquals(3, entries.data.size());
         assertEquals(Type.user, entries.data.get(0).type);
-        assertEquals(1, ((User ) entries.data.get(0).value).id);
+        assertEquals(1, ((User) entries.data.get(0).value).id);
         assertEquals(Type.user, entries.data.get(1).type);
-        assertEquals(2, ((User ) entries.data.get(1).value).id);
+        assertEquals(2, ((User) entries.data.get(1).value).id);
         assertEquals(Type.user, entries.data.get(2).type);
-        assertEquals(3, ((User ) entries.data.get(2).value).id);
+        assertEquals(3, ((User) entries.data.get(2).value).id);
     }
 
     /**
