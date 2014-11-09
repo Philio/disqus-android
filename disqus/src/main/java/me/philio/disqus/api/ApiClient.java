@@ -23,9 +23,8 @@ import me.philio.disqus.api.exception.ApiException;
 import me.philio.disqus.api.exception.BadRequestException;
 import me.philio.disqus.api.exception.ForbiddenException;
 import me.philio.disqus.api.gson.ApplicationsUsageDeserializer;
-import me.philio.disqus.api.gson.BlacklistsEntryDeserializer;
+import me.philio.disqus.api.gson.BlacklistsEntryTypeAdapterFactory;
 import me.philio.disqus.api.model.applications.Usage;
-import me.philio.disqus.api.model.blacklists.Entry;
 import me.philio.disqus.api.resources.Applications;
 import me.philio.disqus.api.resources.Blacklists;
 import me.philio.disqus.api.resources.Categories;
@@ -76,7 +75,7 @@ public class ApiClient {
         Gson gson = new GsonBuilder()
                 .setDateFormat(DisqusConstants.DATE_FORMAT)
                 .registerTypeAdapter(Usage.class, new ApplicationsUsageDeserializer())
-                .registerTypeAdapter(Entry.class, new BlacklistsEntryDeserializer())
+                .registerTypeAdapterFactory(new BlacklistsEntryTypeAdapterFactory())
                 .create();
 
         // Build RestAdapter

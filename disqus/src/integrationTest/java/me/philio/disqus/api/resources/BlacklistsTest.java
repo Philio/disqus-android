@@ -1,6 +1,7 @@
 package me.philio.disqus.api.resources;
 
 import android.test.suitebuilder.annotation.LargeTest;
+import android.util.Log;
 
 import java.util.List;
 
@@ -38,9 +39,6 @@ public class BlacklistsTest extends ResourceTestCase {
                 mBlacklists.list("disqusforandroidintegrationtesting");
         if (entries != null && entries.data != null && entries.data.size() > 0) {
             for (Entry entry : entries.data) {
-                if (entry.value == null) {
-                    continue;
-                }
                 switch (entry.type) {
                     case domain:
                         mBlacklists.removeDomains("disqusforandroidintegrationtesting",
@@ -55,9 +53,6 @@ public class BlacklistsTest extends ResourceTestCase {
                                 new String[]{entry.value.toString()});
                         break;
                     case user:
-                        if (!(entry.value instanceof User)) {
-                            continue;
-                        }
                         mBlacklists.removeUsers("disqusforandroidintegrationtesting",
                                 new Long[]{((User) entry.value).id});
                         break;
@@ -144,11 +139,11 @@ public class BlacklistsTest extends ResourceTestCase {
         assertNotNull(entries.data);
         assertEquals(3, entries.data.size());
         assertEquals(Type.user, entries.data.get(0).type);
-        assertEquals(1, ((User) entries.data.get(0).value).id);
+        assertEquals(1, ((User ) entries.data.get(0).value).id);
         assertEquals(Type.user, entries.data.get(1).type);
-        assertEquals(2, ((User) entries.data.get(1).value).id);
+        assertEquals(2, ((User ) entries.data.get(1).value).id);
         assertEquals(Type.user, entries.data.get(2).type);
-        assertEquals(3, ((User) entries.data.get(2).value).id);
+        assertEquals(3, ((User ) entries.data.get(2).value).id);
     }
 
     /**
@@ -281,11 +276,11 @@ public class BlacklistsTest extends ResourceTestCase {
         assertNotNull(entries.data);
         assertEquals(3, entries.data.size());
         assertEquals(Type.user, entries.data.get(0).type);
-        assertEquals(1, ((User) entries.data.get(0).value).id);
+        assertEquals(1, ((User ) entries.data.get(0).value).id);
         assertEquals(Type.user, entries.data.get(1).type);
-        assertEquals(2, ((User) entries.data.get(1).value).id);
+        assertEquals(2, ((User ) entries.data.get(1).value).id);
         assertEquals(Type.user, entries.data.get(2).type);
-        assertEquals(3, ((User) entries.data.get(2).value).id);
+        assertEquals(3, ((User ) entries.data.get(2).value).id);
     }
 
     /**

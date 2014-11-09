@@ -19,6 +19,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
+import me.philio.disqus.api.model.users.User;
+
 /**
  * Entry in the blacklist
  */

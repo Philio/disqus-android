@@ -11,7 +11,7 @@ import me.philio.disqus.api.model.users.User;
 
 import static me.philio.disqus.api.model.blacklists.Entry.Type;
 
-public class BlacklistsEntryDeserializerTest extends TestCase {
+public class BlacklistsEntryTypeAdapterFactoryTest extends TestCase {
 
     /**
      * Gson instance
@@ -22,7 +22,7 @@ public class BlacklistsEntryDeserializerTest extends TestCase {
     protected void setUp() throws Exception {
         mGson = new GsonBuilder()
                 .setDateFormat(DisqusConstants.DATE_FORMAT)
-                .registerTypeAdapter(Entry.class, new BlacklistsEntryDeserializer())
+                .registerTypeAdapterFactory(new BlacklistsEntryTypeAdapterFactory())
                 .create();
     }
 
@@ -36,7 +36,7 @@ public class BlacklistsEntryDeserializerTest extends TestCase {
         Entry entry = mGson.fromJson(json, Entry.class);
         assertNotNull(entry);
         assertEquals("disqusforandroidintegrationtesting", entry.forum);
-        assertTrue(entry.value instanceof String);
+        assertNotNull(entry.value);
         assertEquals("test.com", entry.value);
         assertFalse(entry.conflictingWhitelistRemoved);
         assertEquals(Type.domain, entry.type);
@@ -54,7 +54,7 @@ public class BlacklistsEntryDeserializerTest extends TestCase {
         Entry entry = mGson.fromJson(json, Entry.class);
         assertNotNull(entry);
         assertEquals("disqusforandroidintegrationtesting", entry.forum);
-        assertTrue(entry.value instanceof String);
+        assertNotNull(entry.value);
         assertEquals("rudeword", entry.value);
         assertFalse(entry.conflictingWhitelistRemoved);
         assertEquals(Type.word, entry.type);
@@ -72,7 +72,7 @@ public class BlacklistsEntryDeserializerTest extends TestCase {
         Entry entry = mGson.fromJson(json, Entry.class);
         assertNotNull(entry);
         assertEquals("disqusforandroidintegrationtesting", entry.forum);
-        assertTrue(entry.value instanceof String);
+        assertNotNull(entry.value);
         assertEquals("test@test.com", entry.value);
         assertFalse(entry.conflictingWhitelistRemoved);
         assertEquals(Type.email, entry.type);
@@ -91,7 +91,7 @@ public class BlacklistsEntryDeserializerTest extends TestCase {
         Entry entry = mGson.fromJson(json, Entry.class);
         assertNotNull(entry);
         assertEquals("disqusforandroidintegrationtesting", entry.forum);
-        assertTrue(entry.value instanceof String);
+        assertNotNull(entry.value);
         assertEquals("254.254.254.254", entry.value);
         assertFalse(entry.conflictingWhitelistRemoved);
         assertEquals(Type.ip, entry.type);
@@ -124,7 +124,7 @@ public class BlacklistsEntryDeserializerTest extends TestCase {
         Entry entry = mGson.fromJson(json, Entry.class);
         assertNotNull(entry);
         assertEquals("disqusforandroidintegrationtesting", entry.forum);
-        assertTrue(entry.value instanceof User);
+        assertNotNull(entry.value);
         assertEquals("Jason", ((User) entry.value).username);
         assertFalse(entry.conflictingWhitelistRemoved);
         assertEquals(Type.user, entry.type);

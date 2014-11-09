@@ -34,7 +34,7 @@ public class Post {
     public boolean isFlagged;
 
     @SerializedName("forum")
-    public String forum;
+    public Object forum;
 
     @SerializedName("parent")
     public long parent;
@@ -61,7 +61,7 @@ public class Post {
     public int userScore;
 
     @SerializedName("thread")
-    public String thread;
+    public Object thread;
 
     @SerializedName("points")
     public int points;
