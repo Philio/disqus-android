@@ -11,7 +11,7 @@ incomplete and under development so is subject to change.
 
 Add the following to your `build.gradle`:
 
-    compile 'me.philio.disqus:disqus:0.0.10'
+    compile 'me.philio.disqus:disqus:0.0.11'
 
 ## Authentication
 
