@@ -31,10 +31,10 @@ public interface Exports {
      * Triggers an export of the forum which is sent via email. API returns an empty object for this
      * request. Response param format only has a single option so has been omitted.
      *
-     * @see <a href="https://disqus.com/api/docs/exports/exportForum/">Documentation</a>
-     * @param forum
-     * @return
+     * @param forum The forum short name
+     * @return A response object, data can be ignored
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/exports/exportForum/">Documentation</a>
      */
     @POST("/exports/exportForum.json")
     public Response<Object> exportForum(@Query("forum") String forum) throws ApiException;

@@ -15,29 +15,17 @@
  */
 package me.philio.disqus.api.resources;
 
-import junit.framework.TestCase;
-
-import me.philio.disqus.api.ApiClient;
-import me.philio.disqus.api.ApiConfig;
-
-import static retrofit.RestAdapter.LogLevel;
-
-/**
- * Resource test abstract class
- */
-public abstract class ResourceTestCase extends TestCase {
+public class ForumsTest extends ResourceTestCase {
 
     /**
-     * ApiClient instance
+     * Forums resource
      */
-    protected ApiClient mApiClient;
+    private Forums mForums;
 
     @Override
     protected void setUp() throws Exception {
-        ApiConfig apiConfig =
-                new ApiConfig("VOyNG8ABoNFyMj7KbAEyvPuQB6tvTPQb6hy4fK5U6kkluH1RePMEKfQw9EdLnaez",
-                        "91ee5737b5b04465bc244ad036e3e3b2", "http://localhost/", LogLevel.FULL);
-        mApiClient = new ApiClient(apiConfig);
+        super.setUp();
+        mForums = mApiClient.createForums();
     }
 
 }
