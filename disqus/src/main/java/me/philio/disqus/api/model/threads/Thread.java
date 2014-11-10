@@ -35,7 +35,7 @@ public class Thread {
     public List<String> identifiers;
 
     @SerializedName("forum")
-    public String forum;
+    public Object forum;
 
     @SerializedName("clean_title")
     public String cleanTitle;
@@ -47,7 +47,7 @@ public class Thread {
     public boolean isDeleted;
 
     @SerializedName("author")
-    public String author;
+    public Object author;
 
     @SerializedName("userScore")
     public int userScore;

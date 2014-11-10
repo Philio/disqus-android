@@ -24,6 +24,8 @@ import me.philio.disqus.api.exception.BadRequestException;
 import me.philio.disqus.api.exception.ForbiddenException;
 import me.philio.disqus.api.gson.ApplicationsUsageDeserializer;
 import me.philio.disqus.api.gson.BlacklistsEntryTypeAdapterFactory;
+import me.philio.disqus.api.gson.PostTypeAdapterFactory;
+import me.philio.disqus.api.gson.ThreadTypeAdapterFactory;
 import me.philio.disqus.api.model.applications.Usage;
 import me.philio.disqus.api.resources.Applications;
 import me.philio.disqus.api.resources.Blacklists;
@@ -76,6 +78,8 @@ public class ApiClient {
                 .setDateFormat(DisqusConstants.DATE_FORMAT)
                 .registerTypeAdapter(Usage.class, new ApplicationsUsageDeserializer())
                 .registerTypeAdapterFactory(new BlacklistsEntryTypeAdapterFactory())
+                .registerTypeAdapterFactory(new PostTypeAdapterFactory())
+                .registerTypeAdapterFactory(new ThreadTypeAdapterFactory())
                 .create();
 
         // Build RestAdapter

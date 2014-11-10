@@ -21,6 +21,7 @@ import java.util.Map;
 import me.philio.disqus.api.exception.ApiException;
 import me.philio.disqus.api.model.Response;
 import me.philio.disqus.api.model.threads.Thread;
+import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Query;
 import retrofit.http.QueryMap;
@@ -89,7 +90,7 @@ public interface Threads {
      * @return
      * @throws ApiException
      */
-    @POST("/threads/details.json")
+    @GET("/threads/details.json")
     public Response<Thread> details(@Query("thread") long thread) throws ApiException;
 
     /**
@@ -101,8 +102,23 @@ public interface Threads {
      * @return
      * @throws ApiException
      */
-    @POST("/threads/details.json")
+    @GET("/threads/details.json")
     public Response<Thread> details(@Query("thread") long thread,
                                     @Query("forum") String forum) throws ApiException;
+
+    /**
+     * Returns thread details
+     *
+     * @see <a href="https://disqus.com/api/docs/threads/details/">Documentation</a>
+     * @param thread
+     * @param forum
+     * @param related
+     * @return
+     * @throws ApiException
+     */
+    @GET("/threads/details.json")
+    public Response<Thread> details(@Query("thread") long thread,
+                                    @Query("forum") String forum,
+                                    @Query("related") String[] related) throws ApiException;
 
 }
