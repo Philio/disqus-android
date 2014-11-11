@@ -34,16 +34,14 @@ import me.philio.disqus.api.model.users.User;
 public class BlacklistsEntryTypeAdapterFactory implements TypeAdapterFactory {
 
     @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+    public <T> TypeAdapter<T> create(final Gson gson, TypeToken<T> type) {
         // Return null if not a blacklist entry object
         if (!type.getType().equals(Entry.class)) {
             return null;
         }
 
-        // Get adapters
+        // Get delegate
         final TypeAdapter<T> delegate = gson.getDelegateAdapter(this, type);
-        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-        final TypeAdapter<User> userAdapter = gson.getAdapter(User.class);
 
         // Return adapter
         return new TypeAdapter<T>() {
@@ -55,7 +53,7 @@ public class BlacklistsEntryTypeAdapterFactory implements TypeAdapterFactory {
 
             @Override
             public T read(JsonReader in) throws IOException {
-                JsonElement jsonTree = elementAdapter.read(in);
+                JsonElement jsonTree = gson.fromJson(in, JsonElement.class);
                 JsonElement value = jsonTree.getAsJsonObject().get("value");
 
                 // Process the entry with the delegate
@@ -63,7 +61,7 @@ public class BlacklistsEntryTypeAdapterFactory implements TypeAdapterFactory {
 
                 // Process value if needed
                 if (value.isJsonObject()) {
-                    ((Entry) entry).value = userAdapter.fromJsonTree(value);
+                    ((Entry) entry).value = gson.fromJson(value, User.class);
                 }
 
                 // Return entry

@@ -22,6 +22,8 @@ import java.util.List;
 import me.philio.disqus.api.exception.ApiException;
 import me.philio.disqus.api.model.Response;
 import me.philio.disqus.api.model.category.Category;
+import me.philio.disqus.api.model.posts.Post;
+import me.philio.disqus.api.model.threads.Thread;
 
 public class CategoriesTest extends ResourceTestCase {
 
@@ -101,6 +103,32 @@ public class CategoriesTest extends ResourceTestCase {
         assertNotNull(categories);
         assertNotNull(categories.data);
         assertTrue(categories.data.size() > 0);
+    }
+
+    /**
+     * Test that list posts executes successfully
+     *
+     * @throws ApiException
+     */
+    @LargeTest
+    public void testListPosts() throws ApiException {
+        Response<List<Post>> posts = mCategories.listPosts(1);
+        assertNotNull(posts);
+        assertEquals(0, posts.code);
+        assertNotNull(posts.data);
+    }
+
+    /**
+     * Test that list threads executes successfully
+     *
+     * @throws ApiException
+     */
+    @LargeTest
+    public void testListThreads() throws ApiException {
+        Response<List<Thread>> threads = mCategories.listThreads(1);
+        assertNotNull(threads);
+        assertEquals(0, threads.code);
+        assertNotNull(threads.data);
     }
 
 }

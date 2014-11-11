@@ -29,7 +29,7 @@ public class Thread {
     public String feed;
 
     @SerializedName("category")
-    public String category;
+    public Object category;
 
     @SerializedName("identifiers")
     public List<String> identifiers;

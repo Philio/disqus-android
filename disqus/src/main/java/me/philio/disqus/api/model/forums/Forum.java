@@ -18,6 +18,7 @@ package me.philio.disqus.api.model.forums;
 import com.google.gson.annotations.SerializedName;
 
 import me.philio.disqus.api.model.Image;
+import me.philio.disqus.api.model.users.User;
 
 /**
  * Forum details
@@ -28,7 +29,10 @@ public class Forum {
     public String name;
 
     @SerializedName("founder")
-    public String founder;
+    public long founder;
+
+    @SerializedName("author")
+    public User author;
 
     @SerializedName("settings")
     public Settings settings;
@@ -38,6 +42,9 @@ public class Forum {
 
     @SerializedName("guidelines")
     public String guidelines;
+
+    @SerializedName("raw_guidelines")
+    public String rawGuidelines;
 
     @SerializedName("favicon")
     public Image favicon;

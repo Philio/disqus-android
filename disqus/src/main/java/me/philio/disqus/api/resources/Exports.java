@@ -17,8 +17,9 @@ package me.philio.disqus.api.resources;
 
 import me.philio.disqus.api.exception.ApiException;
 import me.philio.disqus.api.model.Response;
+import retrofit.http.Field;
+import retrofit.http.FormUrlEncoded;
 import retrofit.http.POST;
-import retrofit.http.Query;
 
 /**
  * Exports resource
@@ -36,7 +37,8 @@ public interface Exports {
      * @throws ApiException
      * @see <a href="https://disqus.com/api/docs/exports/exportForum/">Documentation</a>
      */
+    @FormUrlEncoded
     @POST("/exports/exportForum.json")
-    public Response<Object> exportForum(@Query("forum") String forum) throws ApiException;
+    public Response<Object> exportForum(@Field("forum") String forum) throws ApiException;
 
 }

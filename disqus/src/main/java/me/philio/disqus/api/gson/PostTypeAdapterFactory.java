@@ -27,6 +27,7 @@ import java.io.IOException;
 
 import me.philio.disqus.api.model.forums.Forum;
 import me.philio.disqus.api.model.posts.Post;
+import me.philio.disqus.api.model.threads.Thread;
 
 /**
  * A {@link TypeAdapterFactory} to handle different {@link Post} responses
@@ -34,17 +35,14 @@ import me.philio.disqus.api.model.posts.Post;
 public class PostTypeAdapterFactory implements TypeAdapterFactory {
 
     @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
+    public <T> TypeAdapter<T> create(final Gson gson, TypeToken<T> type) {
         // Return null if not a post object
         if (!type.getType().equals(Post.class)) {
             return null;
         }
 
-        // Get adapters
+        // Get delegate
         final TypeAdapter<T> delegate = gson.getDelegateAdapter(this, type);
-        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-        final TypeAdapter<Forum> forumAdapter = gson.getAdapter(Forum.class);
-        final TypeAdapter<Thread> threadAdapter = gson.getAdapter(Thread.class);
 
         // Return adapter
         return new TypeAdapter<T>() {
@@ -56,7 +54,7 @@ public class PostTypeAdapterFactory implements TypeAdapterFactory {
 
             @Override
             public T read(JsonReader in) throws IOException {
-                JsonElement jsonTree = elementAdapter.read(in);
+                JsonElement jsonTree = gson.fromJson(in, JsonElement.class);
                 JsonElement forum = jsonTree.getAsJsonObject().get("forum");
                 JsonElement thread = jsonTree.getAsJsonObject().get("thread");
 
@@ -65,10 +63,10 @@ public class PostTypeAdapterFactory implements TypeAdapterFactory {
 
                 // Process forum and thread if needed
                 if (forum.isJsonObject()) {
-                    ((Post) post).forum = forumAdapter.fromJsonTree(forum);
+                    ((Post) post).forum = gson.fromJson(forum, Forum.class);
                 }
                 if (thread.isJsonObject()) {
-                    ((Post) post).thread = threadAdapter.fromJsonTree(thread);
+                    ((Post) post).thread = gson.fromJson(thread, Thread.class);
                 }
 
                 // Return post

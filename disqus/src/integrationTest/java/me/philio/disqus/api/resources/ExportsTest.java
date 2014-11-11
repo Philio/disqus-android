@@ -17,6 +17,7 @@ package me.philio.disqus.api.resources;
 
 import android.test.suitebuilder.annotation.LargeTest;
 
+import me.philio.disqus.api.exception.ApiException;
 import me.philio.disqus.api.model.Response;
 
 public class ExportsTest extends ResourceTestCase {
@@ -38,7 +39,7 @@ public class ExportsTest extends ResourceTestCase {
      * @throws Exception
      */
     @LargeTest
-    public void testExportForum() throws Exception {
+    public void testExportForum() throws ApiException {
         Response<Object> response = mExports.exportForum("disqusforandroidintegrationtesting");
         assertNotNull(response);
         assertEquals(0, response.code);

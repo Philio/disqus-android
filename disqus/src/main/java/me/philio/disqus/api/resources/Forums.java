@@ -26,6 +26,8 @@ import me.philio.disqus.api.model.forums.Moderator;
 import me.philio.disqus.api.model.posts.Post;
 import me.philio.disqus.api.model.threads.Thread;
 import me.philio.disqus.api.model.users.User;
+import retrofit.http.Field;
+import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Query;
@@ -41,55 +43,58 @@ public interface Forums {
     /**
      * Adds a moderator to a forum
      *
-     * @see <a href="https://disqus.com/api/docs/forums/addModerator/">Documentation</a>
-     * @param user
-     * @param forum
-     * @return
+     * @param user  The user id of the moderator
+     * @param forum The forum short name
+     * @return The moderator id
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/addModerator/">Documentation</a>
      */
+    @FormUrlEncoded
     @POST("/forums/addModerator.json")
-    public Response<Moderator> addModerator(@Query("user") long user, @Query("forum") String forum)
+    public Response<Moderator> addModerator(@Field("user") long user, @Query("forum") String forum)
             throws ApiException;
 
     /**
      * Creates a new forum
      *
-     * @see <a href="https://disqus.com/api/docs/forums/create/">Documentation</a>
-     * @param website
-     * @param name
-     * @param shortName
-     * @return
+     * @param website   The website url
+     * @param name      The name of the forum
+     * @param shortName The forum short name
+     * @return The created forum
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/create/">Documentation</a>
      */
+    @FormUrlEncoded
     @POST("/forums/create.json")
-    public Response<Forum> create(@Query("website") String website,
-                                  @Query("name") String name,
-                                  @Query("short_name") String shortName) throws ApiException;
+    public Response<Forum> create(@Field("website") String website,
+                                  @Field("name") String name,
+                                  @Field("short_name") String shortName) throws ApiException;
 
     /**
      * Creates a new forum
      *
-     * @see <a href="https://disqus.com/api/docs/forums/create/">Documentation</a>
-     * @param website
-     * @param name
-     * @param shortName
-     * @param guidelines
-     * @return
+     * @param website    The website url
+     * @param name       The name of the forum
+     * @param shortName  The forum short name
+     * @param guidelines Forum guidelines
+     * @return The created forum
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/create/">Documentation</a>
      */
+    @FormUrlEncoded
     @POST("/forums/create.json")
-    public Response<Forum> create(@Query("website") String website,
-                                  @Query("name") String name,
-                                  @Query("short_name") String shortName,
-                                  @Query("guidelines") String guidelines) throws ApiException;
+    public Response<Forum> create(@Field("website") String website,
+                                  @Field("name") String name,
+                                  @Field("short_name") String shortName,
+                                  @Field("guidelines") String guidelines) throws ApiException;
 
     /**
      * Returns forum details
      *
-     * @see <a href="https://disqus.com/api/docs/forums/details/">Documentation</a>
-     * @param forum
-     * @return
+     * @param forum The forum short name
+     * @return Details of the forum
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/details/">Documentation</a>
      */
     @GET("/forums/details.json")
     public Response<Forum> details(@Query("forum") String forum) throws ApiException;
@@ -97,11 +102,11 @@ public interface Forums {
     /**
      * Returns forum details
      *
-     * @see <a href="https://disqus.com/api/docs/forums/details/">Documentation</a>
-     * @param forum
-     * @param related
-     * @return
+     * @param forum   The forum short name
+     * @param related Specify relations to include with the response. Allows: author
+     * @return Details of the forum
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/details/">Documentation</a>
      */
     @GET("/forums/details.json")
     public Response<Forum> details(@Query("forum") String forum,
@@ -110,21 +115,22 @@ public interface Forums {
     /**
      * Follow a forum
      *
-     * @see <a href="https://disqus.com/api/docs/forums/follow/">Documentation</a>
-     * @param target
-     * @return
+     * @param target The forum short name
+     * @return A response object, data can be ignored
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/follow/">Documentation</a>
      */
+    @FormUrlEncoded
     @POST("/forums/follow.json")
-    public Response<Object[]> follow(@Query("target") String target) throws ApiException;
+    public Response<List<Object>> follow(@Field("target") String target) throws ApiException;
 
     /**
      * Returns a list of categories within a forum
      *
-     * @see <a href="https://disqus.com/api/docs/forums/listCategories/">Documentation</a>
-     * @param forum
-     * @return
+     * @param forum The forum short name
+     * @return A list of categories
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/listCategories/">Documentation</a>
      */
     @GET("/forums/listCategories.json")
     public Response<List<Category>> listCategories(@Query("forum") String forum)
@@ -133,11 +139,11 @@ public interface Forums {
     /**
      * Returns a list of categories within a forum
      *
-     * @see <a href="https://disqus.com/api/docs/forums/listCategories/">Documentation</a>
-     * @param forum
-     * @param optionalParams
-     * @return
+     * @param forum          The forum short name
+     * @param optionalParams A map of optional parameters
+     * @return A list of categories
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/listCategories/">Documentation</a>
      */
     @GET("/forums/listCategories.json")
     public Response<List<Category>> listCategories(@Query("forum") String forum,
@@ -147,10 +153,10 @@ public interface Forums {
     /**
      * Returns a list of users following a forum
      *
-     * @see <a href="https://disqus.com/api/docs/forums/listFollowers/">Documentation</a>
-     * @param forum
-     * @return
+     * @param forum The forum short name
+     * @return A list of users
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/listFollowers/">Documentation</a>
      */
     @GET("/forums/listFollowers.json")
     public Response<List<User>> listFollowers(@Query("forum") String forum)
@@ -159,11 +165,11 @@ public interface Forums {
     /**
      * Returns a list of users following a forum
      *
-     * @see <a href="https://disqus.com/api/docs/forums/listFollowers/">Documentation</a>
-     * @param forum
-     * @param optionalParams
-     * @return
+     * @param forum          The forum short name
+     * @param optionalParams A map of optional parameters
+     * @return A list of users
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/listFollowers/">Documentation</a>
      */
     @GET("/forums/listFollowers.json")
     public Response<List<User>> listFollowers(@Query("forum") String forum,
@@ -173,10 +179,10 @@ public interface Forums {
     /**
      * Returns a list of all moderators on a forum
      *
-     * @see <a href="https://disqus.com/api/docs/forums/listModerators/">Documentation</a>
-     * @param forum
-     * @return
+     * @param forum The forum short name
+     * @return A list of moderators
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/listModerators/">Documentation</a>
      */
     @GET("/forums/listModerators.json")
     public Response<List<Moderator>> listModerators(@Query("forum") String forum)
@@ -185,10 +191,10 @@ public interface Forums {
     /**
      * Returns a list of users active within a forum ordered by most comments made
      *
-     * @see <a href="https://disqus.com/api/docs/forums/listMostActiveUsers/">Documentation</a>
-     * @param forum
-     * @return
+     * @param forum The forum short name
+     * @return A list of users
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/listMostActiveUsers/">Documentation</a>
      */
     @GET("/forums/listMostActiveUsers.json")
     public Response<List<User>> listMostActiveUsers(@Query("forum") String forum)
@@ -197,11 +203,11 @@ public interface Forums {
     /**
      * Returns a list of users active within a forum ordered by most comments made
      *
-     * @see <a href="https://disqus.com/api/docs/forums/listMostActiveUsers/">Documentation</a>
-     * @param forum
-     * @param optionalParams
-     * @return
+     * @param forum          The forum short name
+     * @param optionalParams A map of optional parameters
+     * @return A list of users
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/listMostActiveUsers/">Documentation</a>
      */
     @GET("/forums/listMostActiveUsers.json")
     public Response<List<User>> listMostActiveUsers(@Query("forum") String forum,
@@ -211,10 +217,10 @@ public interface Forums {
     /**
      * Returns a list of users active within a forum ordered by most likes received
      *
-     * @see <a href="https://disqus.com/api/docs/forums/listMostLikedUsers/">Documentation</a>
-     * @param forum
-     * @return
+     * @param forum The forum short name
+     * @return A list of users
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/listMostLikedUsers/">Documentation</a>
      */
     @GET("/forums/listMostLikedUsers.json")
     public Response<List<User>> listMostLikedUsers(@Query("forum") String forum)
@@ -223,11 +229,11 @@ public interface Forums {
     /**
      * Returns a list of users active within a forum ordered by most likes received
      *
-     * @see <a href="https://disqus.com/api/docs/forums/listMostLikedUsers/">Documentation</a>
-     * @param forum
-     * @param optionalParams
-     * @return
+     * @param forum          The forum short name
+     * @param optionalParams A map of optional parameters
+     * @return A list of users
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/listMostLikedUsers/">Documentation</a>
      */
     @GET("/forums/listMostLikedUsers.json")
     public Response<List<User>> listMostLikedUsers(@Query("forum") String forum,
@@ -237,10 +243,10 @@ public interface Forums {
     /**
      * Returns a list of posts within a forum
      *
-     * @see <a href="https://disqus.com/api/docs/forums/listPosts/">Documentation</a>
-     * @param forum
-     * @return
+     * @param forum The forum short name
+     * @return A list if posts
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/listPosts/">Documentation</a>
      */
     @GET("/forums/listPosts.json")
     public Response<List<Post>> listPosts(@Query("forum") String forum) throws ApiException;
@@ -248,11 +254,11 @@ public interface Forums {
     /**
      * Returns a list of posts within a forum
      *
-     * @see <a href="https://disqus.com/api/docs/forums/listPosts/">Documentation</a>
-     * @param forum
-     * @param optionalParams
-     * @return
+     * @param forum          The forum short name
+     * @param optionalParams A map of optional parameters
+     * @return A list of posts
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/listPosts/">Documentation</a>
      */
     @GET("/forums/listPosts.json")
     public Response<List<Post>> listPosts(@Query("forum") String forum,
@@ -262,10 +268,10 @@ public interface Forums {
     /**
      * Returns a list of threads within a forum sorted by the date created
      *
-     * @see <a href="https://disqus.com/api/docs/forums/listThreads/">Documentation</a>
-     * @param forum
-     * @return
+     * @param forum The forum short name
+     * @return A list of threads
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/listThreads/">Documentation</a>
      */
     @GET("/forums/listThreads.json")
     public Response<List<Thread>> listThreads(@Query("forum") String forum) throws ApiException;
@@ -273,11 +279,11 @@ public interface Forums {
     /**
      * Returns a list of threads within a forum sorted by the date created
      *
-     * @see <a href="https://disqus.com/api/docs/forums/listThreads/">Documentation</a>
-     * @param forum
-     * @param optionalParams
-     * @return
+     * @param forum          The forum short name
+     * @param optionalParams A map of optional parameters
+     * @return A list of threads
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/listThreads/">Documentation</a>
      */
     @GET("/forums/listThreads.json")
     public Response<List<Thread>> listThreads(@Query("forum") String forum,
@@ -287,10 +293,10 @@ public interface Forums {
     /**
      * Returns a list of users active within a forum
      *
-     * @see <a href="https://disqus.com/api/docs/forums/listUsers/">Documentation</a>
-     * @param forum
-     * @return
+     * @param forum The forum short name
+     * @return A list of users
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/listUsers/">Documentation</a>
      */
     @GET("/forums/listUsers.json")
     public Response<List<User>> listUsers(@Query("forum") String forum) throws ApiException;
@@ -298,11 +304,11 @@ public interface Forums {
     /**
      * Returns a list of users active within a forum
      *
-     * @see <a href="https://disqus.com/api/docs/forums/listUsers/">Documentation</a>
-     * @param forum
-     * @param optionalParams
-     * @return
+     * @param forum          The forum short name
+     * @param optionalParams A map of optional parameters
+     * @return A List of users
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/listUsers/">Documentation</a>
      */
     @GET("/forums/listUsers.json")
     public Response<List<User>> listUsers(@Query("forum") String forum,
@@ -312,41 +318,44 @@ public interface Forums {
     /**
      * Removes a moderator from a forum
      *
-     * @see <a href="https://disqus.com/api/docs/forums/removeModerator/">Documentation</a>
-     * @param moderator
-     * @return
+     * @param moderator The moderator id
+     * @return The removed moderator
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/removeModerator/">Documentation</a>
      */
+    @FormUrlEncoded
     @POST("/forums/removeModerator.json")
-    public Response<Moderator> removeModerator(@Query("moderator") long moderator)
-        throws ApiException;
+    public Response<Moderator> removeModerator(@Field("moderator") long moderator)
+            throws ApiException;
 
     /**
      * Unfollow a forum
      *
-     * @see <a href="https://disqus.com/api/docs/forums/unfollow/">Documentation</a>
-     * @param target
-     * @return
+     * @param target The forum short name
+     * @return A response object, data can be ignored
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/unfollow/">Documentation</a>
      */
+    @FormUrlEncoded
     @POST("/forums/unfollow.json")
-    public Response<List<Object>> unfollow(@Query("target") String target) throws ApiException;
+    public Response<List<Object>> unfollow(@Field("target") String target) throws ApiException;
 
     /**
      * Updates forum details
      *
-     * @see <a href="https://disqus.com/api/docs/forums/update/">Documentation</a>
-     * @param forum
-     * @param website
-     * @param name
-     * @param guidelines
-     * @return
+     * @param forum      The forum short name
+     * @param website    The website url
+     * @param name       The name of the forum
+     * @param guidelines Forum guidelines
+     * @return The updated forum
      * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/update/">Documentation</a>
      */
+    @FormUrlEncoded
     @POST("/forums/update.json")
-    public Response<Forum> update(@Query("forum") String forum,
-                                  @Query("website") String website,
-                                  @Query("name") String name,
-                                  @Query("guidelines") String guidelines) throws ApiException;
+    public Response<Forum> update(@Field("forum") String forum,
+                                  @Field("website") String website,
+                                  @Field("name") String name,
+                                  @Field("guidelines") String guidelines) throws ApiException;
 
 }
