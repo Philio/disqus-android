@@ -91,6 +91,7 @@ public class BlacklistsTest extends ResourceTestCase {
                         new String[]{"test.com", "test2.com", "test3.com"}, 0,
                         "Added by Disqus for Android");
         assertNotNull(entries);
+        assertEquals(0, entries.code);
         assertNotNull(entries.data);
         assertEquals(3, entries.data.size());
         assertEquals(Type.domain, entries.data.get(0).type);
@@ -112,6 +113,7 @@ public class BlacklistsTest extends ResourceTestCase {
                 mBlacklists.addWords("disqusforandroidintegrationtesting",
                         new String[]{"naughty", "words"}, 0, "Added by Disqus for Android");
         assertNotNull(entries);
+        assertEquals(0, entries.code);
         assertNotNull(entries.data);
         assertEquals(2, entries.data.size());
         assertEquals(Type.word, entries.data.get(0).type);
@@ -131,6 +133,7 @@ public class BlacklistsTest extends ResourceTestCase {
                 mBlacklists.addIps("disqusforandroidintegrationtesting",
                         new String[]{"10.0.0.1", "10.0.0.2"}, 0, "Added by Disqus for Android");
         assertNotNull(entries);
+        assertEquals(0, entries.code);
         assertNotNull(entries.data);
         assertEquals(2, entries.data.size());
         assertEquals(Type.ip, entries.data.get(0).type);
@@ -150,6 +153,7 @@ public class BlacklistsTest extends ResourceTestCase {
                 mBlacklists.addUsers("disqusforandroidintegrationtesting",
                         new Long[]{1l, 2l, 3l}, 0, "Added by Disqus for Android");
         assertNotNull(entries);
+        assertEquals(0, entries.code);
         assertNotNull(entries.data);
         assertEquals(3, entries.data.size());
         assertEquals(Type.user, entries.data.get(0).type);
@@ -172,6 +176,7 @@ public class BlacklistsTest extends ResourceTestCase {
                         new String[]{"mail@test.com", "mail@test2.com", "mail@test3.com"}, 0,
                         "Added by Disqus for Android");
         assertNotNull(entries);
+        assertEquals(0, entries.code);
         assertNotNull(entries.data);
         assertEquals(3, entries.data.size());
         assertEquals(Type.email, entries.data.get(0).type);
@@ -196,6 +201,7 @@ public class BlacklistsTest extends ResourceTestCase {
         Response<List<Entry>> entries =
                 mBlacklists.list("disqusforandroidintegrationtesting");
         assertNotNull(entries);
+        assertEquals(0, entries.code);
         assertNotNull(entries.data);
         assertEquals(4, entries.data.size());
         assertEquals(Type.word, entries.data.get(0).type);
@@ -222,6 +228,7 @@ public class BlacklistsTest extends ResourceTestCase {
                 mBlacklists.removeDomains("disqusforandroidintegrationtesting",
                         new String[]{"test.com", "test2.com", "test3.com"});
         assertNotNull(entries);
+        assertEquals(0, entries.code);
         assertNotNull(entries.data);
         assertEquals(3, entries.data.size());
         assertEquals(Type.domain, entries.data.get(0).type);
@@ -245,6 +252,7 @@ public class BlacklistsTest extends ResourceTestCase {
                 mBlacklists.removeWords("disqusforandroidintegrationtesting",
                         new String[]{"naughty", "words"});
         assertNotNull(entries);
+        assertEquals(0, entries.code);
         assertNotNull(entries.data);
         assertEquals(2, entries.data.size());
         assertEquals(Type.word, entries.data.get(0).type);
@@ -266,6 +274,7 @@ public class BlacklistsTest extends ResourceTestCase {
                 mBlacklists.removeIps("disqusforandroidintegrationtesting",
                         new String[]{"10.0.0.1", "10.0.0.2"});
         assertNotNull(entries);
+        assertEquals(0, entries.code);
         assertNotNull(entries.data);
         assertEquals(2, entries.data.size());
         assertEquals(Type.ip, entries.data.get(0).type);
@@ -287,6 +296,7 @@ public class BlacklistsTest extends ResourceTestCase {
                 mBlacklists.removeUsers("disqusforandroidintegrationtesting",
                         new Long[]{1l, 2l, 3l});
         assertNotNull(entries);
+        assertEquals(0, entries.code);
         assertNotNull(entries.data);
         assertEquals(3, entries.data.size());
         assertEquals(Type.user, entries.data.get(0).type);
@@ -311,6 +321,7 @@ public class BlacklistsTest extends ResourceTestCase {
                 mBlacklists.removeEmails("disqusforandroidintegrationtesting",
                         new String[]{"mail@test.com", "mail@test2.com", "mail@test3.com"});
         assertNotNull(entries);
+        assertEquals(0, entries.code);
         assertNotNull(entries.data);
         assertEquals(3, entries.data.size());
         assertEquals(Type.email, entries.data.get(0).type);

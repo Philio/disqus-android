@@ -18,6 +18,7 @@ package me.philio.disqus.api.resources;
 import me.philio.disqus.api.exception.ApiException;
 import me.philio.disqus.api.model.Response;
 import me.philio.disqus.api.model.applications.Usage;
+import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Query;
 
@@ -41,6 +42,16 @@ public interface Applications {
     /**
      * Returns the API usage per day for this application
      *
+     * @param callback Callback for async result
+     * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/applications/listUsage/">Documentation</a>
+     */
+    @GET("/applications/listUsage.json")
+    public void listUsage(Callback<Response<Usage>> callback) throws ApiException;
+
+    /**
+     * Returns the API usage per day for this application
+     *
      * @param days Number of days
      * @return Usage data for the application
      * @throws ApiException
@@ -48,6 +59,18 @@ public interface Applications {
      */
     @GET("/applications/listUsage.json")
     public Response<Usage> listUsage(@Query("days") int days) throws ApiException;
+
+    /**
+     * Returns the API usage per day for this application
+     *
+     * @param days     Number of days
+     * @param callback Callback for async result
+     * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/applications/listUsage/">Documentation</a>
+     */
+    @GET("/applications/listUsage.json")
+    public void listUsage(@Query("days") int days,
+                          Callback<Response<Usage>> callback) throws ApiException;
 
     /**
      * Returns the API usage per day for this application
@@ -61,5 +84,19 @@ public interface Applications {
     @GET("/applications/listUsage.json")
     public Response<Usage> listUsage(@Query("application") int application,
                                      @Query("days") Integer days) throws ApiException;
+
+    /**
+     * Returns the API usage per day for this application
+     *
+     * @param application Application id
+     * @param days        Number of days
+     * @param callback    Callback for async result
+     * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/applications/listUsage/">Documentation</a>
+     */
+    @GET("/applications/listUsage.json")
+    public void listUsage(@Query("application") int application,
+                          @Query("days") Integer days,
+                          Callback<Response<Usage>> callback) throws ApiException;
 
 }

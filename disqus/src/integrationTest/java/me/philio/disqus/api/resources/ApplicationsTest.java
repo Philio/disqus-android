@@ -43,6 +43,7 @@ public class ApplicationsTest extends ResourceTestCase {
     public void testListUsage() throws ApiException {
         Response<Usage> usage = mApplications.listUsage();
         assertNotNull(usage);
+        assertEquals(0, usage.code);
         assertNotNull(usage.data);
         assertTrue(usage.data.size() > 0);
     }
@@ -58,6 +59,7 @@ public class ApplicationsTest extends ResourceTestCase {
     public void testListUsageDays() throws ApiException {
         Response<Usage> usage = mApplications.listUsage(6);
         assertNotNull(usage);
+        assertEquals(0, usage.code);
         assertNotNull(usage.data);
         assertEquals(7, usage.data.size());
     }
@@ -73,6 +75,7 @@ public class ApplicationsTest extends ResourceTestCase {
     public void testListUsageAppDays() throws ApiException {
         Response<Usage> usage = mApplications.listUsage(3318003, 6);
         assertNotNull(usage);
+        assertEquals(0, usage.code);
         assertNotNull(usage.data);
         assertEquals(7, usage.data.size());
     }

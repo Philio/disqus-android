@@ -24,6 +24,9 @@ import me.philio.disqus.api.model.Response;
 import me.philio.disqus.api.model.category.Category;
 import me.philio.disqus.api.model.forums.Forum;
 import me.philio.disqus.api.model.forums.Moderator;
+import me.philio.disqus.api.model.posts.Post;
+import me.philio.disqus.api.model.threads.Thread;
+import me.philio.disqus.api.model.users.User;
 
 public class ForumsTest extends ResourceTestCase {
 
@@ -48,6 +51,7 @@ public class ForumsTest extends ResourceTestCase {
         Response<Moderator> moderator = mForums.addModerator(1,
                 "disqusforandroidintegrationtesting");
         assertNotNull(moderator);
+        assertEquals(0, moderator.code);
         assertNotNull(moderator.data);
         assertTrue(moderator.data.id > 0);
     }
@@ -63,6 +67,7 @@ public class ForumsTest extends ResourceTestCase {
         Response<Forum> forum = mForums.create("http://test.com/", "Integration test " + timestamp,
                 "integration-test-" + timestamp);
         assertNotNull(forum);
+        assertEquals(0, forum.code);
         assertNotNull(forum.data);
         assertEquals("http://test.com/", forum.data.url);
         assertEquals("Integration test " + timestamp, forum.data.name);
@@ -80,6 +85,7 @@ public class ForumsTest extends ResourceTestCase {
         Response<Forum> forum = mForums.create("http://test.com/", "Integration test " + timestamp,
                 "integration-test-" + timestamp, "Forum guidelines");
         assertNotNull(forum);
+        assertEquals(0, forum.code);
         assertNotNull(forum.data);
         assertEquals("http://test.com/", forum.data.url);
         assertEquals("Integration test " + timestamp, forum.data.name);
@@ -100,6 +106,7 @@ public class ForumsTest extends ResourceTestCase {
                 "integration-test-" + timestamp);
         Response<Forum> forum = mForums.details("integration-test-" + timestamp);
         assertNotNull(forum);
+        assertEquals(0, forum.code);
         assertNotNull(forum.data);
         assertEquals("http://test.com/", forum.data.url);
         assertEquals("Integration test " + timestamp, forum.data.name);
@@ -119,6 +126,7 @@ public class ForumsTest extends ResourceTestCase {
         Response<Forum> forum = mForums.details("integration-test-" + timestamp,
                 new String[]{"author"});
         assertNotNull(forum);
+        assertEquals(0, forum.code);
         assertNotNull(forum.data);
         assertEquals("http://test.com/", forum.data.url);
         assertEquals("Integration test " + timestamp, forum.data.name);
@@ -141,16 +149,136 @@ public class ForumsTest extends ResourceTestCase {
     }
 
     /**
-     * Test list categories executes successfully
+     * Test list categories
      *
      * @throws ApiException
      */
     @LargeTest
     public void testListCategories() throws ApiException {
-        Response<List<Category>> categories = mForums.listCategories("disqusforandroidintegrationtesting");
+        Response<List<Category>> categories =
+                mForums.listCategories("disqusforandroidintegrationtesting");
         assertNotNull(categories);
         assertEquals(0, categories.code);
         assertNotNull(categories.data);
+    }
+
+    /**
+     * Test list followers
+     *
+     * @throws ApiException
+     */
+    @LargeTest
+    public void testListFollowers() throws ApiException {
+        Response<List<User>> users = mForums.listFollowers("disqusforandroidintegrationtesting");
+        assertNotNull(users);
+        assertEquals(0, users.code);
+        assertNotNull(users.data);
+    }
+
+    /**
+     * Test list moderators
+     *
+     * @throws ApiException
+     */
+    @LargeTest
+    public void testListModerators() throws ApiException {
+        Response<List<Moderator>> moderators =
+                mForums.listModerators("disqusforandroidintegrationtesting");
+        assertNotNull(moderators);
+        assertEquals(0, moderators.code);
+        assertNotNull(moderators.data);
+    }
+
+    /**
+     * Test list most active users
+     *
+     * @throws ApiException
+     */
+    @LargeTest
+    public void testListMostActiveUsers() throws ApiException {
+        Response<List<User>> users =
+                mForums.listMostActiveUsers("disqusforandroidintegrationtesting");
+        assertNotNull(users);
+        assertEquals(0, users.code);
+        assertNotNull(users.data);
+    }
+
+    /**
+     * Test list most liked users
+     *
+     * @throws ApiException
+     */
+    @LargeTest
+    public void testListMostLikedUsers() throws ApiException {
+        Response<List<User>> users =
+                mForums.listMostLikedUsers("disqusforandroidintegrationtesting");
+        assertNotNull(users);
+        assertEquals(0, users.code);
+        assertNotNull(users.data);
+    }
+
+    /**
+     * Test list posts
+     *
+     * @throws ApiException
+     */
+    @LargeTest
+    public void testListPosts() throws ApiException {
+        Response<List<Post>> posts = mForums.listPosts("disqusforandroidintegrationtesting");
+        assertNotNull(posts);
+        assertEquals(0, posts.code);
+        assertNotNull(posts.data);
+    }
+
+    /**
+     * Test list threads
+     *
+     * @throws ApiException
+     */
+    @LargeTest
+    public void testListThreads() throws ApiException {
+        Response<List<Thread>> threads = mForums.listThreads("disqusforandroidintegrationtesting");
+        assertNotNull(threads);
+        assertEquals(0, threads.code);
+        assertNotNull(threads.data);
+    }
+
+    /**
+     * Test list users
+     *
+     * @throws ApiException
+     */
+    @LargeTest
+    public void testListUsers() throws ApiException {
+        Response<List<User>> users = mForums.listUsers("disqusforandroidintegrationtesting");
+        assertNotNull(users);
+        assertEquals(0, users.code);
+        assertNotNull(users.data);
+    }
+
+    /**
+     * Test remove moderator
+     *
+     * @throws ApiException
+     */
+    @LargeTest
+    public void testRemoveModerator() throws ApiException {
+        Response<Moderator> moderator = mForums.addModerator(1,
+                "disqusforandroidintegrationtesting");
+        Response<Moderator> removed = mForums.removeModerator(moderator.data.id);
+        assertNotNull(removed);
+        assertEquals(0, removed.code);
+        assertNotNull(removed.data);
+    }
+
+    @LargeTest
+    public void testUnfollow() throws ApiException {
+        mForums.unfollow("disqusforandroidintegrationtesting");
+    }
+
+    @LargeTest
+    public void testUpdate() throws ApiException {
+
     }
 
 }

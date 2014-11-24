@@ -266,6 +266,25 @@ public interface Forums {
             throws ApiException;
 
     /**
+     * Returns a list of posts within a forum
+     *
+     * @param forum          The forum short name
+     * @param related        Specify relations to include with the response. Allows: thread
+     * @param include        Filter posts by status. Allows: unapproved, approved, spam, deleted,
+     *                       flagged, highlighted
+     * @param optionalParams A map of optional parameters
+     * @return A list of posts
+     * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/listPosts/">Documentation</a>
+     */
+    @GET("/forums/listPosts.json")
+    public Response<List<Post>> listPosts(@Query("forum") String forum,
+                                          @Query("related") String[] related,
+                                          @Query("include") String[] include,
+                                          @QueryMap Map<String, String> optionalParams)
+            throws ApiException;
+
+    /**
      * Returns a list of threads within a forum sorted by the date created
      *
      * @param forum The forum short name
@@ -287,6 +306,24 @@ public interface Forums {
      */
     @GET("/forums/listThreads.json")
     public Response<List<Thread>> listThreads(@Query("forum") String forum,
+                                              @QueryMap Map<String, String> optionalParams)
+            throws ApiException;
+
+    /**
+     * Returns a list of threads within a forum sorted by the date created
+     *
+     * @param forum          The forum short name
+     * @param related        Specify relations to include with the response. Allows: forum, author
+     * @param include        Filter threads by status. Allows: open, closed, killed
+     * @param optionalParams A map of optional parameters
+     * @return A list of threads
+     * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/forums/listThreads/">Documentation</a>
+     */
+    @GET("/forums/listThreads.json")
+    public Response<List<Thread>> listThreads(@Query("forum") String forum,
+                                              @Query("related") String[] related,
+                                              @Query("include") String[] include,
                                               @QueryMap Map<String, String> optionalParams)
             throws ApiException;
 

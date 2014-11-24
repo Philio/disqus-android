@@ -21,6 +21,7 @@ import java.util.Map;
 import me.philio.disqus.api.exception.ApiException;
 import me.philio.disqus.api.model.Response;
 import me.philio.disqus.api.model.blacklists.Entry;
+import retrofit.Callback;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
@@ -55,6 +56,25 @@ public interface Blacklists {
             throws ApiException;
 
     /**
+     * Adds a domain entry/entries to the blacklist
+     *
+     * @param forum       The forum short name
+     * @param domains     An array of domains to add
+     * @param retroactive Apply to dates in the past
+     * @param notes       Note to add to the entry
+     * @param callback    Callback for async result
+     * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/blacklists/add/">Documentation</a>
+     */
+    @FormUrlEncoded
+    @POST("/blacklists/add.json")
+    public void addDomains(@Field("forum") String forum,
+                           @Field("domain") String[] domains,
+                           @Field("retroactive") int retroactive,
+                           @Field("notes") String notes,
+                           Callback<Response<List<Entry>>> callback) throws ApiException;
+
+    /**
      * Adds a word entry/entries to the blacklist
      *
      * @param forum       The forum short name
@@ -74,6 +94,25 @@ public interface Blacklists {
             throws ApiException;
 
     /**
+     * Adds a word entry/entries to the blacklist
+     *
+     * @param forum       The forum short name
+     * @param words       An array of words to add
+     * @param retroactive Apply to dates in the past
+     * @param notes       Note to add to the entry
+     * @param callback    Callback for async result
+     * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/blacklists/add/">Documentation</a>
+     */
+    @FormUrlEncoded
+    @POST("/blacklists/add.json")
+    public void addWords(@Field("forum") String forum,
+                         @Field("word") String[] words,
+                         @Field("retroactive") int retroactive,
+                         @Field("notes") String notes,
+                         Callback<Response<List<Entry>>> callback) throws ApiException;
+
+    /**
      * Adds an IP entry/entries to the blacklist
      *
      * @param forum       The forum short name
@@ -90,6 +129,25 @@ public interface Blacklists {
                                         @Field("ip") String[] ips,
                                         @Field("retroactive") int retroactive,
                                         @Field("notes") String notes) throws ApiException;
+
+    /**
+     * Adds an IP entry/entries to the blacklist
+     *
+     * @param forum       The forum short name
+     * @param ips         An array of ips to add
+     * @param retroactive Apply to dates in the past
+     * @param notes       Note to add to the entry
+     * @param callback    Callback for async result
+     * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/blacklists/add/">Documentation</a>
+     */
+    @FormUrlEncoded
+    @POST("/blacklists/add.json")
+    public void addIps(@Field("forum") String forum,
+                       @Field("ip") String[] ips,
+                       @Field("retroactive") int retroactive,
+                       @Field("notes") String notes,
+                       Callback<Response<List<Entry>>> callback) throws ApiException;
 
     /**
      * Adds a user entry/entries to the blacklist
@@ -111,6 +169,25 @@ public interface Blacklists {
             throws ApiException;
 
     /**
+     * Adds a user entry/entries to the blacklist
+     *
+     * @param forum       The forum short name
+     * @param users       An array of user ids to add
+     * @param retroactive Apply to dates in the past
+     * @param notes       Note to add to the entry
+     * @param callback    Callback for async result
+     * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/blacklists/add/">Documentation</a>
+     */
+    @FormUrlEncoded
+    @POST("/blacklists/add.json")
+    public void addUsers(@Field("forum") String forum,
+                         @Field("user") Long[] users,
+                         @Field("retroactive") int retroactive,
+                         @Field("notes") String notes,
+                         Callback<Response<List<Entry>>> callback) throws ApiException;
+
+    /**
      * Adds an email entry/entries to the blacklist
      *
      * @param forum       The forum short name
@@ -130,6 +207,25 @@ public interface Blacklists {
             throws ApiException;
 
     /**
+     * Adds an email entry/entries to the blacklist
+     *
+     * @param forum       The forum short name
+     * @param emails      An array of emails to add
+     * @param retroactive Apply to dates in the past
+     * @param notes       Note to add to the entry
+     * @param callback    Callback for async result
+     * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/blacklists/add/">Documentation</a>
+     */
+    @FormUrlEncoded
+    @POST("/blacklists/add.json")
+    public void addEmails(@Field("forum") String forum,
+                          @Field("email") String[] emails,
+                          @Field("retroactive") int retroactive,
+                          @Field("notes") String notes,
+                          Callback<Response<List<Entry>>> callback) throws ApiException;
+
+    /**
      * Returns a list of all blacklist entries
      *
      * @param forum The forum short name
@@ -139,6 +235,18 @@ public interface Blacklists {
      */
     @GET("/blacklists/list.json")
     public Response<List<Entry>> list(@Query("forum") String forum) throws ApiException;
+
+    /**
+     * Returns a list of all blacklist entries
+     *
+     * @param forum    The forum short name
+     * @param callback Callback for async result
+     * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/blacklists/list/">Documentation</a>
+     */
+    @GET("/blacklists/list.json")
+    public void list(@Query("forum") String forum,
+                     Callback<Response<List<Entry>>> callback) throws ApiException;
 
     /**
      * Returns a list of all blacklist entries
@@ -153,6 +261,20 @@ public interface Blacklists {
     public Response<List<Entry>> list(@Query("forum") String forum,
                                       @QueryMap Map<String, String> optionalParams)
             throws ApiException;
+
+    /**
+     * Returns a list of all blacklist entries
+     *
+     * @param forum          The forum short name
+     * @param optionalParams A map of optional parameters
+     * @param callback       Callback for async result
+     * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/blacklists/list/">Documentation</a>
+     */
+    @GET("/blacklists/list.json")
+    public void list(@Query("forum") String forum,
+                     @QueryMap Map<String, String> optionalParams,
+                     Callback<Response<List<Entry>>> callback) throws ApiException;
 
     /**
      * Returns a list of all blacklist entries
@@ -171,6 +293,22 @@ public interface Blacklists {
             throws ApiException;
 
     /**
+     * Returns a list of all blacklist entries
+     *
+     * @param forum          The forum short name
+     * @param related        Get relations in response
+     * @param optionalParams A map of optional parameters
+     * @param callback       Callback for async result
+     * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/blacklists/list/">Documentation</a>
+     */
+    @GET("/blacklists/list.json")
+    public void list(@Query("forum") String forum,
+                     @Query("related") String[] related,
+                     @QueryMap Map<String, String> optionalParams,
+                     Callback<Response<List<Entry>>> callback) throws ApiException;
+
+    /**
      * Removes a domain entry/entries to the blacklist
      *
      * @param forum   The forum short name
@@ -184,6 +322,21 @@ public interface Blacklists {
     public Response<List<Entry>> removeDomains(@Field("forum") String forum,
                                                @Field("domain") String[] domains)
             throws ApiException;
+
+    /**
+     * Removes a domain entry/entries to the blacklist
+     *
+     * @param forum    The forum short name
+     * @param domains  An array of domains to remove
+     * @param callback Callback for async result
+     * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/blacklists/remove/">Documentation</a>
+     */
+    @FormUrlEncoded
+    @POST("/blacklists/remove.json")
+    public void removeDomains(@Field("forum") String forum,
+                              @Field("domain") String[] domains,
+                              Callback<Response<List<Entry>>> callback) throws ApiException;
 
     /**
      * Removes a word entry/entries to the blacklist
@@ -201,6 +354,21 @@ public interface Blacklists {
             throws ApiException;
 
     /**
+     * Removes a word entry/entries to the blacklist
+     *
+     * @param forum    The forum short name
+     * @param words    An array of words to remove
+     * @param callback Callback for async result
+     * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/blacklists/remove/">Documentation</a>
+     */
+    @FormUrlEncoded
+    @POST("/blacklists/remove.json")
+    public void removeWords(@Field("forum") String forum,
+                            @Field("word") String[] words,
+                            Callback<Response<List<Entry>>> callback) throws ApiException;
+
+    /**
      * Removes an IP entry/entries to the blacklist
      *
      * @param forum The forum short name
@@ -213,6 +381,21 @@ public interface Blacklists {
     @POST("/blacklists/remove.json")
     public Response<List<Entry>> removeIps(@Field("forum") String forum,
                                            @Field("ip") String[] ips) throws ApiException;
+
+    /**
+     * Removes an IP entry/entries to the blacklist
+     *
+     * @param forum    The forum short name
+     * @param ips      An array of ips to remove
+     * @param callback Callback for async result
+     * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/blacklists/remove/">Documentation</a>
+     */
+    @FormUrlEncoded
+    @POST("/blacklists/remove.json")
+    public void removeIps(@Field("forum") String forum,
+                          @Field("ip") String[] ips,
+                          Callback<Response<List<Entry>>> callback) throws ApiException;
 
     /**
      * Removes a user entry/entries to the blacklist
@@ -230,6 +413,21 @@ public interface Blacklists {
             throws ApiException;
 
     /**
+     * Removes a user entry/entries to the blacklist
+     *
+     * @param forum    The forum short name
+     * @param users    An array of user ids to remove
+     * @param callback Callback for async result
+     * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/blacklists/remove/">Documentation</a>
+     */
+    @FormUrlEncoded
+    @POST("/blacklists/remove.json")
+    public void removeUsers(@Field("forum") String forum,
+                            @Field("user") Long[] users,
+                            Callback<Response<List<Entry>>> callback) throws ApiException;
+
+    /**
      * Removes an email entry/entries to the blacklist
      *
      * @param forum  The forum short name
@@ -243,5 +441,20 @@ public interface Blacklists {
     public Response<List<Entry>> removeEmails(@Field("forum") String forum,
                                               @Field("email") String[] emails)
             throws ApiException;
+
+    /**
+     * Removes an email entry/entries to the blacklist
+     *
+     * @param forum    The forum short name
+     * @param emails   An array of emails to remove
+     * @param callback Callback for async result
+     * @throws ApiException
+     * @see <a href="https://disqus.com/api/docs/blacklists/remove/">Documentation</a>
+     */
+    @FormUrlEncoded
+    @POST("/blacklists/remove.json")
+    public void removeEmails(@Field("forum") String forum,
+                             @Field("email") String[] emails,
+                             Callback<Response<List<Entry>>> callback) throws ApiException;
 
 }

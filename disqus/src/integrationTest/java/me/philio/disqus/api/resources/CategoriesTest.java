@@ -49,6 +49,7 @@ public class CategoriesTest extends ResourceTestCase {
         Response<Category> category = mCategories.create("disqusforandroidintegrationtesting",
                 "Integration test " + timestamp);
         assertNotNull(category);
+        assertEquals(0, category.code);
         assertNotNull(category.data);
         assertEquals("disqusforandroidintegrationtesting", category.data.forum);
         assertEquals("Integration test " + timestamp, category.data.title);
@@ -66,6 +67,7 @@ public class CategoriesTest extends ResourceTestCase {
         Response<Category> category = mCategories.create("disqusforandroidintegrationtesting",
                 "Integration test " + timestamp, 1);
         assertNotNull(category);
+        assertEquals(0, category.code);
         assertNotNull(category.data);
         assertEquals("disqusforandroidintegrationtesting", category.data.forum);
         assertEquals("Integration test " + timestamp, category.data.title);
@@ -85,6 +87,7 @@ public class CategoriesTest extends ResourceTestCase {
         long id = category.data.id;
         Response<Category> details = mCategories.details(id);
         assertNotNull(details);
+        assertEquals(0, details.code);
         assertNotNull(category.data);
         assertEquals(id, category.data.id);
         assertEquals("disqusforandroidintegrationtesting", category.data.forum);
@@ -101,12 +104,13 @@ public class CategoriesTest extends ResourceTestCase {
     public void testList() throws ApiException {
         Response<List<Category>> categories = mCategories.list("disqusforandroidintegrationtesting");
         assertNotNull(categories);
+        assertEquals(0, categories.code);
         assertNotNull(categories.data);
         assertTrue(categories.data.size() > 0);
     }
 
     /**
-     * Test that list posts executes successfully
+     * Test that list posts
      *
      * @throws ApiException
      */
@@ -119,7 +123,7 @@ public class CategoriesTest extends ResourceTestCase {
     }
 
     /**
-     * Test that list threads executes successfully
+     * Test that list threads
      *
      * @throws ApiException
      */
